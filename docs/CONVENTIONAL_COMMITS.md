@@ -7,19 +7,19 @@ O formato e os tipos de commit seguem a convenção padrão.
 
 ### Tipos de Commit
 
-- **feat**: Uma nova funcionalidade.
+- **feat**: uma nova funcionalidade.
 
-- **fix**: Correção de bugs.
+- **fix**: correção de bugs.
 
-- **docs**: Atualizações ou mudanças na documentação.
+- **docs**: atualizações ou mudanças na documentação.
 
-- **style**: Alterações que não afetam o comportamento do código (ex.: formatação, espaços em branco).
+- **style**: alterações que não afetam o comportamento do código (ex.: formatação, espaços em branco).
 
-- **refactor**: Alterações no código que não adicionam funcionalidades ou corrigem bugs.
+- **refactor**: alterações no código que não adicionam funcionalidades ou corrigem bugs.
 
-- **test**: Adição ou modificação de testes.
+- **test**: adição ou modificação de testes.
 
-- **chore**: Tarefas administrativas, como atualizações de dependências e ajustes no build.
+- **chore**: tarefas administrativas, como atualizações de dependências e ajustes no build.
 
 ### Exemplos
 - `feat: adiciona funcionalidade de login para funcionários da cantina`
