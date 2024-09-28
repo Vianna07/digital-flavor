@@ -1,6 +1,6 @@
 # Contribuindo para o Digital Flavor
 
-Obrigado por considerar contribuir para o **Digital Flavor**! Valorizamos suas contribuições e ideias para melhorar o nosso projeto de gestão de cantina escolar.
+Obrigado por considerar contribuir para o **Digital Flavor**! Valorizamos suas contribuições e ideias para melhorar o nosso projeto de gestão de cantinas.
 
 ## Como Contribuir
 
