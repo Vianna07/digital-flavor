@@ -2,7 +2,7 @@
 # Digital Flavor
 
 ## Descrição
-**Digital Flavor** é um aplicativo desenvolvido para gerenciar as cantinas escolares de forma prática e eficiente. Ele permite que os alunos façam pedidos online, acompanhem o cardápio da semana e façam pagamentos diretamente pelo aplicativo, proporcionando uma experiência rápida e integrada.
+**Digital Flavor** é um aplicativo desenvolvido para gerenciar cantinas de forma prática e eficiente. Ele permite que os alunos façam pedidos online, acompanhem o cardápio da semana e façam pagamentos diretamente pelo aplicativo, proporcionando uma experiência rápida e integrada.
 
 ## Funcionalidades
 - **Pedidos Online**: Os alunos podem fazer pedidos de alimentos e bebidas diretamente pelo aplicativo.
