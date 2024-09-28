@@ -2,11 +2,11 @@
 # Digital Flavor
 
 ## Descrição
-**Digital Flavor** é um aplicativo desenvolvido para gerenciar a cantina escolar de forma prática e eficiente. Ele permite que os alunos façam pedidos online, acompanhem o cardápio da semana e façam pagamentos diretamente pelo aplicativo, proporcionando uma experiência rápida e integrada.
+**Digital Flavor** é um aplicativo desenvolvido para gerenciar as cantinas escolares de forma prática e eficiente. Ele permite que os alunos façam pedidos online, acompanhem o cardápio da semana e façam pagamentos diretamente pelo aplicativo, proporcionando uma experiência rápida e integrada.
 
 ## Funcionalidades
 - **Pedidos Online**: Os alunos podem fazer pedidos de alimentos e bebidas diretamente pelo aplicativo.
-- **Cardápio Semanal**: Visualização do cardápio da cantina atualizado semanalmente.
+- **Cardápio Semanal**: Visualização do cardápio da cantina.
 - **Pagamentos Integrados**: Suporte para pagamento online via cartão de crédito, débito ou Pix.
 - **Histórico de Pedidos**: Acompanhamento de pedidos realizados.
 - **Notificações**: Notificações em tempo real sobre o status do pedido.
@@ -36,13 +36,13 @@ Nosso CSS está organizado em:
 
 ### BEM (Block, Element, Modifier)
 A nomenclatura BEM é usada para facilitar a legibilidade e manutenção:
-- **Block**: Unidade independente (ex.: pedido, cardápio).
-- **Element**: Parte de um bloco com função específica (ex.: pedido__detalhes, cardapio__item).
-- **Modifier**: Variação ou estado (ex.: pedido--pendente, cardapio__item--esgotado).
+- **Block**: Unidade independente (ex.: order, menu).
+- **Element**: Parte de um bloco com função específica (ex.: order__details, menu__item).
+- **Modifier**: Variação ou estado (ex.: order--pending, menu__item--out of stock).
 
 ### Namespaces no CSS
 Utilizamos namespaces para categorizar os seletores:
-- **c-**: Componentes (`c-pedido`, `c-cardapio`).
+- **c-**: Componentes (`c-order`, `c-menu`).
 - **l-**: Layouts (`l-header`, `l-footer`).
 - **u-**: Utilitários (`u-hidden`, `u-clearfix`).
 - **js-**: Classes utilizadas por scripts (`js-toggle`, `js-modal`).
