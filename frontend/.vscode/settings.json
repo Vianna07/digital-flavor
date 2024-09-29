@@ -1,5 +1,8 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "always"
   },
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "eslint.alwaysShowRuleWarningsAsErrors": true
 }

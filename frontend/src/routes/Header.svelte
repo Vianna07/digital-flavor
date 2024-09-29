@@ -1,10 +1,13 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
+
+	const teste = '';
+	const teste2 = '';
 </script>
 
-<header>
+<header class="bg-red-300 absolute">
 	<div class="corner">
 		<a href="https://kit.svelte.dev">
 			<img src={logo} alt="SvelteKit" />
