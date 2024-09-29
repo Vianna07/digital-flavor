@@ -1,0 +1,29 @@
+services:
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.dev
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+      - 5005:5005
+    environment:
+      - SERVER_PORT=${SERVER_PORT}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    develop:
+      watch:
+        - path: ./src
+          target: /app/src
+          action: sync
+    depends_on:
+      database:
+        condition: service_started
+      cache:
+        condition: service_started

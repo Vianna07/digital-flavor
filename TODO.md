@@ -1,5 +1,6 @@
-Colocar licença,
-Configurar ambiente de desenvolvimento para backend
+Configurar linter para front-end
+Configurar intelliJ com docker
+Colocar licença
 
 PRIORIDADES:
 
