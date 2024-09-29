@@ -7,7 +7,7 @@
 	const teste2 = '';
 </script>
 
-<header class="bg-red-300 absolute">
+<header class="absolute bg-red-300">
 	<div class="corner">
 		<a href="https://kit.svelte.dev">
 			<img src={logo} alt="SvelteKit" />

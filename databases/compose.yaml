@@ -20,6 +20,3 @@ services:
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]
-
-volumes:
-  postgres_data:
