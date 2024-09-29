@@ -2,6 +2,10 @@ spring:
   application:
     name: backend
 
+  devtools:
+    restart:
+      enabled: true
+
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
     username: ${POSTGRES_USER}
@@ -40,5 +44,6 @@ spring:
       enabled: always
 
 server:
+  port:
   error:
     include-stacktrace: on_param

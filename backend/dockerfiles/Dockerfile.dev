@@ -2,12 +2,5 @@ FROM maven:3.9.9-amazoncorretto-21-alpine
 WORKDIR /app
 COPY pom.xml ./
 COPY src ./src
-COPY scripts/entrypoint.sh entrypoint.sh
 RUN apk add --no-cache inotify-tools && \
     mvn dependency:go-offline -B
-
-EXPOSE ${SERVER_PORT}
-CMD ["sh", "entrypoint.sh"]
-
-# CMD [ "mvn", "spring-boot:run" ]
-# CMD [ "java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=0.0.0.0:5005", "-jar", "-jar", "app.jar" ]

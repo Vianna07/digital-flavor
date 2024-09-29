@@ -7,6 +7,9 @@ services:
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
       - 5005:5005
+    volumes:
+      - ../scripts/springboot/entrypoint.sh:/app/entrypoint.sh:ro
+    command: [ "sh", "/app/entrypoint.sh" ]
     environment:
       - SERVER_PORT=${SERVER_PORT}
       - POSTGRES_HOST=${POSTGRES_HOST}
