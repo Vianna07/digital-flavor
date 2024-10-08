@@ -1,5 +1,0 @@
-Colocar licença
-
-PRIORIDADES:
-
-DOCUMENTAÇÃO
