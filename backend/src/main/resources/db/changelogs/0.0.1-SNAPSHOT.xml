@@ -16,4 +16,15 @@
             Cria tipos para serem usados junto com enums
         </comment>
     </changeSet>
+
+    <changeSet id="000002" author="viannagustavo71@gmail.com">
+        <sql>
+            CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+        </sql>
+
+        <comment>
+            Adiciona extensão para gerar UUID's
+        </comment>
+    </changeSet>
+
 </databaseChangeLog>
