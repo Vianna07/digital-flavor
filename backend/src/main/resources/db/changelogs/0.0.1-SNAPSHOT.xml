@@ -27,4 +27,24 @@
         </comment>
     </changeSet>
 
+    <changeSet id="000003" author="viannagustavo71@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS products (
+                id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+                stock INT DEFAULT 0,
+                price DECIMAL(7, 2) NOT NULL,
+                cost DECIMAL(7,2) NOT NULL,
+                created_at TIMESTAMP DEFAULT NOW(),
+                updated_at TIMESTAMP DEFAULT NOW(),
+                name VARCHAR(100) NOT NULL,
+                description TEXT,
+                image_url TEXT
+            );
+        </sql>
+
+        <comment>
+            Cria a tabela de produtos
+        </comment>
+    </changeSet>
+
 </databaseChangeLog>
