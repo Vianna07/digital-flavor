@@ -1,0 +1,28 @@
+services:
+  # docker exec -it <container_id> psql -U <username> -d <database>
+  database:
+    image: postgres:16.4-alpine3.20
+    container_name: database
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB:-digital_flavor}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 15s
+
+  redis:
+    image: redis:7.4-alpine3.20
+    container_name: redis
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    command: [ "redis-server", "--requirepass", "${REDIS_PASSWORD}" ]

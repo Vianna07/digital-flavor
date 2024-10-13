@@ -1,0 +1,21 @@
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.dev
+    ports:
+      - ${WEB_SERVER_PORT:-5173}:${WEB_SERVER_PORT:-5173}
+    environment:
+      WEB_SERVER_PORT: ${WEB_SERVER_PORT:-5173}
+    develop:
+      watch:
+        - path: ./src
+          target: /app/src
+          action: sync
+        - path: ./static
+          target: /app/static
+          action: sync
+        - path: ./tests
+          target: /app/tests
+          action: sync

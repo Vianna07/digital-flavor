@@ -1,0 +1,14 @@
+*
+
+!src
+!static
+!tests
+
+!vite*
+!tsconfig*
+!*.config.js
+!.env
+
+!package.json
+!pnpm-lock.yaml
+!.npmrc
