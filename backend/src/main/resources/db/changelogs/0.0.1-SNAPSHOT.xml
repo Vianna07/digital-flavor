@@ -5,4 +5,15 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
+    <changeSet id="000001" author="viannagustavo71@gmail.com">
+        <sql>
+            CREATE TYPE order_status AS ENUM ('OPEN', 'FINALIZED', 'CANCELED', 'PAID');
+            CREATE TYPE user_type AS ENUM ('ADMIN', 'MANAGER', 'EMPLOYEE', 'CUSTOMER');
+            CREATE TYPE payment_method AS ENUM ('CASH', 'PIX', 'CARD');
+        </sql>
+
+        <comment>
+            Cria tipos para serem usados junto com enums
+        </comment>
+    </changeSet>
 </databaseChangeLog>
