@@ -100,7 +100,7 @@
 
     <changeSet id="000007" author="viannagustavo71@gmail.com">
         <sql>
-            CREATE TABLE users (
+            CREATE TABLE IF NOT EXISTS users (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
                 user_type user_type NOT NULL DEFAULT 'CUSTOMER',
@@ -112,6 +112,22 @@
 
         <comment>
             Cria a tabela de usuários
+        </comment>
+    </changeSet>
+
+    <changeSet id="000008" author="viannagustavo71@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS canteens (
+                id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+                manager_id UUID REFERENCES users(id),
+                created_at TIMESTAMP DEFAULT NOW(),
+                name VARCHAR(100) NOT NULL,
+                address VARCHAR(150)
+            );
+        </sql>
+
+        <comment>
+            Cria a tabela de cantinas
         </comment>
     </changeSet>
 
