@@ -145,4 +145,27 @@
         </comment>
     </changeSet>
 
+    <changeSet id="000010" author="viannagustavo71@gmail.com">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="products" columnName="canteen_id"/>
+                <columnExists tableName="orders" columnName="canteen_id"/>
+                <columnExists tableName="payments" columnName="canteen_id"/>
+                <columnExists tableName="users" columnName="canteen_id"/>
+            </not>
+        </preConditions>
+
+        <sql>
+            ALTER TABLE products ADD COLUMN canteen_id UUID REFERENCES canteens(id);
+            ALTER TABLE orders ADD COLUMN canteen_id UUID REFERENCES canteens(id);
+            ALTER TABLE payments ADD COLUMN canteen_id UUID REFERENCES canteens(id);
+            ALTER TABLE users ADD COLUMN canteen_id UUID REFERENCES canteens(id);
+        </sql>
+
+        <comment>
+            Adiciona a coluna canteen_id a todas as tabelas relevantes
+        </comment>
+    </changeSet>
+
+
 </databaseChangeLog>
