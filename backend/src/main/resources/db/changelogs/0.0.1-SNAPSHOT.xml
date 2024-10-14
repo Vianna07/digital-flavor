@@ -131,4 +131,18 @@
         </comment>
     </changeSet>
 
+    <changeSet id="000009" author="viannagustavo71@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS admin_canteens (
+                admin_id UUID REFERENCES users(id) ON DELETE CASCADE,
+                canteen_id UUID REFERENCES canteens(id) ON DELETE CASCADE,
+                PRIMARY KEY (admin_id, canteen_id)
+            );
+        </sql>
+
+        <comment>
+            Cria a tabela de relação entre administradores e cantinas
+        </comment>
+    </changeSet>
+
 </databaseChangeLog>
