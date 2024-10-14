@@ -47,4 +47,21 @@
         </comment>
     </changeSet>
 
+    <changeSet id="000004" author="viannagustavo71@gmail.com">
+        <sql>
+            CREATE TABLE IF NOT EXISTS orders (
+                id BIGSERIAL PRIMARY KEY,
+                created_at TIMESTAMP DEFAULT NOW(),
+                date_finished TIMESTAMP,
+                date_cancelled TIMESTAMP,
+                customer_id BIGINT NOT NULL,
+                status order_status NOT NULL DEFAULT 'OPEN'
+            );
+        </sql>
+
+        <comment>
+            Cria a tabela de pedidos
+        </comment>
+    </changeSet>
+
 </databaseChangeLog>
