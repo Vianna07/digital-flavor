@@ -98,4 +98,21 @@
         </comment>
     </changeSet>
 
+    <changeSet id="000007" author="viannagustavo71@gmail.com">
+        <sql>
+            CREATE TABLE users (
+                id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                user_type user_type NOT NULL DEFAULT 'CUSTOMER',
+                name VARCHAR(100) NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL,
+                password VARCHAR(100) NOT NULL
+            );
+        </sql>
+
+        <comment>
+            Cria a tabela de usuários
+        </comment>
+    </changeSet>
+
 </databaseChangeLog>
