@@ -49,6 +49,23 @@
 
     <changeSet id="000004" author="viannagustavo71@gmail.com">
         <sql>
+            CREATE TABLE IF NOT EXISTS users (
+                id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                user_type user_type NOT NULL DEFAULT 'CUSTOMER',
+                name VARCHAR(100) NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL,
+                password VARCHAR(100) NOT NULL
+            );
+        </sql>
+
+        <comment>
+            Cria a tabela de usuários
+        </comment>
+    </changeSet>
+
+    <changeSet id="000005" author="viannagustavo71@gmail.com">
+        <sql>
             CREATE TABLE IF NOT EXISTS orders (
                 id BIGSERIAL PRIMARY KEY,
                 created_at TIMESTAMP DEFAULT NOW(),
@@ -65,7 +82,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000005" author="viannagustavo71@gmail.com">
+    <changeSet id="000006" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS order_items (
                 order_id BIGINT NOT NULL,
@@ -82,7 +99,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000006" author="viannagustavo71@gmail.com">
+    <changeSet id="000007" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS payments (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -96,23 +113,6 @@
 
         <comment>
             Cria a tabela de pagamentos
-        </comment>
-    </changeSet>
-
-    <changeSet id="000007" author="viannagustavo71@gmail.com">
-        <sql>
-            CREATE TABLE IF NOT EXISTS users (
-                id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-                user_type user_type NOT NULL DEFAULT 'CUSTOMER',
-                name VARCHAR(100) NOT NULL,
-                email VARCHAR(100) UNIQUE NOT NULL,
-                password VARCHAR(100) NOT NULL
-            );
-        </sql>
-
-        <comment>
-            Cria a tabela de usuários
         </comment>
     </changeSet>
 
