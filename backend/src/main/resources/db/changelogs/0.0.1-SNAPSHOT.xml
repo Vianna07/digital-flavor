@@ -134,7 +134,7 @@
 
     <changeSet id="000009" author="viannagustavo71@gmail.com">
         <sql>
-            CREATE TABLE IF NOT EXISTS users_canteens (
+            CREATE TABLE IF NOT EXISTS user_canteens (
                 user_id UUID REFERENCES users(id) ON DELETE CASCADE,
                 canteen_id UUID REFERENCES canteens(id) ON DELETE CASCADE,
                 PRIMARY KEY (user_id, canteen_id)
