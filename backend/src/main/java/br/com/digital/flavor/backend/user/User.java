@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -33,9 +35,13 @@ public class User {
     @Column(nullable = false, length = 100)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "canteen_id")
+    @ManyToMany
+    @JoinTable(
+            name = "user_canteens",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "canteen_id")
+    )
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Canteen canteen;
+    private Set<Canteen> canteens = new HashSet<>();
 }
