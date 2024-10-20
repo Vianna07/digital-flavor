@@ -7,18 +7,6 @@
 
     <changeSet id="000001" author="viannagustavo71@gmail.com">
         <sql>
-            CREATE TYPE order_status AS ENUM ('OPEN', 'FINALIZED', 'CANCELED', 'PAID');
-            CREATE TYPE user_type AS ENUM ('ADMIN', 'MANAGER', 'EMPLOYEE', 'CUSTOMER');
-            CREATE TYPE payment_method AS ENUM ('CASH', 'PIX', 'CARD');
-        </sql>
-
-        <comment>
-            Cria tipos para serem usados junto com enums
-        </comment>
-    </changeSet>
-
-    <changeSet id="000002" author="viannagustavo71@gmail.com">
-        <sql>
             CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
         </sql>
 
@@ -27,7 +15,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000003" author="viannagustavo71@gmail.com">
+    <changeSet id="000002" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS products (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -47,12 +35,12 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000004" author="viannagustavo71@gmail.com">
+    <changeSet id="000003" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS users (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-                user_type user_type NOT NULL DEFAULT 'CUSTOMER',
+                user_type VARCHAR(10) NOT NULL DEFAULT 'CUSTOMER',
                 name VARCHAR(100) NOT NULL,
                 email VARCHAR(100) UNIQUE NOT NULL,
                 password VARCHAR(100) NOT NULL
@@ -64,7 +52,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000005" author="viannagustavo71@gmail.com">
+    <changeSet id="000004" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS orders (
                 id BIGSERIAL PRIMARY KEY,
@@ -72,7 +60,7 @@
                 date_finished TIMESTAMP,
                 date_cancelled TIMESTAMP,
                 user_id UUID,
-                status order_status NOT NULL DEFAULT 'OPEN',
+                status VARCHAR(10) NOT NULL DEFAULT 'OPEN',
                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
         </sql>
@@ -82,7 +70,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000006" author="viannagustavo71@gmail.com">
+    <changeSet id="000005" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS order_items (
                 order_id BIGINT NOT NULL,
@@ -99,14 +87,14 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000007" author="viannagustavo71@gmail.com">
+    <changeSet id="000006" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS payments (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
                 order_id BIGINT NOT NULL,
                 payment_date TIMESTAMP DEFAULT NOW(),
                 amount DECIMAL(7, 2) NOT NULL,
-                method payment_method NOT NULL,
+                method VARCHAR(10) NOT NULL,
                 FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
             );
         </sql>
@@ -116,7 +104,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000008" author="viannagustavo71@gmail.com">
+    <changeSet id="000007" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS canteens (
                 id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -132,7 +120,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000009" author="viannagustavo71@gmail.com">
+    <changeSet id="000008" author="viannagustavo71@gmail.com">
         <sql>
             CREATE TABLE IF NOT EXISTS user_canteens (
                 user_id UUID REFERENCES users(id) ON DELETE CASCADE,
@@ -146,7 +134,7 @@
         </comment>
     </changeSet>
 
-    <changeSet id="000010" author="viannagustavo71@gmail.com">
+    <changeSet id="000009" author="viannagustavo71@gmail.com">
         <preConditions onFail="MARK_RAN">
             <not>
                 <columnExists tableName="products" columnName="canteen_id"/>

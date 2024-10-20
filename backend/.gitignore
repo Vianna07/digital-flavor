@@ -5,6 +5,10 @@ target/
 !**/src/test/**/target/
 .env*
 !.env*.example
+*.pem
+public.pub
+private.key
+*.log
 
 ### STS ###
 .apt_generated

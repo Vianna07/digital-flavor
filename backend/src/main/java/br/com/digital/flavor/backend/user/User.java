@@ -2,8 +2,10 @@ package br.com.digital.flavor.backend.user;
 
 
 import br.com.digital.flavor.backend.canteen.Canteen;
+import br.com.digital.flavor.backend.security.dto.LoginRequest;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -44,4 +46,8 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Canteen> canteens = new HashSet<>();
+
+    public boolean isValidLogin(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(loginRequest.password(), this.password);
+    }
 }
