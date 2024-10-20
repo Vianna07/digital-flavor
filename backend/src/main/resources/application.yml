@@ -53,3 +53,10 @@ server:
   port:  ${SERVER_PORT:8080}
   error:
     include-stacktrace: on_param
+
+logging:
+  level:
+    root: INFO
+    br.com.digital.flavor.backend: DEBUG
+  file:
+    name: logs/application.log
