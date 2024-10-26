@@ -1,5 +1,6 @@
 package br.com.digital.flavor.backend.security.tenant;
 
+import br.com.digital.flavor.backend.security.SecurityConfig;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.core.annotation.Order;
@@ -24,10 +25,13 @@ public class CanteenFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         String authorization = req.getHeader("Authorization");
+        String requestURI = req.getRequestURI();
 
-        if (req.getRequestURI().startsWith("/security/login")) {
-            chain.doFilter(request, response);
-            return;
+        for (String publicRoute : SecurityConfig.PUBLIC_ROUTES) {
+            if (requestURI.startsWith(publicRoute)) {
+                chain.doFilter(request, response);
+                return;
+            }
         }
 
         CanteenContext.setCurrentCanteen(this.jwtDecoder.decode(authorization.substring(7)));

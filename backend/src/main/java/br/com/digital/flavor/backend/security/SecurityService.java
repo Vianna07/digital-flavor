@@ -6,8 +6,8 @@ import br.com.digital.flavor.backend.security.dto.LoginRequest;
 import br.com.digital.flavor.backend.security.dto.LoginResponse;
 import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import br.com.digital.flavor.backend.user.User;
-import br.com.digital.flavor.backend.user.UserDto;
 import br.com.digital.flavor.backend.user.UserRepository;
+import br.com.digital.flavor.backend.user.dto.UserLoginDto;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -38,7 +38,7 @@ public class SecurityService {
         this.canteenRepository = canteenRepository;
     }
 
-    public UserDto login(LoginRequest loginRequest) {
+    public UserLoginDto login(LoginRequest loginRequest) {
         Optional<User> optUser = this.userRepository.findByEmail(loginRequest.email());
 
         if (optUser.isEmpty() || !optUser.get().isValidLogin(loginRequest, this.passwordEncoder)) {
@@ -47,11 +47,11 @@ public class SecurityService {
 
         User user = optUser.get();
 
-        return new UserDto(user.getId(), user.getUserType(), user.getName(), user.getEmail());
+        return new UserLoginDto(user.getId(), user.getUserType(), user.getName(), user.getEmail());
     }
 
     public LoginResponse loginCanteen(LoginRequest loginRequest) {
-        UserDto user = login(loginRequest);
+        UserLoginDto user = login(loginRequest);
         String canteenId = loginRequest.canteenId();
 
         if (canteenId == null || canteenId.isEmpty()) {
@@ -85,7 +85,7 @@ public class SecurityService {
                 .build();
     }
 
-    public JwtClaimsSet getJwtClaimsSet(UserDto user, String canteenId) {
+    public JwtClaimsSet getJwtClaimsSet(UserLoginDto user, String canteenId) {
         return getJwtClaimsSet("backend", user.id().toString(), user.userType().toString(), canteenId);
     }
 
