@@ -1,4 +1,4 @@
-package br.com.digital.flavor.backend.security;
+package br.com.digital.flavor.backend.security.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
