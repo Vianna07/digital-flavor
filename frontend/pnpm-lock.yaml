@@ -44,6 +44,15 @@ importers:
       globals:
         specifier: ^15.11.0
         version: 15.11.0
+      postcss-advanced-variables:
+        specifier: ^5.0.0
+        version: 5.0.0(postcss@8.4.47)
+      postcss-calc:
+        specifier: ^10.0.2
+        version: 10.0.2(postcss@8.4.47)
+      postcss-nested:
+        specifier: ^6.2.0
+        version: 6.2.0(postcss@8.4.47)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -84,6 +93,10 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@csstools/sass-import-resolve@1.0.0':
+    resolution: {integrity: sha512-pH4KCsbtBLLe7eqUrw8brcuFO8IZlN36JjdKlOublibVdAIPHCzEnpBWOVUXK5sCf+DpBi8ZtuWtjF0srybdeA==}
+    engines: {node: '>=4.0.0'}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -1153,6 +1166,18 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
+  postcss-advanced-variables@5.0.0:
+    resolution: {integrity: sha512-g2SwNfZ1bJxoch51VqY7FMtxJ8+sJCxOqVi1vBAfzsiFgf5xRXhWIJXbUW6FXBJK0JQedOfYS5DtuVEuQLXVnQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      postcss: ^8.4
+
+  postcss-calc@10.0.2:
+    resolution: {integrity: sha512-DT/Wwm6fCKgpYVI7ZEWuPJ4az8hiEHtCUeYjZXqU7Ou4QqYh1Df2yCQ7Ca6N7xqKPFkxN3fhf+u9KSoOCJNAjg==}
+    engines: {node: ^18.12 || ^20.9 || >=22.0}
+    peerDependencies:
+      postcss: ^8.4.38
+
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
@@ -1619,6 +1644,8 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@csstools/sass-import-resolve@1.0.0': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
@@ -2597,6 +2624,17 @@ snapshots:
       playwright-core: 1.48.2
     optionalDependencies:
       fsevents: 2.3.2
+
+  postcss-advanced-variables@5.0.0(postcss@8.4.47):
+    dependencies:
+      '@csstools/sass-import-resolve': 1.0.0
+      postcss: 8.4.47
+
+  postcss-calc@10.0.2(postcss@8.4.47):
+    dependencies:
+      postcss: 8.4.47
+      postcss-selector-parser: 6.1.2
+      postcss-value-parser: 4.2.0
 
   postcss-import@15.1.0(postcss@8.4.47):
     dependencies:
