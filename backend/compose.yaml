@@ -7,9 +7,6 @@ services:
     ports:
       - ${SERVER_PORT:-8080}:${SERVER_PORT:-8080}
       - 5005:5005
-    volumes:
-      - ../scripts/entrypoint-spring-app.sh:/app/entrypoint.sh:ro
-    command: [ "sh", "/app/entrypoint.sh" ]
     environment:
       - SERVER_PORT=${SERVER_PORT:-8080}
       - POSTGRES_HOST=${POSTGRES_HOST:-localhost}
@@ -20,11 +17,6 @@ services:
       - REDIS_HOST=${REDIS_HOST:-localhost}
       - REDIS_PORT=${REDIS_PORT:-6379}
       - REDIS_PASSWORD=${REDIS_PASSWORD}
-    develop:
-      watch:
-        - path: ./src
-          target: /app/src
-          action: sync
     depends_on:
       database:
         condition: service_healthy
