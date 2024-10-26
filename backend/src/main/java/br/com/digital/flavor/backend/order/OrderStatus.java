@@ -4,5 +4,5 @@ public enum OrderStatus {
     OPEN,
     FINALIZED,
     CANCELED,
-    PAID;
+    PAID
 }

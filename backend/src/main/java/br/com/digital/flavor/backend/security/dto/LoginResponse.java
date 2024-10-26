@@ -1,3 +1,4 @@
 package br.com.digital.flavor.backend.security.dto;
 
-public record LoginResponse(String authorization, Integer expirationTime) {}
+public record LoginResponse(String authorization, Integer expirationTime) {
+}

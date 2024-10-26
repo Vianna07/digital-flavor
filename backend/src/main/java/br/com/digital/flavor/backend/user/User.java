@@ -4,7 +4,10 @@ package br.com.digital.flavor.backend.user;
 import br.com.digital.flavor.backend.canteen.Canteen;
 import br.com.digital.flavor.backend.security.dto.LoginRequest;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;

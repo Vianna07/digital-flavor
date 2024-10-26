@@ -3,7 +3,10 @@ package br.com.digital.flavor.backend.product;
 
 import br.com.digital.flavor.backend.canteen.Canteen;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
