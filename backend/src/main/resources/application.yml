@@ -3,10 +3,8 @@ spring:
     name: backend
 
   jwt:
-    public:
-      key: classpath:keys/public.pub
-    private:
-      key: classpath:keys/private.key
+    public.key: classpath:keys/public.pem
+    private.key: classpath:keys/private.pem
 
   devtools:
     restart:
