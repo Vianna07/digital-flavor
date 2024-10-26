@@ -5,5 +5,5 @@ public enum UserType {
     ADMIN,
     MANAGER,
     EMPLOYEE,
-    CUSTOMER;
+    CUSTOMER
 }

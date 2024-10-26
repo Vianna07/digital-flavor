@@ -8,7 +8,7 @@ target/
 *.pem
 public.pub
 private.key
-*.log
+*.log*
 
 ### STS ###
 .apt_generated

@@ -4,7 +4,10 @@ package br.com.digital.flavor.backend.order_item;
 import br.com.digital.flavor.backend.order.Order;
 import br.com.digital.flavor.backend.product.Product;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor

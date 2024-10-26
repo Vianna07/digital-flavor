@@ -4,12 +4,15 @@ import br.com.digital.flavor.backend.canteen.Canteen;
 import br.com.digital.flavor.backend.canteen.CanteenRepository;
 import br.com.digital.flavor.backend.security.dto.LoginRequest;
 import br.com.digital.flavor.backend.security.dto.LoginResponse;
+import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import br.com.digital.flavor.backend.user.User;
 import br.com.digital.flavor.backend.user.UserDto;
 import br.com.digital.flavor.backend.user.UserRepository;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -21,14 +24,15 @@ public class SecurityService {
 
     private final int EXPIRES_AT = 960;
     private final JwtEncoder jwtEncoder;
-    private final JwtDecoder jwtDecoder;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final CanteenRepository canteenRepository;
 
-    public SecurityService(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder, BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepository, CanteenRepository canteenRepository) {
+    public SecurityService(JwtEncoder jwtEncoder,
+                           BCryptPasswordEncoder bCryptPasswordEncoder,
+                           UserRepository userRepository,
+                           CanteenRepository canteenRepository) {
         this.jwtEncoder = jwtEncoder;
-        this.jwtDecoder = jwtDecoder;
         this.passwordEncoder = bCryptPasswordEncoder;
         this.userRepository = userRepository;
         this.canteenRepository = canteenRepository;
@@ -62,42 +66,43 @@ public class SecurityService {
 
         try {
             String jwtToken = this.jwtEncoder.encode(JwtEncoderParameters.from(getJwtClaimsSet(user, canteenId))).getTokenValue();
-            return new LoginResponse(jwtToken, this.EXPIRES_AT);
+            return new LoginResponse("Bearer " + jwtToken, this.EXPIRES_AT);
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
 
-    public JwtClaimsSet getJwtClaimsSet(UserDto user, String canteenId) {
+    public JwtClaimsSet getJwtClaimsSet(String issuer, String subject, String scope, String canteenId) {
         Instant instant = Instant.now();
 
         return JwtClaimsSet.builder()
-                .issuer("backend")
-                .subject(user.id().toString())
+                .issuer(issuer)
+                .subject(subject)
                 .issuedAt(instant)
                 .expiresAt(instant.plusSeconds(this.EXPIRES_AT))
-                .claim("role", user.userType())
+                .claim("scope", scope)
                 .claim("canteenId", canteenId)
                 .build();
     }
 
-    public String renewToken(String token) {
+    public JwtClaimsSet getJwtClaimsSet(UserDto user, String canteenId) {
+        return getJwtClaimsSet("backend", user.id().toString(), user.userType().toString(), canteenId);
+    }
+
+    public LoginResponse renewToken() {
         try {
-            Jwt jwt = this.jwtDecoder.decode(token);
-            Instant instant = Instant.now();
+            JwtClaimsSet claims = getJwtClaimsSet(
+                    CanteenContext.getCurrentIssuer(),
+                    CanteenContext.getCurrentSubject(),
+                    CanteenContext.getCurrentScope(),
+                    CanteenContext.getCurrentCanteenId()
+            );
 
-            JwtClaimsSet claims = JwtClaimsSet.builder()
-                    .issuer("backend")
-                    .subject(jwt.getClaim("sub"))
-                    .issuedAt(instant)
-                    .expiresAt(instant.plusSeconds(this.EXPIRES_AT))
-                    .claim("role", jwt.getClaim("sub"))
-                    .claim("canteenId",  jwt.getClaim("sub"))
-                    .build();
-
-            return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+            String jwtToken = this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+            return new LoginResponse("Bearer " + jwtToken, this.EXPIRES_AT);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Erro ao decodificar token JWT - " + e.getMessage());
+            throw new IllegalArgumentException("Erro ao decodificar authorization JWT - " + e.getMessage());
         }
     }
+
 }

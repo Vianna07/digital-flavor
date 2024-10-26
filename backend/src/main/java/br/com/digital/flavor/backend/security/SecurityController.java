@@ -26,9 +26,9 @@ public class SecurityController {
         return ResponseEntity.ok(securityService.loginCanteen(loginRequest));
     }
 
-    @GetMapping("/renew-token")
-    public ResponseEntity<String> renewToken(@RequestHeader("token") String token) {
-        return ResponseEntity.ok(securityService.renewToken(token));
+    @GetMapping("/renew-authorization")
+    public ResponseEntity<LoginResponse> renewToken() {
+        return ResponseEntity.ok(securityService.renewToken());
     }
 
 }
