@@ -2,50 +2,50 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-html, body {
-    @apply h-full;
+html,
+body {
+	@apply h-full;
 }
 
 body {
-    @apply font-body text-text-primary bg-bg-light;
+	@apply bg-bg-light font-body text-text-primary;
 }
 
 button.primary {
-    @apply bg-primary text-text-primary p-2.5 cursor-pointer transition-colors duration-[var(--transition-speed)];
+	@apply cursor-pointer bg-primary p-2.5 text-text-primary transition-colors duration-[var(--transition-speed)];
 }
 
 button.primary:hover {
-    @apply bg-hover;
+	@apply bg-hover;
 }
 
 button.secondary {
-    @apply bg-secondary text-text-secondary p-2.5 cursor-pointer transition-colors duration-[var(--transition-speed)];
+	@apply cursor-pointer bg-secondary p-2.5 text-text-secondary transition-colors duration-[var(--transition-speed)];
 }
 
 header {
-    @apply bg-bg-dark text-text-secondary p-5;
+	@apply bg-bg-dark p-5 text-text-secondary;
 }
 
 footer {
-    @apply bg-bg-dark text-text-secondary p-5;
+	@apply bg-bg-dark p-5 text-text-secondary;
 }
 
 .card {
-    @apply bg-card-bg border border-border p-5 m-2.5 transition-shadow duration-[var(--transition-speed)];
+	@apply m-2.5 border border-border bg-card-bg p-5 transition-shadow duration-[var(--transition-speed)];
 }
 
 .card:hover {
-    @apply shadow-lg;
+	@apply shadow-lg;
 }
 
 a {
-    @apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
+	@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
 }
 
 a:hover {
-    @apply text-hover;
+	@apply text-hover;
 }
-
 
 /*  
 :root {
