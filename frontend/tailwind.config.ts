@@ -7,14 +7,11 @@ export default {
 		extend: {
 			colors: {
 				primary: '#CA2929',
-				secondary: '#E7E7E7',
-				'bg-light': '#F9F2ED',
-				'bg-dark': '#313131',
-				'text-primary': '#000000',
-				'text-secondary': '#555555',
-				border: 'rgba(0, 0, 0, 0.1)',
+				secondary: '#555555',
+				light: '#F7F8F8FA',
+				placeholder: '#C1C1C1',
 				hover: '#E7E7E7',
-				'card-bg': '#ffffff'
+				dark: '#313131'
 			},
 			fontFamily: {
 				body: [
@@ -31,10 +28,6 @@ export default {
 					'Helvetica Neue',
 					'sans-serif'
 				]
-			},
-			spacing: {
-				'column-width': '42rem',
-				'column-margin-top': '4rem'
 			},
 			transitionDuration: {
 				speed: '300ms'
