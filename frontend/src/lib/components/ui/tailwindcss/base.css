@@ -1,0 +1,46 @@
+@layer base {
+	html,
+	body {
+		@apply h-full;
+	}
+
+	body {
+		@apply bg-light font-body text-black;
+	}
+
+	button.primary {
+		@apply cursor-pointer bg-primary p-2.5 text-black transition-colors duration-[var(--transition-speed)];
+	}
+
+	button.primary:hover {
+		@apply bg-hover;
+	}
+
+	button.secondary {
+		@apply cursor-pointer bg-secondary p-2.5 text-secondary transition-colors duration-[var(--transition-speed)];
+	}
+
+	header {
+		@apply bg-dark p-5 text-secondary;
+	}
+
+	footer {
+		@apply bg-dark p-5 text-secondary;
+	}
+
+	.card {
+		@apply m-2.5 border border-light bg-light p-5 transition-shadow duration-[var(--transition-speed)];
+	}
+
+	.card:hover {
+		@apply shadow-lg;
+	}
+
+	a {
+		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
+	}
+
+	a:hover {
+		@apply text-hover;
+	}
+}
