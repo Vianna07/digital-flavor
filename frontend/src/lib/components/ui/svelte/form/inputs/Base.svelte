@@ -1,0 +1,95 @@
+<script lang="ts">
+	import type { InputProps } from '$lib/types';
+
+	let { id, type, label, leftIconUrl, rightIcon, pattern, required = true }: InputProps = $props();
+	let isButtonDisabled = $state<boolean>(false);
+
+	function onclick() {
+		rightIcon?.onclick?.();
+
+		if (rightIcon?.onclick) {
+			isButtonDisabled = true;
+
+			setTimeout(() => {
+				isButtonDisabled = false;
+			}, 75);
+		}
+	}
+</script>
+
+<section class="form-field">
+	<input class="form-field__input" {type} {id} name={id} placeholder=" " {pattern} {required} />
+
+	{#if leftIconUrl}
+		<img src={leftIconUrl} alt="Icon" class="form-field__left-icon" />
+	{/if}
+
+	<label class="form-field__label" for={id}>
+		{label}
+	</label>
+
+	{#if rightIcon}
+		<button {onclick} disabled={isButtonDisabled} class="form-field__right-icon">
+			<img src={rightIcon.url} alt="Icon" />
+		</button>
+	{/if}
+</section>
+
+<style lang="postcss">
+	.form-field {
+		@apply relative;
+
+		&__input {
+			@apply relative rounded-lg border-2 border-gray-300 bg-white p-4 shadow-md outline-none focus-visible:border-primary;
+
+			width: clamp(18rem, 20rem, 24rem);
+		}
+
+		&__input:not(:placeholder-shown) {
+			@apply border-primary;
+		}
+
+		&__input:focus-visible ~ &__label,
+		&__input:not(:placeholder-shown) ~ &__label {
+			@apply left-2 top-0 scale-90 bg-gradient-to-b from-light to-white text-primary;
+		}
+
+		&__input:focus-visible ~ &__left-icon,
+		&__input:not(:placeholder-shown) ~ &__left-icon {
+			filter: invert(20%) sepia(25%) saturate(100) hue-rotate(15deg);
+		}
+
+		&__label {
+			@apply absolute left-4 top-1/2 -translate-y-1/2 rounded-3xl bg-white px-2 text-base font-medium text-secondary transition-all;
+		}
+
+		&__left-icon {
+			@apply absolute left-6 top-1/2 h-5 w-5 -translate-y-1/2;
+
+			:has(&) {
+				.form-field__label {
+					@apply left-12;
+				}
+
+				.form-field__input {
+					@apply pl-14;
+				}
+			}
+		}
+
+		&__left-icon,
+		&__right-icon {
+			filter: invert(20%) sepia(25%) saturate(0) hue-rotate(0);
+		}
+
+		&__right-icon {
+			@apply absolute right-5 top-1/2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center;
+
+			:has(&) {
+				.form-field__input {
+					@apply pr-12;
+				}
+			}
+		}
+	}
+</style>
