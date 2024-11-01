@@ -8,7 +8,23 @@
 		@apply bg-light font-body text-black;
 	}
 
-	button.primary {
+	header {
+		@apply bg-dark p-5 text-secondary;
+	}
+
+	footer {
+		@apply bg-dark p-5 text-secondary;
+	}
+
+	a {
+		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
+	}
+
+	a:hover {
+		@apply text-hover;
+	}
+
+  button.primary {
 		@apply cursor-pointer bg-primary p-2.5 text-black transition-colors duration-[var(--transition-speed)];
 	}
 
@@ -20,27 +36,16 @@
 		@apply cursor-pointer bg-secondary p-2.5 text-secondary transition-colors duration-[var(--transition-speed)];
 	}
 
-	header {
-		@apply bg-dark p-5 text-secondary;
-	}
+  input[type="password"]::-ms-reveal,
+  input[type="password"]::-ms-clear {
+    display: none;
+  }
 
-	footer {
-		@apply bg-dark p-5 text-secondary;
-	}
-
-	.card {
+  .card {
 		@apply m-2.5 border border-light bg-light p-5 transition-shadow duration-[var(--transition-speed)];
 	}
 
 	.card:hover {
 		@apply shadow-lg;
-	}
-
-	a {
-		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
-	}
-
-	a:hover {
-		@apply text-hover;
 	}
 }
