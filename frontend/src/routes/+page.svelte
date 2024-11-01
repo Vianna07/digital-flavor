@@ -2,7 +2,6 @@
 	import NameInput from '@components/form/inputs/Name.svelte';
 	import EmailInput from '@components/form/inputs/Email.svelte';
 	import PasswordInput from '@components/form/inputs/Password.svelte';
-	import eyeIcon from '@icons/eye.svg';
 	import type { PasswordInputProps } from '$lib/types';
 
 	const password: PasswordInputProps = {
