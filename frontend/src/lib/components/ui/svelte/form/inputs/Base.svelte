@@ -16,12 +16,12 @@
 	function onclick() {
 		rightIcon?.onclick();
 
-			isButtonDisabled = true;
+		isButtonDisabled = true;
 
-			setTimeout(() => {
-				isButtonDisabled = false;
-			}, 75);
-		}
+		setTimeout(() => {
+			isButtonDisabled = false;
+		}, 75);
+	}
 </script>
 
 <section class="form-field">
@@ -44,10 +44,10 @@
 
 <style lang="postcss">
 	.form-field {
-		@apply relative;
+		@apply relative bg-white;
 
 		&__input {
-			@apply relative rounded-lg border-2 border-gray-300 bg-white p-4 shadow-md outline-none focus-visible:border-primary;
+			@apply relative z-10 rounded-lg border-2 border-gray-300 bg-transparent p-4 shadow-md outline-none focus-visible:border-primary;
 
 			width: clamp(18rem, 20rem, 24rem);
 		}
@@ -67,7 +67,7 @@
 		}
 
 		&__label {
-			@apply absolute left-4 top-1/2 -translate-y-1/2 rounded-3xl bg-white px-2 text-base font-medium text-secondary transition-all;
+			@apply absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-3xl bg-white px-2 text-base font-medium text-secondary transition-all;
 		}
 
 		&__left-icon {
