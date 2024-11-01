@@ -24,7 +24,7 @@
 		@apply text-hover;
 	}
 
-  button.primary {
+	button.primary {
 		@apply cursor-pointer bg-primary p-2.5 text-black transition-colors duration-[var(--transition-speed)];
 	}
 
@@ -36,12 +36,12 @@
 		@apply cursor-pointer bg-secondary p-2.5 text-secondary transition-colors duration-[var(--transition-speed)];
 	}
 
-  input[type="password"]::-ms-reveal,
-  input[type="password"]::-ms-clear {
-    display: none;
-  }
+	input[type='password']::-ms-reveal,
+	input[type='password']::-ms-clear {
+		display: none;
+	}
 
-  .card {
+	.card {
 		@apply m-2.5 border border-light bg-light p-5 transition-shadow duration-[var(--transition-speed)];
 	}
 

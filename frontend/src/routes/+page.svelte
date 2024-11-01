@@ -6,7 +6,7 @@
 
 	const password: PasswordInputProps = {
 		id: 'retype-password',
-		hasEye: false,
+		hasEye: false
 	};
 </script>
 

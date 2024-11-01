@@ -22,13 +22,13 @@
 		[1, eyeIcon]
 	]);
 
-  const inputProps: BaseInputProps = $state({
+	const inputProps: BaseInputProps = $state({
 		id: id,
 		type: type,
 		label: label,
 		leftIconUrl: leftIconUrl ?? lockIcon,
 		pattern: pattern,
-    rightIcon: undefined,
+		rightIcon: undefined,
 		required: required
 	});
 
@@ -39,7 +39,7 @@
 					url: eyeSlashIcon,
 					onclick: function () {
 						urlIndex = (urlIndex + 1) % 2;
-            inputProps.type = urlIndex === 0 ? 'password' : 'text';
+						inputProps.type = urlIndex === 0 ? 'password' : 'text';
 						this.url = urls.get(urlIndex) as string;
 					}
 				}
