@@ -1,20 +1,27 @@
 <script lang="ts">
-	import type { InputProps } from '$lib/types';
+	import type { BaseInputProps } from '$lib/types';
 
-	let { id, type, label, leftIconUrl, rightIcon, pattern, required = true }: InputProps = $props();
+	let {
+		id,
+		type,
+		label,
+		leftIconUrl,
+		rightIcon,
+		pattern,
+		required = true
+	}: BaseInputProps = $props();
+
 	let isButtonDisabled = $state<boolean>(false);
 
 	function onclick() {
-		rightIcon?.onclick?.();
+		rightIcon?.onclick();
 
-		if (rightIcon?.onclick) {
 			isButtonDisabled = true;
 
 			setTimeout(() => {
 				isButtonDisabled = false;
 			}, 75);
 		}
-	}
 </script>
 
 <section class="form-field">

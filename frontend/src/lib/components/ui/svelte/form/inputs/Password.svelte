@@ -3,31 +3,45 @@
 	import lockIcon from '$lib/assets/icons/lock.svg';
 	import eyeSlashIcon from '$lib/assets/icons/eye-slash.svg';
 	import eyeIcon from '$lib/assets/icons/eye.svg';
-	import type { InputProps, RightIcon } from '$lib/types';
+	import type { BaseInputProps, InputProps, PasswordInputProps } from '$lib/types';
 
-	let hasEye: boolean = $props();
+	let {
+		id = 'password',
+		type = 'password',
+		label = 'Digite sua senha',
+		leftIconUrl,
+		rightIcon,
+		pattern,
+		required,
+		hasEye = true
+	}: PasswordInputProps = $props();
 
 	let urlIndex: number = 0;
 	const urls: Map<number, string> = new Map([
 		[0, eyeSlashIcon],
 		[1, eyeIcon]
 	]);
-	const rightIcon: RightIcon | undefined = hasEye
-		? {
-				url: eyeSlashIcon,
-				onclick: function () {
-					urlIndex = (urlIndex + 1) % 2;
-					this.url = urls.get(urlIndex) as string;
-				}
-			}
-		: undefined;
 
-	const inputProps: InputProps = $state({
-		id: 'password',
-		type: 'password',
-		label: 'Digite sua senha',
-		leftIconUrl: lockIcon,
-		rightIcon: rightIcon
+	rightIcon =
+		rightIcon ??
+		(hasEye
+			? {
+					url: eyeSlashIcon,
+					onclick: function () {
+						urlIndex = (urlIndex + 1) % 2;
+						this.url = urls.get(urlIndex) as string;
+					}
+				}
+			: undefined);
+
+	const inputProps: BaseInputProps = $state({
+		id: id,
+		type: type,
+		label: label,
+		leftIconUrl: leftIconUrl ?? lockIcon,
+		rightIcon: rightIcon,
+		pattern: pattern,
+		required: required
 	});
 </script>
 
