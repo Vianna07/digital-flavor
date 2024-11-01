@@ -36,7 +36,7 @@
 	</label>
 
 	{#if rightIcon}
-		<button {onclick} disabled={isButtonDisabled} class="form-field__right-icon">
+		<button {onclick} type="button" disabled={isButtonDisabled} class="form-field__right-icon">
 			<img src={rightIcon.url} alt="Icon" />
 		</button>
 	{/if}
