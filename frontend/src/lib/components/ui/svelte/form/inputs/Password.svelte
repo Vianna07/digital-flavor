@@ -22,27 +22,28 @@
 		[1, eyeIcon]
 	]);
 
-	rightIcon =
+  const inputProps: BaseInputProps = $state({
+		id: id,
+		type: type,
+		label: label,
+		leftIconUrl: leftIconUrl ?? lockIcon,
+		pattern: pattern,
+    rightIcon: undefined,
+		required: required
+	});
+
+	inputProps.rightIcon =
 		rightIcon ??
 		(hasEye
 			? {
 					url: eyeSlashIcon,
 					onclick: function () {
 						urlIndex = (urlIndex + 1) % 2;
+            inputProps.type = urlIndex === 0 ? 'password' : 'text';
 						this.url = urls.get(urlIndex) as string;
 					}
 				}
 			: undefined);
-
-	const inputProps: BaseInputProps = $state({
-		id: id,
-		type: type,
-		label: label,
-		leftIconUrl: leftIconUrl ?? lockIcon,
-		rightIcon: rightIcon,
-		pattern: pattern,
-		required: required
-	});
 </script>
 
 <BaseInput {...inputProps} />
