@@ -9,8 +9,9 @@
 		label = 'Digite seu nome',
 		leftIconUrl,
 		rightIcon,
-		pattern = '^[a-zA-Z ]',
-		required
+		pattern,
+		required,
+		oninput
 	}: InputProps = $props();
 
 	const inputProps: BaseInputProps = $state({
@@ -20,7 +21,8 @@
 		leftIconUrl: leftIconUrl ?? userIcon,
 		rightIcon: rightIcon,
 		pattern: pattern,
-		required: required
+		required: required,
+		oninput: oninput
 	});
 </script>
 

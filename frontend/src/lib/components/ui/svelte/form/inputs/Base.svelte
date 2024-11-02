@@ -8,7 +8,8 @@
 		leftIconUrl,
 		rightIcon,
 		pattern,
-		required = true
+		required = true,
+		oninput
 	}: BaseInputProps = $props();
 
 	let isButtonDisabled = $state<boolean>(false);
@@ -25,7 +26,16 @@
 </script>
 
 <section class="form-field">
-	<input class="form-field__input" {type} {id} name={id} placeholder=" " {pattern} {required} />
+	<input
+		class="form-field__input"
+		{type}
+		{id}
+		name={id}
+		placeholder=" "
+		{pattern}
+		{required}
+		{oninput}
+	/>
 
 	{#if leftIconUrl}
 		<img src={leftIconUrl} alt="Icon" class="form-field__left-icon" />
@@ -36,7 +46,13 @@
 	</label>
 
 	{#if rightIcon}
-		<button {onclick} type="button" disabled={isButtonDisabled} class="form-field__right-icon">
+		<button
+			{onclick}
+			type="button"
+			disabled={isButtonDisabled}
+			class="form-field__right-icon"
+			tabindex="-1"
+		>
 			<img src={rightIcon.url} alt="Icon" />
 		</button>
 	{/if}

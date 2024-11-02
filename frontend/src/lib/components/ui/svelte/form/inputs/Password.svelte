@@ -13,6 +13,7 @@
 		rightIcon,
 		pattern,
 		required,
+		oninput,
 		hasEye = true
 	}: PasswordInputProps = $props();
 
@@ -28,22 +29,21 @@
 		label: label,
 		leftIconUrl: leftIconUrl ?? lockIcon,
 		pattern: pattern,
-		rightIcon: undefined,
-		required: required
-	});
-
-	inputProps.rightIcon =
-		rightIcon ??
-		(hasEye
-			? {
-					url: eyeSlashIcon,
-					onclick: function () {
-						urlIndex = (urlIndex + 1) % 2;
-						inputProps.type = urlIndex === 0 ? 'password' : 'text';
-						this.url = urls.get(urlIndex) as string;
+		rightIcon:
+			rightIcon ??
+			(hasEye
+				? {
+						url: eyeSlashIcon,
+						onclick: function () {
+							urlIndex = (urlIndex + 1) % 2;
+							inputProps.type = urlIndex === 0 ? 'password' : 'text';
+							this.url = urls.get(urlIndex) as string;
+						}
 					}
-				}
-			: undefined);
+				: undefined),
+		required: required,
+		oninput: oninput
+	});
 </script>
 
 <BaseInput {...inputProps} />

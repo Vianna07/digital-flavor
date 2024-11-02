@@ -10,7 +10,8 @@
 		leftIconUrl,
 		rightIcon,
 		pattern,
-		required
+		required,
+		oninput
 	}: InputProps = $props();
 
 	const inputProps: BaseInputProps = $state({
@@ -20,7 +21,8 @@
 		leftIconUrl: leftIconUrl ?? emailIcon,
 		rightIcon: rightIcon,
 		pattern: pattern,
-		required: required
+		required: required,
+		oninput: oninput
 	});
 </script>
 
