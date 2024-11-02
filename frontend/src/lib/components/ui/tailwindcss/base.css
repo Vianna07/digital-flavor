@@ -5,31 +5,24 @@
 	}
 
 	body {
-		@apply bg-light font-body text-black;
-	}
-
-	header {
-		@apply bg-dark p-5 text-secondary;
+		@apply bg-light font-body text-contrast;
 	}
 
 	footer {
-		@apply bg-dark p-5 text-secondary;
+		@apply bg-contrast p-5 text-secondary;
 	}
 
 	a {
 		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
 	}
 
-	a:hover {
-		@apply text-hover;
-	}
-
 	button.primary {
-		@apply cursor-pointer bg-primary p-2.5 text-black transition-colors duration-[var(--transition-speed)];
-	}
+		@apply cursor-pointer rounded-xl border-4 border-primary-700 bg-primary-500 p-2.5 text-secondary-50 outline-none drop-shadow-lg transition-colors duration-[var(--transition-speed)];
 
-	button.primary:hover {
-		@apply bg-hover;
+		&:hover,
+		&:focus-visible {
+			@apply bg-primary;
+		}
 	}
 
 	button.secondary {
