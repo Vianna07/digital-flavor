@@ -4,8 +4,12 @@
 	let { children } = $props();
 </script>
 
-<main class="flex h-full w-full flex-col items-center justify-center">
+<main class="main">
 	{@render children()}
 </main>
 
-<style></style>
+<style>
+	.main {
+		@apply flex h-full w-full flex-col items-center justify-center;
+	}
+</style>
