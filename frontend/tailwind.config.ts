@@ -1,17 +1,24 @@
 import type { Config } from 'tailwindcss';
 
+import colors from 'tailwindcss/colors';
+
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
 		extend: {
 			colors: {
-				primary: '#CA2929',
-				secondary: '#555555',
-				light: '#F7F8F8FA',
-				placeholder: '#C1C1C1',
-				hover: '#E7E7E7',
-				dark: '#313131'
+				primary: {
+					...colors.red,
+					DEFAULT: colors.red[600]
+				},
+				secondary: {
+					...colors.gray,
+					DEFAULT: colors.gray[600]
+				},
+				light: colors.gray[100],
+				contrast: colors.gray[950],
+				placeholder: colors.gray[400]
 			},
 			fontFamily: {
 				body: [
