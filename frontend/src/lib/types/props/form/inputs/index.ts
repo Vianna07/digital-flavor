@@ -11,6 +11,7 @@ export interface BaseInputProps {
 	rightIcon?: RightIcon;
 	pattern?: string;
 	required?: boolean;
+	oninput?: () => void;
 }
 
 export type InputProps = Partial<BaseInputProps>;
