@@ -30,11 +30,11 @@ export const actions = {
 				throw 'Erro ao cadastrar o usuário: ' + response.statusText;
 			}
 
-      const user = await response.json();
+			const user = await response.json();
 
-      document.cookie = `user=${JSON.stringify(user)}; path=/; max-age=31536000; Secure; HttpOnly; SameSite=Strict;`;
+			document.cookie = `user=${JSON.stringify(user)}; path=/; max-age=31536000; Secure; HttpOnly; SameSite=Strict;`;
 
-      return redirect(303, '/login/canteen');
+			return redirect(303, '/login/canteen');
 		} catch (e) {
 			console.error(`${new Date()} - Error: ${e}`);
 

@@ -1,4 +1,4 @@
 export interface GoBackProps {
-  iconUrl?: string;
-  redirectUrl: string;
+	iconUrl?: string;
+	redirectUrl: string;
 }

@@ -1,37 +1,37 @@
 <script lang="ts">
 	import type { FormProps, PasswordInputProps } from '$lib/types';
-  import GoBack from '../global/GoBack.svelte'
+	import GoBack from '../global/GoBack.svelte';
 	import { fly } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 
-  import NameInput from '@components/form/inputs/Name.svelte';
-  import EmailInput from '@components/form/inputs/Email.svelte';
+	import NameInput from '@components/form/inputs/Name.svelte';
+	import EmailInput from '@components/form/inputs/Email.svelte';
 	import PasswordInput from '@components/form/inputs/Password.svelte';
 
-  let { title, submit, inputs}: FormProps = $props()
+	let { title, submit, inputs }: FormProps = $props();
 
-  let error: string = $state('');
+	let error: string = $state('');
 
-  const confirmPassword: PasswordInputProps = {
+	const confirmPassword: PasswordInputProps = {
 		id: 'retypePassword',
 		label: 'Confirme sua senha',
 		hasEye: false,
 		oninput: oninput
 	};
 
-  function oninput() {
+	function oninput() {
 		error = '';
 	}
 </script>
 
 <section class="page">
-  <header>
-    <h1>{title}</h1>
+	<header>
+		<h1>{title}</h1>
 
-    <section class="go-back">
-      <GoBack redirectUrl={'/canteen'} />
-    </section>
-  </header>
+		<section class="go-back">
+			<GoBack redirectUrl={'/canteen'} />
+		</section>
+	</header>
 
 	<form
 		method="POST"
@@ -45,27 +45,28 @@
 			};
 		}}
 	>
+		{#if inputs.name}
+			<NameInput />
+		{/if}
 
+		<EmailInput />
+		<PasswordInput {oninput} />
 
-    {#if (inputs.name)}
-      <NameInput />
-    {/if}
-
-    <EmailInput />
-    <PasswordInput {oninput} />
-
-    {#if (inputs.confirmPassword)}
-      <PasswordInput {...confirmPassword} />
-    {/if}
+		{#if inputs.confirmPassword}
+			<PasswordInput {...confirmPassword} />
+		{/if}
 
 		{#if error}
 			<p class="form__error" transition:fly={{ duration: 500, x: -175 }}>{error}</p>
 		{/if}
 
-    <div class="form__submit-area">
-      <button class="primary">{submit.text}</button>
-      <p>{submit.paragraph.text} <a href={submit.paragraph.link.href}>{submit.paragraph.link.text}</a></p>
-    </div>
+		<div class="form__submit-area">
+			<button class="primary">{submit.text}</button>
+			<p>
+				{submit.paragraph.text}
+				<a href={submit.paragraph.link.href}>{submit.paragraph.link.text}</a>
+			</p>
+		</div>
 	</form>
 </section>
 
