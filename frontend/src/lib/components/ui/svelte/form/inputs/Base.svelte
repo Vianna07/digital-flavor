@@ -60,10 +60,12 @@
 
 <style lang="postcss">
 	.form-field {
-		@apply relative bg-white;
+		@apply relative bg-secondary-50;
+
+		width: clamp(18rem, 20rem, 24rem);
 
 		&__input {
-			@apply relative z-10 rounded-lg border-2 border-gray-300 bg-transparent p-4 shadow-md outline-none focus-visible:border-primary;
+			@apply relative z-10 rounded-lg border-2 border-secondary-300 bg-transparent p-4 shadow-md outline-none focus-visible:border-primary;
 
 			width: clamp(18rem, 20rem, 24rem);
 		}
@@ -74,7 +76,7 @@
 
 		&__input:focus-visible ~ &__label,
 		&__input:not(:placeholder-shown) ~ &__label {
-			@apply left-2 top-0 scale-90 bg-gradient-to-b from-light to-white text-primary;
+			@apply left-2 top-0 scale-90 bg-gradient-to-b from-light to-secondary-50 text-primary;
 		}
 
 		&__input:focus-visible ~ &__left-icon,
@@ -83,7 +85,7 @@
 		}
 
 		&__label {
-			@apply absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-3xl bg-white px-2 text-base font-medium text-secondary transition-all;
+			@apply absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-3xl bg-secondary-50 px-2 text-base font-medium text-secondary transition-all;
 		}
 
 		&__left-icon {
