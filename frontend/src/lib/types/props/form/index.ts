@@ -1,4 +1,4 @@
-export * from './inputs/index';
+export * from './inputs';
 
 interface SubmitArea {
 	text: string;
