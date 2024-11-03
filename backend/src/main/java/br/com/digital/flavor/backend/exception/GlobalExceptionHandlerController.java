@@ -17,9 +17,8 @@ public class GlobalExceptionHandlerController {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandlerController.class);
 
     public ResponseEntity<String> error(String message, HttpStatus httpStatus, Exception e) {
-        message = message + e.getMessage();
-        logger.error(message, e);
-        return ResponseEntity.status(httpStatus).body(message);
+        logger.error("{}{}", message, e.getMessage(), e);
+        return ResponseEntity.status(httpStatus).body(e.getMessage());
     }
 
     @ExceptionHandler(BadCredentialsException.class)
