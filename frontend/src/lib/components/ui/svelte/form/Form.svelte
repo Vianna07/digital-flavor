@@ -7,6 +7,7 @@
 	import NameInput from '@components/form/inputs/Name.svelte';
 	import EmailInput from '@components/form/inputs/Email.svelte';
 	import PasswordInput from '@components/form/inputs/Password.svelte';
+	import { goto } from '$app/navigation';
 
 	let { title, submit, inputs }: FormProps = $props();
 
@@ -41,6 +42,8 @@
 				if (result.type === 'failure') {
 					error = result.data?.message as string;
 					cancel();
+				} else if (result.type === 'redirect') {
+					goto(result?.location as string);
 				}
 			};
 		}}

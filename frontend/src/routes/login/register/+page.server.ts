@@ -3,7 +3,7 @@ import type { Actions } from '../$types';
 import { PUBLIC_API_URL } from '$env/static/public';
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ cookies, request }) => {
 		const data = await request.formData();
 
 		const name = data.get('name');
@@ -27,14 +27,19 @@ export const actions = {
 			});
 
 			if (!response.ok) {
-				throw 'Erro ao cadastrar o usuário: ' + response.statusText;
+				return fail(400, {
+					message: 'Usuário já cadastrado!'
+				});
 			}
 
 			const user = await response.json();
-
-			document.cookie = `user=${JSON.stringify(user)}; path=/; max-age=31536000; Secure; HttpOnly; SameSite=Strict;`;
-
-			return redirect(303, '/login/canteen');
+			cookies.set('user', JSON.stringify(user), {
+				path: '/',
+				maxAge: 31536000,
+				secure: false,
+				httpOnly: true,
+				sameSite: 'strict'
+			});
 		} catch (e) {
 			console.error(`${new Date()} - Error: ${e}`);
 
@@ -42,5 +47,7 @@ export const actions = {
 				message: 'Erro ao cadastrar usuário! Tente novamente'
 			});
 		}
+
+		return redirect(303, '/login/canteen');
 	}
 } satisfies Actions;
