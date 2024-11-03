@@ -14,7 +14,7 @@ interface SubmitArea {
 export interface FormProps {
 	title: string;
 	submit: SubmitArea;
-	inputs: {
+	inputs?: {
 		name?: boolean;
 		confirmPassword?: boolean;
 	};

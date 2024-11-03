@@ -48,14 +48,14 @@
 			};
 		}}
 	>
-		{#if inputs.name}
-			<NameInput />
+		{#if inputs?.name}
+			<NameInput {oninput} />
 		{/if}
 
-		<EmailInput />
+		<EmailInput {oninput} />
 		<PasswordInput {oninput} />
 
-		{#if inputs.confirmPassword}
+		{#if inputs?.confirmPassword}
 			<PasswordInput {...confirmPassword} />
 		{/if}
 
