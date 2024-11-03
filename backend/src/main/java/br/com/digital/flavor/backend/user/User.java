@@ -3,10 +3,10 @@ package br.com.digital.flavor.backend.user;
 
 import br.com.digital.flavor.backend.canteen.Canteen;
 import br.com.digital.flavor.backend.security.dto.LoginRequest;
+import br.com.digital.flavor.backend.user.dto.NewUserDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,12 +16,10 @@ import java.util.Set;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "created_at", nullable = false)
@@ -49,6 +47,21 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Canteen> canteens = new HashSet<>();
+
+    public User() {
+        this.id = UUID.randomUUID();
+    }
+
+    public User(UUID uuid, NewUserDto newUserDto, PasswordEncoder passwordEncoder) {
+        this.id = uuid;
+        this.name = newUserDto.name();
+        this.email = newUserDto.email();
+        this.password = passwordEncoder.encode(newUserDto.password());
+
+        if (newUserDto.userType() != null) {
+            this.userType = newUserDto.userType();
+        }
+    }
 
     public boolean isValidLogin(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
         return passwordEncoder.matches(loginRequest.password(), this.password);

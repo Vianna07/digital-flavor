@@ -29,25 +29,32 @@ import java.security.interfaces.RSAPublicKey;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Value("${jwt.public.key:classpath:keys/public.pem}")
-    private RSAPublicKey publicKey;
+    public static final String[] PUBLIC_ROUTES = {"/security/login", "/security/login-canteen", "/user/save"};
+    private final RSAPublicKey publicKey;
+    private final RSAPrivateKey privateKey;
 
-    @Value("${jwt.private.key:classpath:keys/private.pem}")
-    private RSAPrivateKey privateKey;
+    public SecurityConfig(
+            @Value("${jwt.public.key:classpath:keys/public.pem}")
+            RSAPublicKey publicKey,
+            @Value("${jwt.private.key:classpath:keys/private.pem}")
+            RSAPrivateKey privateKey) {
+        this.publicKey = publicKey;
+        this.privateKey = privateKey;
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers("/security/login**").permitAll()
+                                .requestMatchers(PUBLIC_ROUTES).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(new CanteenFilter(jwtDecoder()), UsernamePasswordAuthenticationFilter.class)
                 .csrf(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }

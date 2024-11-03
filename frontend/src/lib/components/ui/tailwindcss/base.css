@@ -1,0 +1,44 @@
+@layer base {
+	html,
+	body {
+		@apply h-full;
+	}
+
+	body {
+		@apply bg-light font-body text-contrast;
+	}
+
+	footer {
+		@apply bg-contrast p-5 text-secondary;
+	}
+
+	a {
+		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
+	}
+
+	button.primary {
+		@apply cursor-pointer rounded-xl border-4 border-primary-700 bg-primary-500 p-2.5 text-secondary-50 outline-none drop-shadow-lg transition-colors duration-[var(--transition-speed)];
+
+		&:hover,
+		&:focus-visible {
+			@apply bg-primary;
+		}
+	}
+
+	button.secondary {
+		@apply cursor-pointer bg-secondary p-2.5 text-secondary transition-colors duration-[var(--transition-speed)];
+	}
+
+	input[type='password']::-ms-reveal,
+	input[type='password']::-ms-clear {
+		display: none;
+	}
+
+	.card {
+		@apply m-2.5 border border-light bg-light p-5 transition-shadow duration-[var(--transition-speed)];
+	}
+
+	.card:hover {
+		@apply shadow-lg;
+	}
+}

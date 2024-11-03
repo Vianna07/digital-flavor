@@ -2,7 +2,7 @@ package br.com.digital.flavor.backend.security;
 
 import br.com.digital.flavor.backend.security.dto.LoginRequest;
 import br.com.digital.flavor.backend.security.dto.LoginResponse;
-import br.com.digital.flavor.backend.user.UserDto;
+import br.com.digital.flavor.backend.user.dto.UserLoginDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class SecurityController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<UserLoginDto> login(@RequestBody LoginRequest loginRequest) {
         return ResponseEntity.ok(securityService.login(loginRequest));
     }
 

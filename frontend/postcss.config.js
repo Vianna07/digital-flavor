@@ -1,9 +1,11 @@
 export default {
 	plugins: {
-		'postcss-nested': {},
+		'postcss-import': {},
+		'tailwindcss/nesting': {},
 		'postcss-advanced-variables': {},
 		'postcss-calc': {},
 		tailwindcss: {},
-		autoprefixer: {}
+		autoprefixer: {},
+		...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
 	}
 };
