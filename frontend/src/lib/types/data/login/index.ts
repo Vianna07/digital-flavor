@@ -1,4 +1,9 @@
-type UserType = 'admin' | 'canteen' | 'client';
+enum UserType {
+  ADMIN=1,
+  MANAGER=2,
+  EMPLOYEE=3,
+  CUSTOMER=4
+}
 
 export interface LoginRequest {
 	email: string;
