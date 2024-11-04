@@ -48,14 +48,14 @@
 			};
 		}}
 	>
-		{#if inputs.name}
-			<NameInput />
+		{#if inputs?.name}
+			<NameInput {oninput} />
 		{/if}
 
-		<EmailInput />
+		<EmailInput {oninput} />
 		<PasswordInput {oninput} />
 
-		{#if inputs.confirmPassword}
+		{#if inputs?.confirmPassword}
 			<PasswordInput {...confirmPassword} />
 		{/if}
 
@@ -76,6 +76,8 @@
 <style lang="postcss">
 	.page {
 		@apply flex flex-col gap-10;
+
+		width: clamp(18rem, 20rem, 24rem);
 
 		header {
 			@apply text-center text-4xl font-bold text-primary;

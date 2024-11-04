@@ -1,4 +1,4 @@
-export * from './inputs/index';
+export * from './inputs';
 
 interface SubmitArea {
 	text: string;
@@ -14,7 +14,7 @@ interface SubmitArea {
 export interface FormProps {
 	title: string;
 	submit: SubmitArea;
-	inputs: {
+	inputs?: {
 		name?: boolean;
 		confirmPassword?: boolean;
 	};
