@@ -3,7 +3,7 @@ export interface RightIcon {
 	onclick: () => void;
 }
 
-export interface BaseInputProps {
+export interface GenericInputProps {
 	id: string;
 	type: string;
 	label: string;
@@ -14,7 +14,7 @@ export interface BaseInputProps {
 	oninput?: () => void;
 }
 
-export type InputProps = Partial<BaseInputProps>;
+export type InputProps = Partial<GenericInputProps>;
 
 export interface PasswordInputProps extends InputProps {
 	hasEye?: boolean;

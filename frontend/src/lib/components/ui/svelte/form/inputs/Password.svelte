@@ -1,9 +1,9 @@
 <script lang="ts">
-	import BaseInput from './Base.svelte';
+	import GenericInput from '@components/global/GenericInput.svelte';
 	import lockIcon from '$lib/assets/icons/lock.svg';
 	import eyeSlashIcon from '$lib/assets/icons/eye-slash.svg';
 	import eyeIcon from '$lib/assets/icons/eye.svg';
-	import type { BaseInputProps, InputProps, PasswordInputProps } from '$lib/types';
+	import type { GenericInputProps, PasswordInputProps } from '$lib/types';
 
 	let {
 		id = 'password',
@@ -23,7 +23,7 @@
 		[1, eyeIcon]
 	]);
 
-	const inputProps: BaseInputProps = $state({
+	const inputProps: GenericInputProps = $state({
 		id: id,
 		type: type,
 		label: label,
@@ -46,4 +46,4 @@
 	});
 </script>
 
-<BaseInput {...inputProps} />
+<GenericInput {...inputProps} />
