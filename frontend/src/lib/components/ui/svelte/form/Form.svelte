@@ -77,6 +77,8 @@
 	.page {
 		@apply flex flex-col gap-10;
 
+		width: clamp(18rem, 20rem, 24rem);
+
 		header {
 			@apply text-center text-4xl font-bold text-primary;
 

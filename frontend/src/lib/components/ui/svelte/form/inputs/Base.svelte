@@ -62,12 +62,8 @@
 	.form-field {
 		@apply relative bg-secondary-50;
 
-		width: clamp(18rem, 20rem, 24rem);
-
 		&__input {
-			@apply relative z-10 rounded-lg border-2 border-secondary-300 bg-transparent p-4 shadow-md outline-none focus-visible:border-primary;
-
-			width: clamp(18rem, 20rem, 24rem);
+			@apply relative z-10 w-full rounded-lg border-2 border-secondary-300 bg-transparent p-4 shadow-md outline-none focus-visible:border-primary;
 		}
 
 		&__input:not(:placeholder-shown) {
