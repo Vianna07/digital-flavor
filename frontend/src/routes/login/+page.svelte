@@ -6,7 +6,7 @@
 	const formProps: FormProps = {
 		title: 'Entre na sua conta',
 		submit: {
-			text: 'Cadastre-se',
+			text: 'Faça login',
 			paragraph: {
 				text: 'Não possui uma conta?',
 				link: {
