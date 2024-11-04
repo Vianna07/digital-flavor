@@ -8,7 +8,7 @@
 	{@render children()}
 </main>
 
-<style>
+<style lang="postcss">
 	.main {
 		@apply flex h-full w-full flex-col items-center justify-center;
 	}
