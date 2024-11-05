@@ -17,6 +17,25 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "canteens")
+
+@NamedNativeQuery(
+        name = "Canteen.findAll",
+        query = "SELECT id, name, address FROM canteens",
+        resultSetMapping = "CanteenDtoMapping"
+)
+
+@SqlResultSetMapping(
+        name = "CanteenDtoMapping",
+        classes = @ConstructorResult(
+                targetClass = CanteenDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = UUID.class),
+                        @ColumnResult(name = "name"),
+                        @ColumnResult(name = "address")
+                }
+        )
+)
+
 public class Canteen {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
