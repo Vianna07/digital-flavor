@@ -1,3 +1,5 @@
+export * from './canteen';
+
 enum UserType {
 	ADMIN = 1,
 	MANAGER = 2,
