@@ -8,10 +8,6 @@
 		@apply bg-light font-body text-contrast;
 	}
 
-	footer {
-		@apply bg-contrast p-5 text-secondary;
-	}
-
 	a {
 		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
 	}
