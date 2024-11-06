@@ -3,7 +3,7 @@
 	import GenericList from '@components/global/GenericList.svelte';
 	import GenericInput from '@components/global/GenericInput.svelte';
 	import searchIcon from '@icons/magnifying-glass.svg';
-  import noImageIcon from '@icons/no_photography.svg';
+	import noImageIcon from '@icons/no_photography.svg';
 	import type { Canteen, GenericInputProps, GenericListProps } from '$lib/types';
 	import { goto } from '$app/navigation';
 
@@ -13,11 +13,11 @@
 		list: data.canteens,
 		fields: {
 			title: 'name',
-			subTitle: 'address',
+			subTitle: 'address'
 		},
 		left: {
-      snippet: canteenIImage,
-      field: 'logoUrl'
+			snippet: canteenIImage,
+			field: 'logoUrl'
 		},
 		onclick: (id: string) => {
 			goto('/home', {
@@ -35,9 +35,9 @@
 </script>
 
 {#snippet canteenIImage(url?: string)}
-  {@const src: string = url ?? noImageIcon}
-  {@const area: string = src === noImageIcon ? 'w-10 h-10' : 'w-16 h-16'}
-  <img class={area} {src} alt="logo">
+	{@const src: string = url ?? noImageIcon}
+	{@const area: string = src === noImageIcon ? 'w-10 h-10' : 'w-16 h-16'}
+	<img class={area} {src} alt="logo" />
 {/snippet}
 
 <section class="page">
@@ -45,7 +45,7 @@
 		<img src={logo} alt="logo" />
 	</header>
 
-	<div class="content ">
+	<div class="content">
 		<GenericInput {...searchInput} />
 		<GenericList {...list} />
 	</div>
