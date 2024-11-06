@@ -6,6 +6,9 @@ export interface GenericListProps<T> {
 		title: keyof T;
 		subTitle: keyof T;
 	};
-	left?: Snippet;
+	left?: {
+    snippet: Snippet<[ field: keyof T ]>;
+    field: keyof T;
+  };
 	onclick?: (id: string) => void;
 }

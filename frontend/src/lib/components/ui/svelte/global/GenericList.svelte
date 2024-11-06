@@ -8,8 +8,13 @@
 	{#each list as data}
 		<li class="list__item">
 			<button type="button" onclick={() => onclick?.(data.id)}>
-				<h1 class="list__item__title">{data[fields.title]}</h1>
-				<h3 class="list__item__sub-title">{data[fields.subTitle]}</h3>
+        <div>
+          {@render left?.snippet(null)}
+        </div>
+        <div class="list__item__content">
+          <h1 class="list__item__title">{data[fields.title]}</h1>
+          <h3 class="list__item__sub-title">{data[fields.subTitle]}</h3>
+        </div>
 			</button>
 		</li>
 	{/each}
@@ -22,14 +27,22 @@
 		&__item {
 			@apply h-20 w-full cursor-pointer rounded-lg border-2 border-primary bg-secondary-50 p-3 text-center shadow-md transition-transform;
 
+      button {
+        @apply flex items-center w-full h-full gap-4;
+      }
+
 			transition: transform 0.3s ease;
 
 			&:hover {
 				transform: scale(1.05);
 			}
 
+      &__content {
+        @apply text-center w-9/12;
+      }
+
 			&__title {
-				@apply text-base font-bold;
+				@apply text-sm font-bold;
 			}
 
 			&__sub-title {
