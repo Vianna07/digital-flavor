@@ -9,7 +9,7 @@
 		<li class="list__item">
 			<button type="button" onclick={() => onclick?.(data.id)}>
         <div>
-          {@render left?.snippet(null)}
+          {@render left?.snippet(left.field)}
         </div>
         <div class="list__item__content">
           <h1 class="list__item__title">{data[fields.title]}</h1>
