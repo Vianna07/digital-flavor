@@ -19,10 +19,21 @@
 			snippet: canteenIImage,
 			field: 'logoUrl'
 		},
-		onclick: (id: string) => {
-			goto('/home', {
-				state: id
-			});
+		onclick: async (id: string) => {
+      try {
+        await fetch('/login/canteen', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({canteenId: id}),
+        });
+
+        goto('/home')
+
+      } catch (error) {
+        console.error(error);
+      }
 		}
 	};
 
