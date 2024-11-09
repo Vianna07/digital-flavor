@@ -63,7 +63,7 @@ public class User {
         }
     }
 
-    public boolean isValidLogin(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
-        return passwordEncoder.matches(loginRequest.password(), this.password);
+    public boolean isValidLogin(String password, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(password, this.password);
     }
 }
