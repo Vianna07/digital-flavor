@@ -6,11 +6,17 @@
 	import noImageIcon from '@icons/no_photography.svg';
 	import type { Canteen, GenericInputProps, GenericListProps } from '$lib/types';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	let { data }: { data: { canteens: Canteen[] } } = $props();
 
-	const list: GenericListProps<Canteen> = {
-		list: data.canteens,
+  const FETCH_URL = `/api${$page.url.pathname}`
+
+  console.log(FETCH_URL);
+
+
+	let canteens: GenericListProps<Canteen> = $state({
+		data: data.canteens,
 		fields: {
 			title: 'name',
 			subTitle: 'address'
@@ -21,7 +27,7 @@
 		},
 		onclick: async (id: string) => {
       try {
-        await fetch('/login/canteen', {
+        await fetch(FETCH_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,13 +41,30 @@
         console.error(error);
       }
 		}
-	};
+	});
 
 	const searchInput: GenericInputProps = {
 		id: 'search',
 		type: 'text',
 		label: 'Pesquise pela cantina',
-		leftIconUrl: searchIcon
+		leftIconUrl: searchIcon,
+    oninput: async(nameOrAddress: string) => {
+      try {
+        if (nameOrAddress) {
+          const response: Response = await fetch(FETCH_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({canteenId: '', nameOrAddress}),
+          });
+
+          canteens.data = await response.json();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
 	};
 </script>
 
@@ -58,7 +81,7 @@
 
 	<div class="content">
 		<GenericInput {...searchInput} />
-		<GenericList {...list} />
+		<GenericList {...canteens} />
 	</div>
 
 	<footer>
@@ -81,7 +104,7 @@
 		}
 
 		.content {
-			@apply flex w-full max-w-full flex-col gap-16;
+			@apply flex w-full max-w-full flex-col gap-10;
 		}
 
 		footer {
