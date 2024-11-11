@@ -1,5 +1,6 @@
 package br.com.digital.flavor.backend.canteen;
 
+import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,14 @@ import java.util.UUID;
 @Repository
 public interface CanteenRepository extends JpaRepository<Canteen, UUID> {
 
-    @Query(name = "Canteen.findAll", nativeQuery = true)
+    @Query(name = "findAll", nativeQuery = true)
     List<CanteenDto> findAllCanteens();
+
+    @Query(value =
+        "SELECT new br.com.digital.flavor.backend.canteen.CanteenDto(c.id, c.name, c.address) " +
+        "  FROM Canteen c " +
+        " WHERE c.name ILIKE %:nameOrAddress% " +
+        "    OR c.address ILIKE %:nameOrAddress% "
+    )
+    List<CanteenDto> findAllByNameOrAddress(@Param("nameOrAddress") String nameOrAddress);
 }
