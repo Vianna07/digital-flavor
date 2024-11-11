@@ -8,10 +8,17 @@ import java.util.List;
 @Service
 public class CanteenService {
 
-    @Autowired
-    private CanteenRepository canteenRepository;
+    private final CanteenRepository canteenRepository;
+
+    public CanteenService(CanteenRepository canteenRepository) {
+        this.canteenRepository = canteenRepository;
+    }
 
     public List<CanteenDto> getAll() {
         return this.canteenRepository.findAllCanteens();
+    }
+
+    public List<CanteenDto> getAllByNameOrAddress(String nameOrAddress) {
+        return this.canteenRepository.findAllByNameOrAddress(nameOrAddress);
     }
 }
