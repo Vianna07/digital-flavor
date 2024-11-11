@@ -1,11 +1,11 @@
 <script lang="ts" generics="T extends { id: string }">
 	import { type GenericListProps } from '$lib/types';
 
-	let { list, fields, left, onclick }: GenericListProps<T> = $props();
+	let { data, fields, left, onclick }: GenericListProps<T> = $props();
 </script>
 
 <ul class="list">
-	{#each list as data}
+	{#each data as data (data.id)}
 		<li class="list__item">
 			<button type="button" onclick={() => onclick?.(data.id)}>
 				<div>

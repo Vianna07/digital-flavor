@@ -1,7 +1,7 @@
 import type { Snippet } from 'svelte';
 
 export interface GenericListProps<T> {
-	list: T[];
+	data: T[];
 	fields: {
 		title: keyof T;
 		subTitle: keyof T;
