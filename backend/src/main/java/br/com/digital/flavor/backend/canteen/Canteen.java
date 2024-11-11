@@ -13,29 +13,28 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@Entity
-@Table(name = "canteens")
-
-@NamedNativeQuery(
-        name = "Canteen.findAll",
-        query = "SELECT id, name, address FROM canteens",
-        resultSetMapping = "CanteenDtoMapping"
-)
-
 @SqlResultSetMapping(
         name = "CanteenDtoMapping",
         classes = @ConstructorResult(
                 targetClass = CanteenDto.class,
                 columns = {
                         @ColumnResult(name = "id", type = UUID.class),
-                        @ColumnResult(name = "name"),
-                        @ColumnResult(name = "address")
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "address", type = String.class)
                 }
         )
 )
 
+@NamedNativeQuery(
+        name = "findAll",
+        query = "SELECT id, name, address FROM canteens",
+        resultSetMapping = "CanteenDtoMapping"
+)
+
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "canteens")
 public class Canteen {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
