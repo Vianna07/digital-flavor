@@ -4,3 +4,8 @@ export interface Canteen {
 	address: string;
 	logoUrl?: string;
 }
+
+export interface Token {
+  authorization: string;
+  expiresAt: number;
+}
