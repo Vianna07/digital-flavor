@@ -13,6 +13,6 @@ export const load: PageServerLoad = async ({ fetch }) => {
 			canteens: canteens
 		};
 	} catch (error) {
-		console.error(`${new Date()} - Error: ${error}`);
+		console.error(`${new Date()} - Erro ao buscar cantinas: ${error}`);
 	}
 };
