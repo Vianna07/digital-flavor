@@ -29,7 +29,7 @@ public class CanteenFilter implements Filter {
         String requestURI = req.getRequestURI();
 
         for (String publicRoute : SecurityConfig.PUBLIC_ROUTES) {
-            if (requestURI.startsWith(publicRoute)) {
+            if (requestURI.startsWith(publicRoute.replace("*", ""))) {
                 chain.doFilter(request, response);
                 return;
             }
