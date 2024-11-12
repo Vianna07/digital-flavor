@@ -61,8 +61,6 @@ async function loginCanteen(canteenId: string, cookies: Cookies) {
 }
 
 async function getAllByNameOrAddress(nameOrAddress: string): Promise<Response> {
-	console.log(`${PUBLIC_API_URL}/canteen/get-all-by-name-or-address/${nameOrAddress}`);
-
 	const response: Response = await fetch(
 		`${PUBLIC_API_URL}/canteen/get-all-by-name-or-address/${nameOrAddress}`,
 		{
