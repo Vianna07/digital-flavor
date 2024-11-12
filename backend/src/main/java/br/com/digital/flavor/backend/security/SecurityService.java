@@ -41,13 +41,13 @@ public class SecurityService {
     public UserLoginDto login(LoginRequest loginRequest) {
         Optional<User> optUser = this.userRepository.findByEmail(loginRequest.email());
 
-        if (optUser.isEmpty() || !optUser.get().isValidLogin(loginRequest, this.passwordEncoder)) {
+        if (optUser.isEmpty() || !optUser.get().isValidLogin(loginRequest.password(), this.passwordEncoder)) {
             throw new BadCredentialsException("E-mail ou senha inválidos");
         }
 
         User user = optUser.get();
 
-        return new UserLoginDto(user.getId(), user.getUserType(), user.getName(), user.getEmail());
+        return new UserLoginDto(user.getId(), user.getUserType(), user.getName(), user.getEmail(), loginRequest.password());
     }
 
     public LoginResponse loginCanteen(LoginRequest loginRequest) {

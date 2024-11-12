@@ -1,6 +1,6 @@
 <script lang="ts">
-	import BaseInput from './Base.svelte';
-	import type { BaseInputProps, InputProps } from '$lib/types';
+	import GenericInput from '@components/global/GenericInput.svelte';
+	import type { GenericInputProps, InputProps } from '$lib/types';
 	import userIcon from '$lib/assets/icons/user.svg';
 
 	let {
@@ -14,7 +14,7 @@
 		oninput
 	}: InputProps = $props();
 
-	const inputProps: BaseInputProps = $state({
+	const inputProps: GenericInputProps = $state({
 		id: id,
 		type: type,
 		label: label,
@@ -26,4 +26,4 @@
 	});
 </script>
 
-<BaseInput {...inputProps} />
+<GenericInput {...inputProps} />

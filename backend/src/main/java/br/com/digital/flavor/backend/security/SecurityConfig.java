@@ -29,7 +29,14 @@ import java.security.interfaces.RSAPublicKey;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    public static final String[] PUBLIC_ROUTES = {"/security/login", "/security/login-canteen", "/user/save"};
+    public static final String[] PUBLIC_ROUTES = {
+            "/security/login-canteen",
+            "/security/login",
+            "/user/save",
+            "/canteen/get-all-by-name-or-address/*",
+            "/canteen/get-all",
+    };
+
     private final RSAPublicKey publicKey;
     private final RSAPrivateKey privateKey;
 

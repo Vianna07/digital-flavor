@@ -1,4 +1,20 @@
 @layer base {
+	::-webkit-scrollbar {
+		@apply h-2 w-2;
+	}
+
+	::-webkit-scrollbar-track {
+		@apply ml-0.5 rounded-lg bg-gray-200;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply rounded-lg border-2 border-gray-200 bg-red-500;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-red-600;
+	}
+
 	html,
 	body {
 		@apply h-full;
@@ -6,10 +22,6 @@
 
 	body {
 		@apply bg-light font-body text-contrast;
-	}
-
-	footer {
-		@apply bg-contrast p-5 text-secondary;
 	}
 
 	a {

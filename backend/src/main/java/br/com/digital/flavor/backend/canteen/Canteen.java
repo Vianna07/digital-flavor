@@ -13,6 +13,24 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@SqlResultSetMapping(
+        name = "CanteenDtoMapping",
+        classes = @ConstructorResult(
+                targetClass = CanteenDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = UUID.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "address", type = String.class)
+                }
+        )
+)
+
+@NamedNativeQuery(
+        name = "findAll",
+        query = "SELECT id, name, address FROM canteens",
+        resultSetMapping = "CanteenDtoMapping"
+)
+
 @Data
 @NoArgsConstructor
 @Entity

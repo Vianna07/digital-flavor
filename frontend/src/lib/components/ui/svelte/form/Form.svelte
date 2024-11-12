@@ -3,7 +3,6 @@
 	import GoBack from '../global/GoBack.svelte';
 	import { fly } from 'svelte/transition';
 	import { enhance } from '$app/forms';
-
 	import NameInput from '@components/form/inputs/Name.svelte';
 	import EmailInput from '@components/form/inputs/Email.svelte';
 	import PasswordInput from '@components/form/inputs/Password.svelte';

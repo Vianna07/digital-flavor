@@ -1,20 +1,6 @@
-export interface RightIcon {
-	url: string;
-	onclick: () => void;
-}
+import type { GenericInputProps } from '$lib/types';
 
-export interface BaseInputProps {
-	id: string;
-	type: string;
-	label: string;
-	leftIconUrl?: string;
-	rightIcon?: RightIcon;
-	pattern?: string;
-	required?: boolean;
-	oninput?: () => void;
-}
-
-export type InputProps = Partial<BaseInputProps>;
+export type InputProps = Partial<GenericInputProps>;
 
 export interface PasswordInputProps extends InputProps {
 	hasEye?: boolean;

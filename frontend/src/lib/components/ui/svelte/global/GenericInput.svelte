@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { BaseInputProps } from '$lib/types';
+	import type { GenericInputProps } from '$lib/types';
 
 	let {
 		id,
@@ -10,7 +10,7 @@
 		pattern,
 		required = true,
 		oninput
-	}: BaseInputProps = $props();
+	}: GenericInputProps = $props();
 
 	let isButtonDisabled = $state<boolean>(false);
 
@@ -34,7 +34,7 @@
 		placeholder=" "
 		{pattern}
 		{required}
-		{oninput}
+		oninput={(event: Event) => oninput?.((event.target as HTMLInputElement).value)}
 	/>
 
 	{#if leftIconUrl}

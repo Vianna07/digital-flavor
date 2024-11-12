@@ -31,6 +31,6 @@ public class UserService {
         User newUser = new User(id, newUserDto, passwordEncoder);
         userRepository.save(newUser);
 
-        return new UserLoginDto(id, newUser.getUserType(), newUserDto.name(), newUserDto.email());
+        return new UserLoginDto(id, newUser.getUserType(), newUserDto.name(), newUserDto.email(), newUserDto.password());
     }
 }
