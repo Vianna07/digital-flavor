@@ -40,7 +40,8 @@
       } catch (error) {
         console.error(error);
       }
-		}
+		},
+    noDataMessage: 'Nenhuma cantina encontrada'
 	});
 
 	const searchInput: GenericInputProps = {
