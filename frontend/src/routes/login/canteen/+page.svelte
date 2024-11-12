@@ -12,8 +12,6 @@
 
 	const FETCH_URL = `/api${$page.url.pathname}`;
 
-	console.log(FETCH_URL);
-
 	let canteens: GenericListProps<Canteen> = $state({
 		data: data.canteens,
 		fields: {
