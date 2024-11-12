@@ -2,36 +2,42 @@
 	import { type GenericListProps } from '$lib/types';
 	import { flip } from 'svelte/animate';
 
-	let { data, fields, left, onclick, noDataMessage = "Nenhum dado encontrado" }: GenericListProps<T> = $props();
+	let {
+		data,
+		fields,
+		left,
+		onclick,
+		noDataMessage = 'Nenhum dado encontrado'
+	}: GenericListProps<T> = $props();
 </script>
 
 <ul class="list">
-  {#if (data.length)}
-    {#each data as data (data.id)}
-      <li class="list__item" animate:flip>
-        <button type="button" onclick={() => onclick?.(data.id)}>
-          <div>
-            {@render left?.snippet(data[left.field])}
-          </div>
-          <div class="list__item__content">
-            <h1 class="list__item__title">{data[fields.title]}</h1>
-            <h3 class="list__item__sub-title">{data[fields.subTitle]}</h3>
-          </div>
-        </button>
-      </li>
-    {/each}
-  {:else}
-    <h1 class="list__no-data-message">{noDataMessage}</h1>
-  {/if}
+	{#if data.length}
+		{#each data as data (data.id)}
+			<li class="list__item" animate:flip>
+				<button type="button" onclick={() => onclick?.(data.id)}>
+					<div>
+						{@render left?.snippet(data[left.field])}
+					</div>
+					<div class="list__item__content">
+						<h1 class="list__item__title">{data[fields.title]}</h1>
+						<h3 class="list__item__sub-title">{data[fields.subTitle]}</h3>
+					</div>
+				</button>
+			</li>
+		{/each}
+	{:else}
+		<h1 class="list__no-data-message">{noDataMessage}</h1>
+	{/if}
 </ul>
 
 <style lang="postcss">
 	.list {
-		@apply flex w-full flex-col h-full items-center justify-start overflow-y-scroll pr-1 gap-5 border-2 rounded-md;
+		@apply flex h-full w-full flex-col items-center justify-start gap-5 overflow-y-scroll rounded-md border-2 pr-1;
 
-    &__no-data-message {
-      @apply relative top-1/2 -translate-y-1/2 font-bold p-3;
-    }
+		&__no-data-message {
+			@apply relative top-1/2 -translate-y-1/2 p-3 font-bold;
+		}
 
 		&__item {
 			@apply h-20 w-full cursor-pointer rounded-lg border-2 border-primary bg-secondary-50 p-3 text-center shadow-md transition-transform;

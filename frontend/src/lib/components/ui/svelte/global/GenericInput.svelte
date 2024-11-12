@@ -34,7 +34,7 @@
 		placeholder=" "
 		{pattern}
 		{required}
-    oninput={(event: Event) => oninput?.((event.target as HTMLInputElement).value)}
+		oninput={(event: Event) => oninput?.((event.target as HTMLInputElement).value)}
 	/>
 
 	{#if leftIconUrl}

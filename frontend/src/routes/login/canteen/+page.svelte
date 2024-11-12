@@ -10,10 +10,9 @@
 
 	let { data }: { data: { canteens: Canteen[] } } = $props();
 
-  const FETCH_URL = `/api${$page.url.pathname}`
+	const FETCH_URL = `/api${$page.url.pathname}`;
 
-  console.log(FETCH_URL);
-
+	console.log(FETCH_URL);
 
 	let canteens: GenericListProps<Canteen> = $state({
 		data: data.canteens,
@@ -26,22 +25,21 @@
 			field: 'logoUrl'
 		},
 		onclick: async (id: string) => {
-      try {
-        await fetch(FETCH_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({canteenId: id}),
-        });
+			try {
+				await fetch(FETCH_URL, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ canteenId: id })
+				});
 
-        goto('/home')
-
-      } catch (error) {
-        console.error(error);
-      }
+				goto('/home');
+			} catch (error) {
+				console.error(error);
+			}
 		},
-    noDataMessage: 'Nenhuma cantina encontrada'
+		noDataMessage: 'Nenhuma cantina encontrada'
 	});
 
 	const searchInput: GenericInputProps = {
@@ -49,23 +47,23 @@
 		type: 'text',
 		label: 'Pesquise pela cantina',
 		leftIconUrl: searchIcon,
-    oninput: async(nameOrAddress: string) => {
-      try {
-        if (nameOrAddress) {
-          const response: Response = await fetch(FETCH_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({canteenId: '', nameOrAddress}),
-          });
+		oninput: async (nameOrAddress: string) => {
+			try {
+				if (nameOrAddress) {
+					const response: Response = await fetch(FETCH_URL, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ canteenId: '', nameOrAddress })
+					});
 
-          canteens.data = await response.json();
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
+					canteens.data = await response.json();
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		}
 	};
 </script>
 
@@ -105,7 +103,7 @@
 		}
 
 		.content {
-			@apply flex w-full max-w-full flex-col gap-10 h-96;
+			@apply flex h-96 w-full max-w-full flex-col gap-10;
 		}
 
 		footer {

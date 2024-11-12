@@ -11,5 +11,5 @@ export interface GenericListProps<T> {
 		field: keyof T;
 	};
 	onclick?: (id: string) => void;
-  noDataMessage?: string;
+	noDataMessage?: string;
 }

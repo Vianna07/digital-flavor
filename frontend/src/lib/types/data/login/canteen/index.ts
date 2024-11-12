@@ -6,6 +6,6 @@ export interface Canteen {
 }
 
 export interface Token {
-  authorization: string;
-  expiresAt: number;
+	authorization: string;
+	expiresAt: number;
 }
