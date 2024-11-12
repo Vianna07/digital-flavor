@@ -22,7 +22,7 @@ export const POST = async ({ request, cookies }: RequestEvent) => {
 };
 
 async function loginCanteen(canteenId: string, cookies: Cookies) {
-	const user: User = JSON.parse(cookies.get('user') ?? '');
+	const user: User = JSON.parse(cookies.get('user') ?? '{}');
 
 	if (!canteenId || !user || !user.email || !user.password) {
 		throw error(400, 'Dados inválidos');
