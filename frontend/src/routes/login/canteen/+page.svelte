@@ -104,7 +104,7 @@
 		}
 
 		.content {
-			@apply flex w-full max-w-full flex-col gap-10;
+			@apply flex w-full max-w-full flex-col gap-10 h-96;
 		}
 
 		footer {

@@ -1,12 +1,13 @@
 <script lang="ts" generics="T extends { id: string }">
 	import { type GenericListProps } from '$lib/types';
+	import { flip } from 'svelte/animate';
 
 	let { data, fields, left, onclick }: GenericListProps<T> = $props();
 </script>
 
 <ul class="list">
 	{#each data as data (data.id)}
-		<li class="list__item">
+		<li class="list__item" animate:flip>
 			<button type="button" onclick={() => onclick?.(data.id)}>
 				<div>
 					{@render left?.snippet(data[left.field])}
@@ -22,7 +23,7 @@
 
 <style lang="postcss">
 	.list {
-		@apply flex w-full flex-col items-center justify-center gap-5;
+		@apply flex w-full flex-col h-full items-center justify-start overflow-y-scroll pr-1 gap-5 border-2 rounded-md;
 
 		&__item {
 			@apply h-20 w-full cursor-pointer rounded-lg border-2 border-primary bg-secondary-50 p-3 text-center shadow-md transition-transform;
@@ -34,7 +35,7 @@
 			transition: transform 0.3s ease;
 
 			&:hover {
-				transform: scale(1.05);
+				transform: scale(0.95);
 			}
 
 			&__content {
