@@ -1,7 +1,7 @@
 <script lang="ts">
 	import logo from '@images/logo.png';
-	import GenericList from '@components/global/GenericList.svelte';
-	import GenericInput from '@components/global/GenericInput.svelte';
+	import GenericList from '@components/global/generic/GenericList.svelte';
+	import GenericInput from '@components/global/generic/GenericInput.svelte';
 	import searchIcon from '@icons/magnifying-glass.svg';
 	import noImageIcon from '@icons/no_photography.svg';
 	import type { Canteen, GenericInputProps, GenericListProps } from '$lib/types';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GenericInput from '@components/global/GenericInput.svelte';
+	import GenericInput from '@components/global/generic/GenericInput.svelte';
 	import lockIcon from '$lib/assets/icons/lock.svg';
 	import eyeSlashIcon from '$lib/assets/icons/eye-slash.svg';
 	import eyeIcon from '$lib/assets/icons/eye.svg';

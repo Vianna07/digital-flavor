@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GenericInput from '@components/global/GenericInput.svelte';
+	import GenericInput from '@components/global/generic/GenericInput.svelte';
 	import type { GenericInputProps, InputProps } from '$lib/types';
 	import emailIcon from '$lib/assets/icons/envelope.svg';
 
