@@ -33,7 +33,7 @@
 
 <style lang="postcss">
 	.list {
-		@apply flex h-full w-full flex-col items-center justify-start gap-5 overflow-y-scroll rounded-md border-2 pr-1;
+		@apply flex h-full w-full flex-col items-center justify-start gap-5 overflow-y-scroll rounded-md border-2 pr-1.5;
 
 		&__no-data-message {
 			@apply relative top-1/2 -translate-y-1/2 p-3 font-bold;

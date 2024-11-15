@@ -88,15 +88,15 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex flex-col items-center justify-center gap-10;
+		@apply h-full my-4 flex flex-col items-center justify-around gap-6;
 
 		width: clamp(18rem, 20rem, 24rem);
 
 		header {
-			@apply absolute top-10 flex items-center justify-center;
+			@apply flex items-center justify-center;
 
 			img {
-				@apply h-48 w-48;
+				@apply h-32 w-32;
 			}
 		}
 
@@ -105,7 +105,7 @@
 		}
 
 		footer {
-			@apply absolute bottom-10 max-w-full px-10 text-center;
+			@apply text-center;
 		}
 	}
 </style>
