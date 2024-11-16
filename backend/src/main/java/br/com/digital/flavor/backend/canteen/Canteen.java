@@ -25,11 +25,20 @@ import java.util.UUID;
         )
 )
 
-@NamedNativeQuery(
-        name = "findAll",
-        query = "SELECT id, name, address FROM canteens",
-        resultSetMapping = "CanteenDtoMapping"
-)
+
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Canteen.findAll",
+                query = "SELECT id, name, address FROM canteens",
+                resultSetMapping = "CanteenDtoMapping"
+        ),
+        @NamedNativeQuery(
+                name = "Canteen.findAllByNameOrAddress",
+                query = "SELECT id, name, address FROM canteens WHERE name ILIKE ?1 OR address ILIKE ?1",
+                resultSetMapping = "CanteenDtoMapping"
+        )
+})
 
 @Data
 @NoArgsConstructor
