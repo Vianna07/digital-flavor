@@ -13,6 +13,7 @@
 	const FETCH_URL = `/api${$page.url.pathname}`;
 
 	let canteens: GenericListProps<Canteen> = $state({
+    listingType: 'closed-listing',
 		data: data.canteens,
 		fields: {
 			title: 'name',
