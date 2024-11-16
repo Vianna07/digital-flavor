@@ -1,0 +1,13 @@
+@layer utilities {
+  .main {
+    @apply flex h-full w-full flex-col items-center;
+  }
+
+  .main--center {
+    @apply main justify-center;
+  }
+
+  .main--start {
+    @apply main justify-start;
+  }
+}
