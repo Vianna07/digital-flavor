@@ -74,7 +74,7 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex flex-col gap-10;
+		@apply flex flex-col gap-10 mt-24;
 
 		width: clamp(18rem, 20rem, 24rem);
 
@@ -94,7 +94,7 @@
 			}
 
 			&__submit-area {
-				@apply mt-10 flex flex-col gap-1 text-center;
+				@apply mt-5 flex flex-col gap-1 text-center;
 
 				a {
 					@apply font-bold text-contrast;
