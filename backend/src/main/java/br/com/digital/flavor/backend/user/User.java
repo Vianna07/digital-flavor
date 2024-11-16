@@ -2,7 +2,7 @@ package br.com.digital.flavor.backend.user;
 
 
 import br.com.digital.flavor.backend.canteen.Canteen;
-import br.com.digital.flavor.backend.security.dto.LoginRequest;
+import br.com.digital.flavor.backend.user.dto.CustomerDto;
 import br.com.digital.flavor.backend.user.dto.NewUserDto;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,6 +14,29 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+@SqlResultSetMapping(
+        name = "CustomerDtoMapping",
+        classes = @ConstructorResult(
+                targetClass = CustomerDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = UUID.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "email", type = String.class)
+                }
+        )
+)
+
+@NamedNativeQuery(
+        name = "User.findAllCustomers",
+        query = "SELECT u.id, u.name, u.email " +
+                "  FROM user_canteens uc " +
+                "  JOIN users u " +
+                "    ON u.id = uc.user_id " +
+                "   AND u.user_type = 'CUSTOMER' " +
+                " WHERE uc.canteen_id = ?1 ",
+        resultSetMapping = "CustomerDtoMapping"
+)
 
 @Data
 @Entity

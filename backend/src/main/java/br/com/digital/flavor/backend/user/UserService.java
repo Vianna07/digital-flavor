@@ -1,10 +1,13 @@
 package br.com.digital.flavor.backend.user;
 
+import br.com.digital.flavor.backend.security.tenant.CanteenContext;
+import br.com.digital.flavor.backend.user.dto.CustomerDto;
 import br.com.digital.flavor.backend.user.dto.NewUserDto;
 import br.com.digital.flavor.backend.user.dto.UserLoginDto;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,5 +35,9 @@ public class UserService {
         userRepository.save(newUser);
 
         return new UserLoginDto(id, newUser.getUserType(), newUserDto.name(), newUserDto.email(), newUserDto.password());
+    }
+
+    public List<CustomerDto> getAllCustomers() {
+        return this.userRepository.getAllCustomers(CanteenContext.getCurrentCanteenUUID());
     }
 }
