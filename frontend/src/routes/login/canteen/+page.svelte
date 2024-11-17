@@ -1,12 +1,10 @@
 <script lang="ts">
 	import logo from '@images/logo.png';
-	import GenericList from '@components/global/generic/GenericList.svelte';
-	import GenericInput from '@components/global/generic/GenericInput.svelte';
-	import searchIcon from '@icons/magnifying-glass.svg';
 	import noImageIcon from '@icons/no_photography.svg';
-	import type { Canteen, GenericInputProps, GenericListProps } from '$lib/types';
+	import type { Canteen, GenericInputProps, GenericListProps, GenericSearchableListProps, InputProps } from '$lib/types';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
 
 	let { data }: { data: { canteens: Canteen[] } } = $props();
 
@@ -41,11 +39,8 @@
 		noDataMessage: 'Nenhuma cantina encontrada'
 	});
 
-	const searchInput: GenericInputProps = {
-		id: 'search',
-		type: 'text',
+	const searchInput: InputProps = {
 		label: 'Pesquise pela cantina',
-		leftIconUrl: searchIcon,
 		oninput: async (nameOrAddress: string) => {
 			try {
 				if (nameOrAddress) {
@@ -64,6 +59,12 @@
 			}
 		}
 	};
+
+  const searchableList: GenericSearchableListProps<Canteen> = {
+    list: canteens,
+    searchInput: searchInput,
+    style: 'h-96 gap-10'
+  }
 </script>
 
 {#snippet canteenIImage(url?: string)}
@@ -77,10 +78,7 @@
 		<img src={logo} alt="logo" />
 	</header>
 
-	<div class="content">
-		<GenericInput {...searchInput} />
-		<GenericList {...canteens} />
-	</div>
+  <GenericSearchableList {...searchableList} />
 
 	<footer>
 		<p>Selecione a loja que deseja comprar conforme a sua localização</p>
@@ -99,10 +97,6 @@
 			img {
 				@apply h-32 w-32;
 			}
-		}
-
-		.content {
-			@apply flex h-96 w-full max-w-full flex-col gap-10;
 		}
 
 		footer {
