@@ -50,18 +50,18 @@ public class Canteen {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "manager_id")
+    @JoinColumn(name = "manager_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private User manager;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(length = 150)
+    @Column(length = 150, nullable = false)
     private String address;
 
     @ManyToMany(mappedBy = "canteens")

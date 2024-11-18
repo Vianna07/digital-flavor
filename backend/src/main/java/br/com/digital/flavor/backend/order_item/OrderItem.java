@@ -18,7 +18,7 @@ public class OrderItem {
     private OrderItemId id;
 
     @Column(nullable = false)
-    private int quantity = 1;
+    private Short quantity = 1;
 
     @ManyToOne
     @MapsId("orderId")
