@@ -74,12 +74,10 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex flex-col gap-10 mt-24;
-
-		width: clamp(18rem, 20rem, 24rem);
+		@apply gap-10 mt-24 justify-center w-80;
 
 		header {
-			@apply text-center text-4xl font-bold text-primary;
+			@apply text-center text-4xl font-bold text-primary w-full;
 
 			.go-back {
 				@apply absolute top-10;

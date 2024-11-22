@@ -87,9 +87,7 @@
 
 <style lang="postcss">
 	.page {
-		@apply h-full my-4 flex flex-col items-center justify-around gap-6;
-
-		width: clamp(18rem, 20rem, 24rem);
+		@apply my-4 justify-around gap-6 w-80;
 
 		header {
 			@apply flex items-center justify-center;
