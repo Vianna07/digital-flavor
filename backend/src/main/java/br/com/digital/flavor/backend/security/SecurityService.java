@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -50,6 +51,7 @@ public class SecurityService {
         return new UserLoginDto(user.getId(), user.getUserType(), user.getName(), user.getEmail(), loginRequest.password());
     }
 
+    @Transactional
     public LoginResponse loginCanteen(LoginRequest loginRequest) {
         UserLoginDto user = login(loginRequest);
         String canteenId = loginRequest.canteenId();
@@ -64,12 +66,18 @@ public class SecurityService {
             throw new IllegalArgumentException("Id da cantina inválido");
         }
 
+        this.userRepository.saveUserInCanteen(user.id(), UUID.fromString(loginRequest.canteenId()));
+
         try {
             String jwtToken = this.jwtEncoder.encode(JwtEncoderParameters.from(getJwtClaimsSet(user, canteenId))).getTokenValue();
             return new LoginResponse("Bearer " + jwtToken, this.EXPIRES_AT);
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
         }
+    }
+
+    public JwtClaimsSet getJwtClaimsSet(UserLoginDto user, String canteenId) {
+        return getJwtClaimsSet("backend", user.id().toString(), user.userType().toString(), canteenId);
     }
 
     public JwtClaimsSet getJwtClaimsSet(String issuer, String subject, String scope, String canteenId) {
@@ -83,10 +91,6 @@ public class SecurityService {
                 .claim("scope", scope)
                 .claim("canteenId", canteenId)
                 .build();
-    }
-
-    public JwtClaimsSet getJwtClaimsSet(UserLoginDto user, String canteenId) {
-        return getJwtClaimsSet("backend", user.id().toString(), user.userType().toString(), canteenId);
     }
 
     public LoginResponse renewToken() {
