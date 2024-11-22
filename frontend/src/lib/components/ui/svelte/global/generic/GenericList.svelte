@@ -13,7 +13,7 @@
 </script>
 
 <ul class={`list ${listingType}`}>
-	{#if data.length}
+	{#if data?.length}
 		{#each data as data (data.id)}
 			<li class="list__item" animate:flip>
 				<button type="button" onclick={() => onclick?.(data.id)}>
@@ -45,13 +45,17 @@
 		&__item {
 			@apply h-20 w-full cursor-pointer rounded-lg bg-secondary-50 p-3 text-center shadow-md transition-transform;
 
+      transition: transform 0.3s ease;
+
 			button {
 				@apply flex h-full w-full items-center gap-4;
+
+        &:focus-visible {
+          @apply outline-none;
+        }
 			}
 
-			transition: transform 0.3s ease;
-
-			&:hover {
+			&:hover, &:has(button:focus-visible) {
 				transform: scale(0.95);
 			}
 
