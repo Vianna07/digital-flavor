@@ -27,16 +27,30 @@ import java.util.UUID;
         )
 )
 
-@NamedNativeQuery(
-        name = "User.findAllCustomers",
-        query = "SELECT u.id, u.name, u.email " +
-                "  FROM users_canteens uc " +
-                "  JOIN users u " +
-                "    ON u.id = uc.user_id " +
-                "   AND u.user_type = 'CUSTOMER' " +
-                " WHERE uc.canteen_id = ?1 ",
-        resultSetMapping = "CustomerDtoMapping"
-)
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "User.findAllCustomers",
+                query = "SELECT u.id, u.name, u.email " +
+                        "  FROM users_canteens uc " +
+                        "  JOIN users u " +
+                        "    ON u.id = uc.user_id " +
+                        "   AND u.user_type = 'CUSTOMER' " +
+                        " WHERE uc.canteen_id = ?1 ",
+                resultSetMapping = "CustomerDtoMapping"
+        ),
+        @NamedNativeQuery(
+                name = "User.findAllCustomersByNameOrEmail",
+                query = "SELECT u.id, u.name, u.email " +
+                        "  FROM users_canteens uc " +
+                        "  JOIN users u " +
+                        "    ON u.id = uc.user_id " +
+                        "   AND u.user_type = 'CUSTOMER' " +
+                        " WHERE uc.canteen_id = ?1" +
+                        "   AND u.name ILIKE ?2 " +
+                        "   AND u.email ILIKE ?2 ",
+                resultSetMapping = "CustomerDtoMapping"
+        )
+})
 
 @Data
 @Entity

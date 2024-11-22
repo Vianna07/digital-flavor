@@ -18,11 +18,16 @@ public class UserController {
 
     @PostMapping("/save")
     public ResponseEntity<UserLoginDto> save(@RequestBody NewUserDto newUserDto) {
-        return ResponseEntity.ok(userService.save(newUserDto));
+        return ResponseEntity.ok(this.userService.save(newUserDto));
     }
 
     @GetMapping("/get-all-customers")
     public ResponseEntity<List<CustomerDto>> getAllCustomers() {
-        return ResponseEntity.ok(userService.getAllCustomers());
+        return ResponseEntity.ok(this.userService.getAllCustomers());
+    }
+
+    @GetMapping("/get-all-customers/{nameOrEmail}")
+    public ResponseEntity<List<CustomerDto>> getAllCustomersByNameOrEmail(@PathVariable String nameOrEmail) {
+        return ResponseEntity.ok(this.userService.getAllCustomersByNameOrEmail(nameOrEmail));
     }
 }

@@ -40,4 +40,8 @@ public class UserService {
     public List<CustomerDto> getAllCustomers() {
         return this.userRepository.getAllCustomers(CanteenContext.getCurrentCanteenUUID());
     }
+
+    public List<CustomerDto> getAllCustomersByNameOrEmail(String nameOrEmail) {
+        return this.userRepository.getAllCustomersByNameOrEmail(CanteenContext.getCurrentCanteenUUID(), "%" + nameOrEmail + "%");
+    }
 }
