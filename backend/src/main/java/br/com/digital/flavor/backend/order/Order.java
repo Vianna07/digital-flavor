@@ -19,7 +19,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "date_finished")
@@ -28,8 +28,8 @@ public class Order {
     @Column(name = "date_cancelled")
     private LocalDateTime dateCancelled;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne()
+    @JoinColumn(name = "user_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private User user;
@@ -39,7 +39,7 @@ public class Order {
     private OrderStatus status = OrderStatus.OPEN;
 
     @ManyToOne
-    @JoinColumn(name = "canteen_id")
+    @JoinColumn(name = "canteen_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Canteen canteen;

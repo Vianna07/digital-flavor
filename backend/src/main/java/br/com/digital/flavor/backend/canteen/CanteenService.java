@@ -19,6 +19,6 @@ public class CanteenService {
     }
 
     public List<CanteenDto> getAllByNameOrAddress(String nameOrAddress) {
-        return this.canteenRepository.findAllByNameOrAddress(nameOrAddress);
+        return this.canteenRepository.findAllByNameOrAddress("%" + nameOrAddress + "%");
     }
 }
