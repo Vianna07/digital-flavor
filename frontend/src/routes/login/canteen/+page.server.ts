@@ -1,9 +1,9 @@
-import { PUBLIC_API_URL } from '$env/static/public';
+import { PRIVATE_BACKEND_API_URL } from '$env/static/private';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ fetch }) => {
 	try {
-		const response: Response = await fetch(`${PUBLIC_API_URL}/canteen/get-all`, {
+		const response: Response = await fetch(`${PRIVATE_BACKEND_API_URL}/canteen/get-all`, {
 			method: 'GET'
 		});
 
