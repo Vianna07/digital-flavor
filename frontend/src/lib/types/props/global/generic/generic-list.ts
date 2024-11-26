@@ -1,6 +1,9 @@
 import type { Snippet } from 'svelte';
 
+type ListingType = 'open-listing' | 'closed-listing';
+
 export interface GenericListProps<T> {
+  listingType?: ListingType;
 	data: T[];
 	fields: {
 		title: keyof T;

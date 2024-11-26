@@ -3,5 +3,6 @@
 @import 'tailwindcss/utilities';
 
 @import './lib/components/ui/tailwindcss/base.css';
+@import './lib/components/ui/tailwindcss/utilities.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');

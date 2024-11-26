@@ -13,3 +13,5 @@ export interface GenericInputProps {
 	required?: boolean;
 	oninput?: (value: string) => void;
 }
+
+export type InputProps = Partial<GenericInputProps>;

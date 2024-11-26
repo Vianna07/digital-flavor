@@ -2,7 +2,7 @@ package br.com.digital.flavor.backend.user;
 
 
 import br.com.digital.flavor.backend.canteen.Canteen;
-import br.com.digital.flavor.backend.security.dto.LoginRequest;
+import br.com.digital.flavor.backend.user.dto.CustomerDto;
 import br.com.digital.flavor.backend.user.dto.NewUserDto;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,6 +15,43 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@SqlResultSetMapping(
+        name = "CustomerDtoMapping",
+        classes = @ConstructorResult(
+                targetClass = CustomerDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = UUID.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "email", type = String.class)
+                }
+        )
+)
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "User.findAllCustomers",
+                query = "SELECT u.id, u.name, u.email " +
+                        "  FROM users_canteens uc " +
+                        "  JOIN users u " +
+                        "    ON u.id = uc.user_id " +
+                        "   AND u.user_type = 'CUSTOMER' " +
+                        " WHERE uc.canteen_id = ?1 ",
+                resultSetMapping = "CustomerDtoMapping"
+        ),
+        @NamedNativeQuery(
+                name = "User.findAllCustomersByNameOrEmail",
+                query = "SELECT u.id, u.name, u.email " +
+                        "  FROM users_canteens uc " +
+                        "  JOIN users u " +
+                        "    ON u.id = uc.user_id " +
+                        "   AND u.user_type = 'CUSTOMER' " +
+                        " WHERE uc.canteen_id = ?1" +
+                        "   AND u.name ILIKE ?2 " +
+                        "   AND u.email ILIKE ?2 ",
+                resultSetMapping = "CustomerDtoMapping"
+        )
+})
+
 @Data
 @Entity
 @Table(name = "users")
@@ -22,25 +59,25 @@ public class User {
     @Id
     private UUID id;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type", nullable = false)
     private UserType userType = UserType.CUSTOMER;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @ManyToMany
     @JoinTable(
-            name = "user_canteens",
+            name = "users_canteens",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "canteen_id")
     )

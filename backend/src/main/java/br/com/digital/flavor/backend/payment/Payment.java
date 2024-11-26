@@ -30,7 +30,7 @@ public class Payment {
     @Column(name = "payment_date", nullable = false)
     private LocalDateTime paymentDate = LocalDateTime.now();
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 7, scale = 2)
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
