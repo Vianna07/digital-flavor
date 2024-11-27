@@ -49,7 +49,7 @@ async function loginCanteen(canteenId: string, cookies: Cookies) {
 	const { authorization, expiresAt }: Token = await response.json();
 
 	cookies.delete('user', { path: '/' });
-	cookies.set('access_token', JSON.stringify(authorization), {
+	cookies.set('authorization', JSON.stringify(authorization), {
 		path: '/',
 		maxAge: expiresAt,
 		secure: false,
