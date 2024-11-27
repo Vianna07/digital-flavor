@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto } from '$app/navigation'; // Para navegação no SvelteKit
+  import { goto } from '$app/navigation';
   import homeIcon from '@icons/home.svg';
   import personIcon from '@icons/person.svg';
   import bagIcon from '@icons/bag.svg';
@@ -13,24 +13,24 @@
   ];
 
   let activeIndex = 0;
-  let isAnimating = false; // Controle para a animação
+  let isAnimating = false;
 
-  // Função para controlar a navegação com animação
+
   function navigateWithAnimation(index: number, href: string) {
     if (isAnimating) return; // Se já está animando, ignora o clique
 
-    isAnimating = true; // Inicia a animação
-    activeIndex = index; // Muda para o ícone selecionado imediatamente
+    isAnimating = true;
+    activeIndex = index;
 
-    // A animação será feita, e ao terminar, vamos navegar
+
     setTimeout(() => {
-      goto(href); // Navegação após o tempo da animação
-    }, 500); // O tempo precisa coincidir com a duração da animação
+      goto(href);
+    }, 500);
   }
 
-  // Função chamada quando a transição do ícone termina
+
   function onTransitionEnd() {
-    isAnimating = false; // Permite novas animações
+    isAnimating = false;
   }
 </script>
 
@@ -40,7 +40,7 @@
       <li class:active={activeIndex === i}
           on:click={() => navigateWithAnimation(i, icon.href)}
           class="icon-item"
-          on:transitionend={onTransitionEnd}> <!-- Espera pela animação -->
+          on:transitionend={onTransitionEnd}>
         <a href="#">
           <span class="icon">
             <img src={icon.icon} class="svg-icon" alt="icon" />
@@ -132,7 +132,7 @@
   .svg-icon {
     width: 30px;
     height: 60px;
-    margin-left: 5px; /* Move 3px para a direita */
+    margin-left: 5px;
     transition: transform 0.3s ease;
   }
 
