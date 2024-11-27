@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { Snippet } from "svelte";
   import closeIcon from "@icons/close.svg"
 	import type { ModalProps } from "$lib/types";
 
@@ -19,7 +18,7 @@
         </button>
       </header>
 
-      {@render children()}
+      {@render children?.()}
     </div>
   </div>
 {/if}
