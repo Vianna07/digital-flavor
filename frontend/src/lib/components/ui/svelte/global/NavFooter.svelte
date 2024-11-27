@@ -1,23 +1,49 @@
 <script lang="ts">
+  import { goto } from '$app/navigation'; // Para navegação no SvelteKit
   import homeIcon from '@icons/home.svg';
   import personIcon from '@icons/person.svg';
   import bagIcon from '@icons/bag.svg';
   import settingsIcon from '@icons/settings.svg';
-  const icons = [homeIcon, personIcon, bagIcon, settingsIcon];
-  let activeIndex = 0;
 
-  function setActive(index: number) {
-    activeIndex = index;
+  const icons: { icon: string, href: string }[] = [
+    { icon: homeIcon, href: "/home" },
+    { icon: personIcon, href: "/home/customers" },
+    { icon: bagIcon, href: "/home/transactions" },
+    { icon: settingsIcon, href: "/home/settings" }
+  ];
+
+  let activeIndex = 0;
+  let isAnimating = false; // Controle para a animação
+
+  // Função para controlar a navegação com animação
+  function navigateWithAnimation(index: number, href: string) {
+    if (isAnimating) return; // Se já está animando, ignora o clique
+
+    isAnimating = true; // Inicia a animação
+    activeIndex = index; // Muda para o ícone selecionado imediatamente
+
+    // A animação será feita, e ao terminar, vamos navegar
+    setTimeout(() => {
+      goto(href); // Navegação após o tempo da animação
+    }, 500); // O tempo precisa coincidir com a duração da animação
+  }
+
+  // Função chamada quando a transição do ícone termina
+  function onTransitionEnd() {
+    isAnimating = false; // Permite novas animações
   }
 </script>
 
 <div class="navigation">
   <ul>
     {#each icons as icon, i}
-      <li class:active={activeIndex === i}>
-        <a href="#" on:click={() => setActive(i)}>
+      <li class:active={activeIndex === i}
+          on:click={() => navigateWithAnimation(i, icon.href)}
+          class="icon-item"
+          on:transitionend={onTransitionEnd}> <!-- Espera pela animação -->
+        <a href="#">
           <span class="icon">
-            <img src={icon} class="svg-icon" alt="icon" />
+            <img src={icon.icon} class="svg-icon" alt="icon" />
           </span>
         </a>
       </li>
@@ -76,6 +102,7 @@
     width: 80px;
     height: 70px;
     z-index: 1;
+    cursor: pointer;
   }
 
   .navigation ul li a {
@@ -92,15 +119,15 @@
     font-size: 2em;
     color: var(--clr-secondary);
     opacity: 0.85;
-    transition: 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
   }
 
   .navigation ul li.active a .icon {
-  opacity: 1;
-  transform: translateY(-7px);
-  filter: brightness(0) saturate(100%) invert(12%) sepia(82%) saturate(7499%) hue-rotate(1deg) brightness(96%) contrast(116%);
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
+    opacity: 1;
+    transform: translateY(-7px);
+    filter: brightness(0) saturate(100%) invert(12%) sepia(82%) saturate(7499%) hue-rotate(1deg) brightness(96%) contrast(116%);
+    transition: opacity 0.3s, transform 0.3s;
+  }
 
   .svg-icon {
     width: 30px;
@@ -122,18 +149,17 @@
     transition: transform 0.5s ease;
   }
 
-
-.indicator::before {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: -25.75px;
-  width: 20px;
-  height: 20px;
-  background: transparent;
-  border-top-right-radius: 20px;
-  box-shadow: 4px -6px 0 2px var(--clr-background);
-}
+  .indicator::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: -25.75px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-top-right-radius: 20px;
+    box-shadow: 4px -6px 0 2px var(--clr-background);
+  }
 
   .indicator::after {
     content: "";
@@ -157,5 +183,4 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     transform: scale(0.85);
   }
-
 </style>
