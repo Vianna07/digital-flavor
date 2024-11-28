@@ -3,7 +3,16 @@
 	import searchIcon from '@icons/magnifying-glass.svg';
 	import type { GenericInputProps, InputProps } from '$lib/types';
 
-	let { id = "search", type = "text", label = "Pesquise por algo", leftIconUrl = searchIcon, oninput, pattern, required, rightIcon }: InputProps = $props();
+	let {
+		id = 'search',
+		type = 'text',
+		label = 'Pesquise por algo',
+		leftIconUrl = searchIcon,
+		oninput,
+		pattern,
+		required,
+		rightIcon
+	}: InputProps = $props();
 
 	const searchInput: GenericInputProps = {
 		id,
@@ -11,9 +20,9 @@
 		label,
 		leftIconUrl,
 		oninput,
-    pattern,
-    required,
-    rightIcon,
+		pattern,
+		required,
+		rightIcon
 	};
 </script>
 

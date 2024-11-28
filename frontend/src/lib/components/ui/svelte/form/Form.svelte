@@ -74,10 +74,10 @@
 
 <style lang="postcss">
 	.page {
-		@apply gap-10 mt-24 justify-center w-80;
+		@apply mt-24 w-80 justify-center gap-10;
 
 		header {
-			@apply text-center text-4xl font-bold text-primary w-full;
+			@apply w-full text-center text-4xl font-bold text-primary;
 
 			.go-back {
 				@apply absolute top-10;
