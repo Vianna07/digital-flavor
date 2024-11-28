@@ -9,7 +9,7 @@
 
   let { label }: { label: string } = $props()
 
-  let showButton = $state(true);
+  let showUploadButton = $state(true);
   let isUrlOption = $state(false);
 
   let fileInput = $state() as HTMLInputElement;
@@ -36,7 +36,7 @@
     {
       label: 'Adicionar URL',
       action: () => {
-        showButton = false;
+        showUploadButton = false;
         isUrlOption = true;
 
         modalProps = { isOpen: true, title: 'Adicione a URL' };
@@ -45,7 +45,7 @@
     {
       label: 'Adicionar arquivo',
       action: () => {
-        showButton = false;
+        showUploadButton = false;
         isUrlOption = false;
 
         modalProps = { isOpen: true, title: 'Adicione o arquivo' };
@@ -54,7 +54,7 @@
   ];
 
   async function onclick() {
-    showButton = false;
+    showUploadButton = false;
     isUrlOption = false;
   }
 
@@ -106,14 +106,14 @@
   <h1 class="title">{label}</h1>
 
   <div class="image-preview">
-    {#if showButton && !url}
+    {#if showUploadButton && !url}
       <button {onclick} type="button" class="upload-button">
         <img src={uploadFileIcon} alt="">
       </button>
     {/if}
 
-    {#if !showButton && !url}
-      {@render closeButton(() => {showButton = true})}
+    {#if !showUploadButton && !url}
+      {@render closeButton(() => {showUploadButton = true})}
       {#each options as { label, action }}
         <button type="button" class="primary upload-option" onclick={action}>
           {label}
@@ -126,7 +126,7 @@
         fileInput.value = ""
         previewUrl = ""
         url = ""
-        showButton = true;
+        showUploadButton = true;
       })}
       <img src={url} alt="">
     {/if}
