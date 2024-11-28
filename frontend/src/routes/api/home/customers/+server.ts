@@ -15,9 +15,9 @@ export const POST = async ({ request, cookies }: RequestEvent) => {
       }
     );
 
-      const customers: Customer[] = await response.json();
+		const customers: Customer[] = await response.json();
 
-      return json(customers, { status: 200 });
+		return json(customers, { status: 200 });
 	} catch (err) {
 		const message: string = 'Erro ao buscar clientes';
 

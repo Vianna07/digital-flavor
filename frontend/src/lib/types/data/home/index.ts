@@ -1,1 +1,2 @@
-export * from './customers'
+export * from './details';
+export * from './customers';

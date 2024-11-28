@@ -7,12 +7,12 @@
 </script>
 
 <div class={`listing ${style}`}>
-  <SearchInput {...searchInput} />
-  <GenericList {...list} />
+	<SearchInput {...searchInput} />
+	<GenericList {...list} />
 </div>
 
 <style lang="postcss">
-  .listing {
-    @apply flex w-full flex-col;
-  }
+	.listing {
+		@apply flex w-full flex-col;
+	}
 </style>

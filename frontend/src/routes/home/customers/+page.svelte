@@ -1,13 +1,18 @@
 <script lang="ts">
-	import type { Customer, GenericListProps, GenericSearchableListProps, InputProps } from "$lib/types";
-	import GenericSearchableList from "@components/global/generic/GenericSearchableList.svelte";
-  import { page } from '$app/stores';
+	import type {
+		Customer,
+		GenericListProps,
+		GenericSearchableListProps,
+		InputProps
+	} from '$lib/types';
+	import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
+	import { page } from '$app/stores';
 
-  let { data }: { data: { customers: Customer[] }} = $props()
+	let { data }: { data: { customers: Customer[] } } = $props();
 
-  const FETCH_URL = `/api${$page.url.pathname}`;
+	const FETCH_URL = `/api${$page.url.pathname}`;
 
-  let customers: GenericListProps<Customer> = $state({
+	let customers: GenericListProps<Customer> = $state({
 		data: data.customers,
 		fields: {
 			title: 'name',
@@ -37,19 +42,19 @@
 		}
 	};
 
-  const searchableList: GenericSearchableListProps<Customer> = {
-    list: customers,
-    searchInput: searchInput,
-    style: 'gap-10'
-  }
+	const searchableList: GenericSearchableListProps<Customer> = {
+		list: customers,
+		searchInput: searchInput,
+		style: 'gap-10'
+	};
 </script>
 
 <section class="page">
-  <header>
-    <h1 class="simple-title">Clientes</h1>
-  </header>
+	<header>
+		<h1 class="simple-title">Clientes</h1>
+	</header>
 
-  <GenericSearchableList {...searchableList} />
+	<GenericSearchableList {...searchableList} />
 </section>
 
 <style lang="postcss"></style>
