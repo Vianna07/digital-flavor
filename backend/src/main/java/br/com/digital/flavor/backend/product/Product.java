@@ -28,7 +28,7 @@ public class Product {
     @Column(nullable = false, precision = 7, scale = 2)
     private BigDecimal price;
 
-    @Column(nullable = false, precision = 7, scale = 2)
+    @Column(precision = 7, scale = 2)
     private BigDecimal cost;
 
     @CreationTimestamp
