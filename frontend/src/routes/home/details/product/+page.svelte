@@ -44,7 +44,7 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex min-h-screen flex-col;
+		@apply min-h-svh;
 
 		header {
 			@apply my-3.5 flex h-14 items-center;
