@@ -1,0 +1,11 @@
+FROM gradle:8.11.1-jdk21-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN gradle build --no-daemon && \
+    rm -f /app/build/libs/file-storage*-plain.jar
+
+FROM amazoncorretto:21.0.5-alpine3.20
+WORKDIR /app
+COPY --from=builder /app/build/libs/file-storage*.jar /app/app.jar
+
+CMD ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006", "-jar", "/app/app.jar"]

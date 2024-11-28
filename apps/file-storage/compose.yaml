@@ -1,0 +1,11 @@
+services:
+  app-file-storage:
+    container_name: app-file-storage
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.dev
+    ports:
+      - ${SERVER_PORT:-8081}:${SERVER_PORT:-8081}
+      - 5006:5006
+    env_file:
+      - .env
