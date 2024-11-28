@@ -12,6 +12,10 @@
       .simple-title {
         @apply text-contrast text-xl font-medium text-center m-7;
       }
+
+      .simple-title--lg {
+        @apply text-contrast text-lg font-medium w-full flex items-center justify-center;
+      }
     }
   }
 }
