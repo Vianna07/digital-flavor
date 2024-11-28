@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
   import homeIcon from '@icons/home.svg';
   import personIcon from '@icons/person.svg';
   import bagIcon from '@icons/bag.svg';
@@ -41,7 +40,7 @@
 
 <style lang="postcss">
   footer, nav {
-    @apply w-full h-[4.375rem] bg-primary flex justify-center items-center rounded-xl;
+    @apply w-full h-[4.375rem] bg-primary flex justify-center items-center;
   }
 
   footer {
@@ -60,6 +59,7 @@
             .icon {
               @apply relative block text-[2em] text-light opacity-85;
 
+              filter: brightness(0) invert(1) sepia(0) saturate(0);
               transition: opacity 0.3s, transform 0.3s;
 
               img {
