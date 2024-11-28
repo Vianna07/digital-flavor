@@ -20,8 +20,7 @@
     type: 'text',
     label: 'Breve descrição',
     required: false,
-    min: 0,
-    max: 25
+    maxlength: 25
   }
 
   const priceInputProps: GenericInputProps = {
