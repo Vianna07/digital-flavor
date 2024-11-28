@@ -1,7 +1,12 @@
 <script lang="ts">
 	import logo from '@images/logo.png';
 	import noImageIcon from '@icons/no_photography.svg';
-	import type { Canteen, GenericListProps, GenericSearchableListProps, InputProps } from '$lib/types';
+	import type {
+		Canteen,
+		GenericListProps,
+		GenericSearchableListProps,
+		InputProps
+	} from '$lib/types';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
@@ -11,7 +16,7 @@
 	const FETCH_URL = `/api${$page.url.pathname}`;
 
 	let canteens: GenericListProps<Canteen> = $state({
-    listingType: 'closed-listing',
+		listingType: 'closed-listing',
 		data: data.canteens,
 		fields: {
 			title: 'name',
@@ -60,11 +65,11 @@
 		}
 	};
 
-  const searchableList: GenericSearchableListProps<Canteen> = {
-    list: canteens,
-    searchInput: searchInput,
-    style: 'h-96 gap-10'
-  }
+	const searchableList: GenericSearchableListProps<Canteen> = {
+		list: canteens,
+		searchInput: searchInput,
+		style: 'h-96 gap-10'
+	};
 </script>
 
 {#snippet canteenIImage(url?: string)}
@@ -78,7 +83,7 @@
 		<img src={logo} alt="logo" />
 	</header>
 
-  <GenericSearchableList {...searchableList} />
+	<GenericSearchableList {...searchableList} />
 
 	<footer>
 		<p>Selecione a loja que deseja comprar conforme a sua localização</p>
@@ -87,7 +92,7 @@
 
 <style lang="postcss">
 	.page {
-		@apply my-4 justify-around gap-6 w-80;
+		@apply my-4 w-80 justify-around gap-6;
 
 		header {
 			@apply flex items-center justify-center;
