@@ -1,5 +1,5 @@
 import { error, json, type Cookies, type RequestEvent } from '@sveltejs/kit';
-import { PUBLIC_API_URL } from '$env/static/public';
+import { PRIVATE_BACKEND_API_URL } from '$env/static/private';
 import type { Canteen, LoginRequest, Token, User } from '$lib/types';
 
 export const POST = async ({ request, cookies }: RequestEvent) => {
@@ -34,7 +34,7 @@ async function loginCanteen(canteenId: string, cookies: Cookies) {
 		canteenId
 	};
 
-	const response = await fetch(`${PUBLIC_API_URL}/security/login-canteen`, {
+	const response = await fetch(`${PRIVATE_BACKEND_API_URL}/security/login-canteen`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ async function loginCanteen(canteenId: string, cookies: Cookies) {
 	const { authorization, expiresAt }: Token = await response.json();
 
 	cookies.delete('user', { path: '/' });
-	cookies.set('access_token', JSON.stringify(authorization), {
+	cookies.set('authorization', JSON.stringify(authorization), {
 		path: '/',
 		maxAge: expiresAt,
 		secure: false,
@@ -62,7 +62,7 @@ async function loginCanteen(canteenId: string, cookies: Cookies) {
 
 async function getAllByNameOrAddress(nameOrAddress: string): Promise<Response> {
 	const response: Response = await fetch(
-		`${PUBLIC_API_URL}/canteen/get-all-by-name-or-address/${nameOrAddress}`,
+		`${PRIVATE_BACKEND_API_URL}/canteen/get-all-by-name-or-address/${nameOrAddress}`,
 		{
 			method: 'GET'
 		}

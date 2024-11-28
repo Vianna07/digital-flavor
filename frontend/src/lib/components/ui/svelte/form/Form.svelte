@@ -74,12 +74,10 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex flex-col gap-10;
-
-		width: clamp(18rem, 20rem, 24rem);
+		@apply mt-24 w-80 justify-center gap-10;
 
 		header {
-			@apply text-center text-4xl font-bold text-primary;
+			@apply w-full text-center text-4xl font-bold text-primary;
 
 			.go-back {
 				@apply absolute top-10;
@@ -94,7 +92,7 @@
 			}
 
 			&__submit-area {
-				@apply mt-10 flex flex-col gap-1 text-center;
+				@apply mt-5 flex flex-col gap-1 text-center;
 
 				a {
 					@apply font-bold text-contrast;

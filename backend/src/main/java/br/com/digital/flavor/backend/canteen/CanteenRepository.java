@@ -11,14 +11,9 @@ import java.util.UUID;
 @Repository
 public interface CanteenRepository extends JpaRepository<Canteen, UUID> {
 
-    @Query(name = "findAll", nativeQuery = true)
+    @Query(name = "Canteen.findAll", nativeQuery = true)
     List<CanteenDto> findAllCanteens();
 
-    @Query(value =
-        "SELECT new br.com.digital.flavor.backend.canteen.CanteenDto(c.id, c.name, c.address) " +
-        "  FROM Canteen c " +
-        " WHERE c.name ILIKE %:nameOrAddress% " +
-        "    OR c.address ILIKE %:nameOrAddress% "
-    )
-    List<CanteenDto> findAllByNameOrAddress(@Param("nameOrAddress") String nameOrAddress);
+    @Query(name = "Canteen.findAllByNameOrAddress", nativeQuery = true)
+    List<CanteenDto> findAllByNameOrAddress(String nameOrAddress);
 }

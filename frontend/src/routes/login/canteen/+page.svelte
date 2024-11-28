@@ -1,18 +1,22 @@
 <script lang="ts">
 	import logo from '@images/logo.png';
-	import GenericList from '@components/global/GenericList.svelte';
-	import GenericInput from '@components/global/GenericInput.svelte';
-	import searchIcon from '@icons/magnifying-glass.svg';
 	import noImageIcon from '@icons/no_photography.svg';
-	import type { Canteen, GenericInputProps, GenericListProps } from '$lib/types';
+	import type {
+		Canteen,
+		GenericListProps,
+		GenericSearchableListProps,
+		InputProps
+	} from '$lib/types';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
 
 	let { data }: { data: { canteens: Canteen[] } } = $props();
 
 	const FETCH_URL = `/api${$page.url.pathname}`;
 
 	let canteens: GenericListProps<Canteen> = $state({
+		listingType: 'closed-listing',
 		data: data.canteens,
 		fields: {
 			title: 'name',
@@ -40,11 +44,8 @@
 		noDataMessage: 'Nenhuma cantina encontrada'
 	});
 
-	const searchInput: GenericInputProps = {
-		id: 'search',
-		type: 'text',
+	const searchInput: InputProps = {
 		label: 'Pesquise pela cantina',
-		leftIconUrl: searchIcon,
 		oninput: async (nameOrAddress: string) => {
 			try {
 				if (nameOrAddress) {
@@ -63,6 +64,12 @@
 			}
 		}
 	};
+
+	const searchableList: GenericSearchableListProps<Canteen> = {
+		list: canteens,
+		searchInput: searchInput,
+		style: 'h-96 gap-10'
+	};
 </script>
 
 {#snippet canteenIImage(url?: string)}
@@ -76,10 +83,7 @@
 		<img src={logo} alt="logo" />
 	</header>
 
-	<div class="content">
-		<GenericInput {...searchInput} />
-		<GenericList {...canteens} />
-	</div>
+	<GenericSearchableList {...searchableList} />
 
 	<footer>
 		<p>Selecione a loja que deseja comprar conforme a sua localização</p>
@@ -88,24 +92,18 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex flex-col items-center justify-center gap-10;
-
-		width: clamp(18rem, 20rem, 24rem);
+		@apply my-4 w-80 justify-around gap-6;
 
 		header {
-			@apply absolute top-10 flex items-center justify-center;
+			@apply flex items-center justify-center;
 
 			img {
-				@apply h-48 w-48;
+				@apply h-32 w-32;
 			}
 		}
 
-		.content {
-			@apply flex h-96 w-full max-w-full flex-col gap-10;
-		}
-
 		footer {
-			@apply absolute bottom-10 max-w-full px-10 text-center;
+			@apply text-center;
 		}
 	}
 </style>

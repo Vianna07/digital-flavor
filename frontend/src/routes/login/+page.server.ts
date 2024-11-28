@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { PUBLIC_API_URL } from '$env/static/public';
+import { PRIVATE_BACKEND_API_URL } from '$env/static/private';
 import type { Actions } from './$types';
 
 export const actions = {
@@ -10,7 +10,7 @@ export const actions = {
 		const password = data.get('password');
 
 		try {
-			const response: Response = await fetch(`${PUBLIC_API_URL}/security/login`, {
+			const response: Response = await fetch(`${PRIVATE_BACKEND_API_URL}/security/login`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

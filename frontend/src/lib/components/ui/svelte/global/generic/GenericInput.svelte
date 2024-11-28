@@ -25,9 +25,9 @@
 	}
 </script>
 
-<section class="form-field">
+<section class="input-area">
 	<input
-		class="form-field__input"
+		class="input-area__input"
 		{type}
 		{id}
 		name={id}
@@ -38,10 +38,10 @@
 	/>
 
 	{#if leftIconUrl}
-		<img src={leftIconUrl} alt="Icon" class="form-field__left-icon" />
+		<img src={leftIconUrl} alt="Icon" class="input-area__left-icon" />
 	{/if}
 
-	<label class="form-field__label" for={id}>
+	<label class="input-area__label" for={id}>
 		{label}
 	</label>
 
@@ -50,7 +50,7 @@
 			{onclick}
 			type="button"
 			disabled={isButtonDisabled}
-			class="form-field__right-icon"
+			class="input-area__right-icon"
 			tabindex="-1"
 		>
 			<img src={rightIcon.url} alt="Icon" />
@@ -59,7 +59,7 @@
 </section>
 
 <style lang="postcss">
-	.form-field {
+	.input-area {
 		@apply relative bg-secondary-50;
 
 		&__input {
@@ -88,11 +88,11 @@
 			@apply absolute left-6 top-1/2 h-5 w-5 -translate-y-1/2;
 
 			:has(&) {
-				.form-field__label {
+				.input-area__label {
 					@apply left-12;
 				}
 
-				.form-field__input {
+				.input-area__input {
 					@apply pl-14;
 				}
 			}
@@ -107,7 +107,7 @@
 			@apply absolute right-5 top-1/2 z-10 flex h-5 w-5 -translate-y-1/2 items-center justify-center;
 
 			:has(&) {
-				.form-field__input {
+				.input-area__input {
 					@apply pr-12;
 				}
 			}

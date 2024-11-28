@@ -1,6 +1,4 @@
-import type { GenericInputProps } from '$lib/types';
-
-export type InputProps = Partial<GenericInputProps>;
+import type { InputProps } from '$lib/types';
 
 export interface PasswordInputProps extends InputProps {
 	hasEye?: boolean;
