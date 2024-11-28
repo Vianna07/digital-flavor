@@ -1,13 +1,13 @@
 @layer utilities {
-  .main {
-    @apply flex h-full w-full flex-col items-center justify-center;
+	.main {
+		@apply flex h-full w-full flex-col items-center justify-center;
 
-    .page {
-      @apply flex h-full w-80 flex-col items-center justify-start;
-    }
+		.page {
+			@apply flex h-full w-80 flex-col items-center justify-start;
+		}
 
-    header {
-      @apply w-full;
+		header {
+			@apply w-full;
 
       .simple-title {
         @apply text-contrast text-xl font-medium text-center m-7;
