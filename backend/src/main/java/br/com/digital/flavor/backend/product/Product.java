@@ -42,6 +42,9 @@ public class Product {
     @Column(nullable = false, length = 100)
     private String name;
 
+    @Column(name = "short_description")
+    private String shortDescription;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 
@@ -53,4 +56,14 @@ public class Product {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Canteen canteen;
+
+    public Product(NewProductDto dto) {
+        this.id = UUID.randomUUID();
+        this.name = dto.name();
+        this.shortDescription = dto.shortDescription();
+        this.price = dto.price();
+        this.stock = dto.stock();
+        this.description = dto.description();
+        this.imageUrl = dto.imageUrl();
+    }
 }
