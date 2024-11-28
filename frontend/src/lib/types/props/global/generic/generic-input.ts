@@ -11,6 +11,9 @@ export interface GenericInputProps {
 	rightIcon?: RightIcon;
 	pattern?: string;
 	required?: boolean;
+  max?: number;
+  min?: number;
+  step?: string;
 	oninput?: (value: string) => void;
 }
 

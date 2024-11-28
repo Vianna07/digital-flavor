@@ -9,7 +9,10 @@
 		rightIcon,
 		pattern,
 		required = true,
-		oninput
+		oninput,
+    max,
+    min,
+    step
 	}: GenericInputProps = $props();
 
 	let isButtonDisabled = $state<boolean>(false);
@@ -35,6 +38,9 @@
 		{pattern}
 		{required}
 		oninput={(event: Event) => oninput?.((event.target as HTMLInputElement).value)}
+    {max}
+    {min}
+    {step}
 	/>
 
 	{#if leftIconUrl}
