@@ -2,3 +2,4 @@ include:
   - frontend/compose.yaml
   - databases/compose.yaml
   - backend/compose.yaml
+  - apps/file-storage/compose.yaml
