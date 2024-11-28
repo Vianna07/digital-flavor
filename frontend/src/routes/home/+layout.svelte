@@ -4,7 +4,5 @@
 	let { children } = $props();
 </script>
 
-<main class="main">
-	{@render children()}
-	<NavFooter/>
-</main>
+{@render children()}
+<NavFooter/>
