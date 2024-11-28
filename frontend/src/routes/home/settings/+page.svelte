@@ -12,7 +12,7 @@
 		<h1>Perfil</h1>
 	</header>
 
-	<main>
+	<div class="content">
 		<div class="user-info">
 			<h2>{user.name}</h2>
 			<p class="user-email">{user.email}</p>
@@ -28,7 +28,7 @@
 				<p>Logout</p>
 			</div>
 		</div>
-	</main>
+	</div>
 
 	<footer>
 		<p>Digital Flavor</p>
@@ -47,7 +47,7 @@
 			}
 		}
 
-		main {
+		.content {
 			@apply flex flex-col items-center gap-8;
 
 			.user-info {
