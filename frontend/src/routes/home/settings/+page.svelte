@@ -7,7 +7,7 @@
 	};
 </script>
 
-<div class="profile-page">
+<div class="page">
 	<header>
 		<h1>Perfil</h1>
 	</header>
@@ -36,9 +36,7 @@
 </div>
 
 <style lang="postcss">
-	.profile-page {
-		@apply flex flex-col items-center min-h-screen bg-light text-contrast p-5;
-
+	.page {
 		header {
 			@apply mt-6 mb-8 w-full flex justify-center;
 
