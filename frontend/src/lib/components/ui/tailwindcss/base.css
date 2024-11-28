@@ -24,15 +24,17 @@
 		@apply bg-light font-body text-contrast;
 	}
 
-  hr {
-    @apply border-t-4;
-  }
+	hr {
+		@apply border-t-4;
+	}
 
 	a {
 		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
 	}
 
-	button.primary, input.primary, label.primary {
+	button.primary,
+	input.primary,
+	label.primary {
 		@apply cursor-pointer rounded-xl border-4 border-primary-700 bg-primary-500 p-2.5 text-secondary-50 outline-none drop-shadow-lg transition-colors duration-[var(--transition-speed)];
 
 		&:hover,

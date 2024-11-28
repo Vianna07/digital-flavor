@@ -9,13 +9,13 @@
 		header {
 			@apply w-full;
 
-      .simple-title {
-        @apply text-contrast text-xl font-medium text-center m-7;
-      }
+			.simple-title {
+				@apply m-7 text-center text-xl font-medium text-contrast;
+			}
 
-      .simple-title--lg {
-        @apply text-contrast text-lg font-medium w-full flex items-center justify-center;
-      }
-    }
-  }
+			.simple-title--lg {
+				@apply flex w-full items-center justify-center text-lg font-medium text-contrast;
+			}
+		}
+	}
 }

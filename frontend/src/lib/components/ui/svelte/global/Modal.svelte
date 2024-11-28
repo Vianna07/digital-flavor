@@ -1,43 +1,43 @@
 <script lang="ts">
-  import closeIcon from "@icons/close.svg"
-	import type { ModalProps } from "$lib/types";
-	import { scale } from "svelte/transition";
+	import closeIcon from '@icons/close.svg';
+	import type { ModalProps } from '$lib/types';
+	import { scale } from 'svelte/transition';
 
-  let { children, isOpen, title }: ModalProps = $props();
+	let { children, isOpen, title }: ModalProps = $props();
 
-  const closeModal = () => (isOpen = false);
+	const closeModal = () => (isOpen = false);
 </script>
 
 {#if isOpen}
-  <div class="screen">
-    <div class="screen__modal" transition:scale={{ start: 0.5, duration: 250 }}>
-      <header>
-        <h1>{title}</h1>
+	<div class="screen">
+		<div class="screen__modal" transition:scale={{ start: 0.5, duration: 250 }}>
+			<header>
+				<h1>{title}</h1>
 
-        <button type="button" onclick={closeModal}>
-          <img src={closeIcon} alt="closeIcon">
-        </button>
-      </header>
+				<button type="button" onclick={closeModal}>
+					<img src={closeIcon} alt="closeIcon" />
+				</button>
+			</header>
 
-      {@render children?.()}
-    </div>
-  </div>
+			{@render children?.()}
+		</div>
+	</div>
 {/if}
 
 <style class="postcss">
-  .screen {
-    @apply fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex items-center justify-center z-50;
+	.screen {
+		@apply fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50;
 
-    &__modal {
-      @apply bg-white p-6 rounded-lg shadow-lg w-80 min-h-56 flex flex-col items-center gap-5;
+		&__modal {
+			@apply flex min-h-56 w-80 flex-col items-center gap-5 rounded-lg bg-white p-6 shadow-lg;
 
-      header {
-        @apply flex justify-between;
+			header {
+				@apply flex justify-between;
 
-        h1 {
-          @apply text-xl font-bold;
-        }
-      }
-    }
-  }
+				h1 {
+					@apply text-xl font-bold;
+				}
+			}
+		}
+	}
 </style>
