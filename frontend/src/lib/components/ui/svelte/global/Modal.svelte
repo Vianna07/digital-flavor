@@ -1,6 +1,7 @@
 <script lang="ts">
   import closeIcon from "@icons/close.svg"
 	import type { ModalProps } from "$lib/types";
+	import { scale } from "svelte/transition";
 
   let { children, isOpen, title }: ModalProps = $props();
 
@@ -9,11 +10,11 @@
 
 {#if isOpen}
   <div class="screen">
-    <div class="screen__modal">
+    <div class="screen__modal" transition:scale={{ start: 0.5, duration: 250 }}>
       <header>
         <h1>{title}</h1>
 
-        <button onclick={closeModal}>
+        <button type="button" onclick={closeModal}>
           <img src={closeIcon} alt="closeIcon">
         </button>
       </header>
