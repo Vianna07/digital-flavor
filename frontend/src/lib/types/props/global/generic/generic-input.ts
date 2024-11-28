@@ -12,7 +12,9 @@ export interface GenericInputProps {
 	pattern?: string;
 	required?: boolean;
   max?: number;
+  maxlength?: number;
   min?: number;
+  minlength?: number;
   step?: string;
 	oninput?: (value: string) => void;
 }

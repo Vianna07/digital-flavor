@@ -11,7 +11,9 @@
 		required = true,
 		oninput,
     max,
+    maxlength,
     min,
+    minlength,
     step
 	}: GenericInputProps = $props();
 
@@ -39,7 +41,9 @@
 		{required}
 		oninput={(event: Event) => oninput?.((event.target as HTMLInputElement).value)}
     {max}
+    {maxlength}
     {min}
+    {minlength}
     {step}
 	/>
 
