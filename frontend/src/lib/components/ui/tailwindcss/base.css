@@ -24,6 +24,10 @@
 		@apply bg-light font-body text-contrast;
 	}
 
+  hr {
+    @apply border-t-4;
+  }
+
 	a {
 		@apply text-primary no-underline transition-colors duration-[var(--transition-speed)];
 	}
