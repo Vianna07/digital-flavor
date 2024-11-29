@@ -34,6 +34,10 @@
 			</button>
 		</div>
 	</div>
+
+  <footer>
+		<p>Digital Flavor</p>
+	</footer>
 </div>
 
 <style lang="postcss">
@@ -86,6 +90,10 @@
 					}
 				}
 			}
+		}
+
+    footer {
+			@apply mt-auto text-primary text-lg font-bold;
 		}
 	}
 </style>
