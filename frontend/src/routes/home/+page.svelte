@@ -51,7 +51,7 @@
 {#snippet productListing(products: ProductCardProps[] | undefined)}
   <div class="product-listing">
     {#if data.userType < 4 }
-      <div class="new-product-card ">
+      <div class="new-product-card">
         <button class="primary" onclick={() => goto("/home/create/product")}>
           <img class="icon--white" src={addIcon} alt="add-icon">
         </button>
@@ -89,18 +89,24 @@
     .new-product-card {
       @apply flex flex-col items-center justify-center rounded-lg p-3 gap-3 w-40 h-60 shadow-2xl border-2 border-secondary-400;
 
+      transition: 200ms all ease-in-out;
+
+      &:hover {
+        @apply scale-[1.02];
+      }
+
       button {
         @apply rounded-[100%] w-20 h-20 flex items-center justify-center;
 
         transition: 200ms all ease-in-out;
 
+        &:hover {
+          @apply scale-105;
+        }
+
         img {
           @apply w-10 h-10;
         }
-      }
-
-      button:hover {
-        @apply scale-110;
       }
 
       h1 {
