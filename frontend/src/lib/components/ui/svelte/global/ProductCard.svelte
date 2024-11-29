@@ -30,7 +30,7 @@
 <style lang="postcss">
 	.product-card {
 		a {
-			@apply flex h-60 w-40 cursor-pointer flex-col items-center gap-10 rounded-lg border-2 border-secondary-300 p-3 shadow-xl;
+			@apply flex h-60 w-40 cursor-pointer flex-col items-center rounded-lg border-2 border-secondary-300 p-3 shadow-xl;
 
 			transition: 200ms all ease-in-out;
 
@@ -55,7 +55,7 @@
 		}
 
 		&__purchase {
-			@apply flex w-full items-center justify-between;
+			@apply mt-auto flex w-full items-center justify-between;
 
 			&__price {
 				@apply text-base font-bold text-contrast;
