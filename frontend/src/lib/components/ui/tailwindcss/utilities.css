@@ -19,7 +19,7 @@
 		}
 	}
 
-  .center {
-    @apply flex h-svh w-full flex-col items-center justify-center;
-  }
+	.center {
+		@apply flex h-svh w-full flex-col items-center justify-center;
+	}
 }

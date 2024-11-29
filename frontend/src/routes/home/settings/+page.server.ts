@@ -4,13 +4,16 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ cookies, fetch }) => {
 	try {
-		const response: Response = await fetch(`${PRIVATE_BACKEND_API_URL}/user/get-user-settings-by-id`, {
-			method: 'GET',
-      headers: {
-      'Content-Type': 'application/json',
-      Authorization: JSON.parse(cookies.get('authorization') || '{}') as string
-    }
-		});
+		const response: Response = await fetch(
+			`${PRIVATE_BACKEND_API_URL}/user/get-user-settings-by-id`,
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: JSON.parse(cookies.get('authorization') || '{}') as string
+				}
+			}
+		);
 
 		const userSettings: UserSettings = await response.json();
 
