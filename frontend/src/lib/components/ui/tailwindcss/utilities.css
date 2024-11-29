@@ -3,7 +3,7 @@
 		@apply flex min-h-full w-full flex-col items-center justify-between;
 
 		.page {
-			@apply flex h-full flex-grow w-80 flex-col items-center justify-start;
+			@apply flex h-full flex-grow w-80 flex-col items-center justify-start my-4;
 		}
 
 		header {
