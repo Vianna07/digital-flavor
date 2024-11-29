@@ -51,15 +51,15 @@
 
 {#snippet productListing(products: ProductCardProps[] | undefined)}
   <div class="product-listing" >
-    {#if data.userType < 4 }
-      <div class="new-product-card">
-        <button class="primary" onclick={() => goto("/home/create/product")}>
+    {#if data.userType}
+      <button class="new-product-card" onclick={() => goto("/home/create/product")}>
+        <a href="/home/create/product" class="primary">
           <img class="icon--white" src={addIcon} alt="add-icon">
-        </button>
+        </a>
         <h1>
           Cadastrar produto
         </h1>
-      </div>
+      </button>
     {/if}
 
     {#if products}
@@ -99,7 +99,7 @@
         @apply scale-[1.02];
       }
 
-      button {
+      a {
         @apply rounded-[100%] w-20 h-20 flex items-center justify-center;
 
         transition: 200ms all ease-in-out;
