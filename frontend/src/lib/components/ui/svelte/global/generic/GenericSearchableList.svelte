@@ -3,7 +3,7 @@
 	import SearchInput from '../SearchInput.svelte';
 	import type { GenericSearchableListProps } from '$lib/types';
 
-	let { list, searchInput, style }: GenericSearchableListProps<T> = $props();
+	let { list, searchInput, style = '' }: GenericSearchableListProps<T> = $props();
 </script>
 
 <div class={`listing ${style}`}>
@@ -13,6 +13,6 @@
 
 <style lang="postcss">
 	.listing {
-		@apply flex w-full flex-col;
+		@apply flex w-full flex-col gap-10;
 	}
 </style>
