@@ -4,6 +4,7 @@ import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import br.com.digital.flavor.backend.user.dto.CustomerDto;
 import br.com.digital.flavor.backend.user.dto.NewUserDto;
 import br.com.digital.flavor.backend.user.dto.UserLoginDto;
+import br.com.digital.flavor.backend.user.dto.UserSettingsDto;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +44,19 @@ public class UserService {
 
     public List<CustomerDto> getAllCustomersByNameOrEmail(String nameOrEmail) {
         return this.userRepository.getAllCustomersByNameOrEmail(CanteenContext.getCurrentCanteenUUID(), "%" + nameOrEmail + "%");
+    }
+
+    public UserSettingsDto getUserSettingsById() {
+        Optional<User> user = this.userRepository.findById(CanteenContext.getCurrentSubjectUUID());
+
+        if (user.isEmpty()) {
+            throw new RuntimeException("Usuário não encontrado");
+        }
+
+        return new UserSettingsDto(user.get());
+    }
+
+    public String getUserType() {
+        return CanteenContext.getCurrentScope();
     }
 }

@@ -44,8 +44,7 @@
 
 	const searchableList: GenericSearchableListProps<Customer> = {
 		list: customers,
-		searchInput: searchInput,
-		style: 'gap-10'
+		searchInput: searchInput
 	};
 </script>
 

@@ -2,15 +2,11 @@
 	import type { ProductDetails } from '$lib/types';
 	import GoBack from '@components/global/GoBack.svelte';
 
-	let product: ProductDetails = {
-		name: 'Café Ghourmet',
-		shortDescription: 'Forte',
-		description:
-			'Um cappuccino é uma bebida de aproximadamente 150 ml (5 oz), com 25 ml de café expresso e 85 ml de leite fresco',
-		price: 1.99,
-		imageUrl:
-			'https://th.bing.com/th/id/OIP.JW4deLVxEH2nEwQHqQ3CAwEyDM?w=7360&h=4912&rs=1&pid=ImgDetMain'
-	};
+	let { data }: { data: { product: ProductDetails } } = $props();
+
+	const product = data.product;
+
+	console.log(product);
 </script>
 
 <div class="page">
@@ -25,7 +21,7 @@
 		<h2 class="product-content__name">{product.name}</h2>
 		<p class="product-content__short__description">{product.shortDescription}</p>
 
-		<hr class="product-content__divider" />
+		<hr />
 
 		<h3 class="product-content__description__title">Descrição</h3>
 		<p class="product-content__description">
@@ -35,25 +31,26 @@
 
 	<footer>
 		<div class="price">
-			<span class="price__label">Preço</span>
-			<span class="price__value">R$ {product.price.toFixed(2)}</span>
+			<p class="price__label">Preço</p>
+			<p class="price__value">R$ {product.price.toFixed(2)}</p>
 		</div>
-		<button class="add-to-cart-button"> Adicionar ao Carrinho </button>
+		<button class="primary add-to-cart-button"> Adicionar ao Carrinho </button>
 	</footer>
 </div>
 
 <style lang="postcss">
 	.page {
-    @apply gap-8;
+		@apply gap-8;
 
 		header {
 			@apply mt-4 flex h-14 items-center;
 		}
+
 		.product-content {
 			@apply flex flex-grow flex-col;
 
 			&__image {
-				@apply mb-4 h-56 w-full rounded-lg object-cover;
+				@apply mb-4 h-56 w-full rounded-lg border-2 border-secondary-300 bg-secondary-200 object-cover;
 			}
 
 			&__name {
@@ -64,8 +61,8 @@
 				@apply mb-3 text-placeholder;
 			}
 
-			&__divider {
-				@apply mb-3 border-placeholder;
+			hr {
+				@apply my-4;
 			}
 
 			&__description__title {
@@ -78,13 +75,13 @@
 		}
 
 		footer {
-			@apply w-full flex items-center justify-between gap-8;
+			@apply mt-auto flex w-full items-center justify-between gap-8;
 
 			.price {
-				@apply h-10 w-16 text-left;
+				@apply h-10 text-left;
 
 				&__label {
-					@apply block text-sm text-placeholder;
+					@apply text-sm text-placeholder;
 				}
 
 				&__value {
@@ -93,7 +90,7 @@
 			}
 
 			.add-to-cart-button {
-				@apply flex h-9 w-44 flex-row items-center justify-center rounded-2xl bg-primary text-sm text-secondary-50 transition duration-speed hover:bg-primary-500;
+				@apply flex h-10 items-center justify-center;
 			}
 		}
 	}

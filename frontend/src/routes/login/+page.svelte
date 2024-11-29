@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { FormProps } from '$lib/types';
 
-	import Form from '@components/form/Form.svelte';
+	import LoginForm from '@components/form/LoginForm.svelte';
 
 	const formProps: FormProps = {
 		title: 'Entre na sua conta',
@@ -18,4 +18,4 @@
 	};
 </script>
 
-<Form {...formProps} />
+<LoginForm {...formProps} />

@@ -3,6 +3,7 @@ package br.com.digital.flavor.backend.user;
 import br.com.digital.flavor.backend.user.dto.CustomerDto;
 import br.com.digital.flavor.backend.user.dto.NewUserDto;
 import br.com.digital.flavor.backend.user.dto.UserLoginDto;
+import br.com.digital.flavor.backend.user.dto.UserSettingsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,15 @@ public class UserController {
     @GetMapping("/get-all-customers/{nameOrEmail}")
     public ResponseEntity<List<CustomerDto>> getAllCustomersByNameOrEmail(@PathVariable String nameOrEmail) {
         return ResponseEntity.ok(this.userService.getAllCustomersByNameOrEmail(nameOrEmail));
+    }
+
+    @GetMapping("/get-user-settings-by-id")
+    public ResponseEntity<UserSettingsDto> getUserById() {
+        return ResponseEntity.ok(this.userService.getUserSettingsById());
+    }
+
+    @GetMapping("/get-user-type")
+    public ResponseEntity<String> getUserType() {
+        return ResponseEntity.ok(this.userService.getUserType());
     }
 }
