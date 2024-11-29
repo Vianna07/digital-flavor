@@ -21,6 +21,6 @@ export const load: PageServerLoad = async ({ cookies, fetch }) => {
 			userSettings: userSettings
 		};
 	} catch (error) {
-		console.error(`${new Date()} - Erro ao buscar cantinas: ${error}`);
+		console.error(`${new Date()} - Erro ao buscar informações de configuração do usuário: ${error}`);
 	}
 };

@@ -28,4 +28,10 @@ public class CanteenController {
     public ResponseEntity<List<CanteenDto>> getAllByNameOrAddress(@PathVariable String nameOrAddress) {
         return ResponseEntity.ok(this.canteenService.getAllByNameOrAddress(nameOrAddress));
     }
+
+    @GetMapping("get-by-id")
+    public ResponseEntity<CanteenDto> getById() {
+        return ResponseEntity.ok(this.canteenService.getById());
+    }
+
 }

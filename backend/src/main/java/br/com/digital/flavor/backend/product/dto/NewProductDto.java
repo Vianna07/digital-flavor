@@ -1,4 +1,4 @@
-package br.com.digital.flavor.backend.product;
+package br.com.digital.flavor.backend.product.dto;
 
 import java.math.BigDecimal;
 
