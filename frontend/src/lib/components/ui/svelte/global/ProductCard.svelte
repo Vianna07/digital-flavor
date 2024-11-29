@@ -34,12 +34,15 @@
 
 <style lang="postcss">
   .product-card {
-    @apply flex flex-col items-center rounded-lg p-3 gap-3 w-40 h-60 shadow-xl border-2 border-secondary-300 cursor-pointer;
+    a {
+      @apply flex flex-col items-center rounded-lg p-3 gap-10 w-40 h-60 shadow-xl border-2 border-secondary-300 cursor-pointer;
 
-    transition: 200ms all ease-in-out;
+      transition: 200ms all ease-in-out;
 
-    &:hover {
-      @apply scale-105;
+      &:hover {
+        @apply scale-105;
+      }
+
     }
 
     img {
