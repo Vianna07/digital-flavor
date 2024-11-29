@@ -44,7 +44,7 @@
 
 <style lang="postcss">
 	.page {
-    @apply gap-8;
+		@apply gap-8;
 
 		header {
 			@apply mt-4 flex h-14 items-center;
@@ -78,7 +78,7 @@
 		}
 
 		footer {
-			@apply w-full flex items-center justify-between gap-8;
+			@apply flex w-full items-center justify-between gap-8;
 
 			.price {
 				@apply h-10 w-16 text-left;

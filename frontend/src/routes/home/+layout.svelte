@@ -5,4 +5,4 @@
 </script>
 
 {@render children()}
-<NavFooter/>
+<NavFooter />

@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { UserSettings } from '$lib/types';
-	import logoutIcon from '@icons/logout.svg'
-	import settingsIcon from '@icons/settings.svg'
+	import logoutIcon from '@icons/logout.svg';
+	import settingsIcon from '@icons/settings.svg';
 
-  let { data }: { data: { userSettings: UserSettings } } = $props();
-  const user = data.userSettings;
+	let { data }: { data: { userSettings: UserSettings } } = $props();
+	const user = data.userSettings;
 
-  function logout() {
-    goto("/")
-  }
+	function logout() {
+		goto('/');
+	}
 </script>
 
 <div class="page">
@@ -39,10 +39,10 @@
 <style lang="postcss">
 	.page {
 		header {
-			@apply mt-6 mb-8 w-full flex justify-center;
+			@apply mb-8 mt-6 flex w-full justify-center;
 
 			h1 {
-				@apply text-2xl font-bold text-primary text-center;
+				@apply text-center text-2xl font-bold text-primary;
 			}
 		}
 
@@ -63,20 +63,19 @@
 				.user-email {
 					@apply text-primary;
 				}
-
 			}
 
 			.actions {
 				@apply flex flex-col gap-6;
 
-        .action {
-          @apply flex items-center gap-4;
+				.action {
+					@apply flex items-center gap-4;
 
-          transition: 200ms ease-in-out all;
+					transition: 200ms ease-in-out all;
 
-          &:hover {
-            @apply scale-110;
-          }
+					&:hover {
+						@apply scale-110;
+					}
 
 					.icon {
 						filter: invert(20%) sepia(25%) saturate(100) hue-rotate(15deg);
