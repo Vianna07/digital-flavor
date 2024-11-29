@@ -18,8 +18,6 @@
 
 	const FETCH_URL = `/api${$page.url.pathname}`;
 
-	console.log(FETCH_URL);
-
 	let products: GenericListProps<ProductCardProps> = $state({
 		data: data.products,
 		listingType: 'custom-listing',
@@ -40,7 +38,6 @@
 					});
 
 					products.data = await response.json();
-					console.log(products.data);
 				}
 			} catch (error) {
 				console.error(error);
