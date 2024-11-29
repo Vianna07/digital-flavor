@@ -1,14 +1,7 @@
-*
+node_modules
+.git
+.gitignore
+.env.development
 
-!src
-!static
-!tests
-
-!vite*
-!tsconfig*
-!*.config.js
-!.env
-
-!package.json
-!pnpm-lock.yaml
-!.npmrc
+*.md
+*.example

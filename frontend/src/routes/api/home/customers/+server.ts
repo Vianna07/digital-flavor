@@ -1,12 +1,12 @@
 import { error, json, type RequestEvent } from '@sveltejs/kit';
-import { PUBLIC_API_URL } from '$env/static/public';
+import { PRIVATE_BACKEND_API_URL } from '$env/static/private';
 import type { Customer } from '$lib/types';
 
 export const POST = async ({ request, cookies }: RequestEvent) => {
 	try {
 		const { nameOrEmail }: { nameOrEmail: string } = await request.json();
 		const response: Response = await fetch(
-			`${PUBLIC_API_URL}/user/get-all-customers/${nameOrEmail}`,
+			`${PRIVATE_BACKEND_API_URL}/user/get-all-customers/${nameOrEmail}`,
 			{
 				method: 'GET',
 				headers: {

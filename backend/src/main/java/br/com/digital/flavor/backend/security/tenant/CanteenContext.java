@@ -21,6 +21,10 @@ public class CanteenContext {
         return CURRENT_CANTEEN.get().getClaim("sub");
     }
 
+    public static UUID getCurrentSubjectUUID() {
+        return UUID.fromString(CURRENT_CANTEEN.get().getClaim("sub"));
+    }
+
     public static Instant getCurrentIssuedAt() {
         return Instant.from(CURRENT_CANTEEN.get().getClaim("iat"));
     }

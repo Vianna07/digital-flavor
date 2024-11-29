@@ -44,13 +44,13 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex min-h-screen flex-col;
+    @apply gap-8;
 
 		header {
-			@apply my-3.5 flex h-14 items-center;
+			@apply mt-4 flex h-14 items-center;
 		}
 		.product-content {
-			@apply flex h-14 max-w-md flex-grow flex-col;
+			@apply flex flex-grow flex-col;
 
 			&__image {
 				@apply mb-4 h-56 w-full rounded-lg object-cover;
@@ -73,12 +73,12 @@
 			}
 
 			&__description {
-				@apply mb-4 h-20 w-72 text-sm font-normal leading-6 text-secondary;
+				@apply h-20 w-72 text-sm font-normal leading-6 text-secondary;
 			}
 		}
 
 		footer {
-			@apply mt-auto flex items-center justify-between gap-8 px-2.5 py-2.5;
+			@apply w-full flex items-center justify-between gap-8;
 
 			.price {
 				@apply h-10 w-16 text-left;
