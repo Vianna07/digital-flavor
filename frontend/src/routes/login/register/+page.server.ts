@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from '../$types';
-import { PUBLIC_API_URL } from '$env/static/public';
+import { PRIVATE_BACKEND_API_URL } from '$env/static/private';
 
 export const actions = {
 	default: async ({ cookies, request }) => {
@@ -18,7 +18,7 @@ export const actions = {
 		}
 
 		try {
-			const response: Response = await fetch(`${PUBLIC_API_URL}/user/save`, {
+			const response: Response = await fetch(`${PRIVATE_BACKEND_API_URL}/user/save`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

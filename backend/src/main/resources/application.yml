@@ -2,10 +2,6 @@ spring:
   application:
     name: backend
 
-  jwt:
-    public.key: classpath:keys/public.pem
-    private.key: classpath:keys/private.pem
-
   devtools:
     restart:
       enabled: true
@@ -43,6 +39,12 @@ spring:
         min-idle: 0
         max-wait: -1
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1MB
+      max-request-size: 1MB
+
   output:
     ansi:
       enabled: always
@@ -58,3 +60,11 @@ logging:
     br.com.digital.flavor.backend: DEBUG
   file:
     name: logs/application.log
+
+jwt:
+  public.key: classpath:keys/public.pem
+  private.key: classpath:keys/private.pem
+
+apps:
+  file-storage:
+    url: ${FILE_STORAGE_URL}

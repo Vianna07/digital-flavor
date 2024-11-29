@@ -41,9 +41,9 @@ public class SecurityConfig {
     private final RSAPrivateKey privateKey;
 
     public SecurityConfig(
-            @Value("${jwt.public.key:classpath:keys/public.pem}")
+            @Value("${jwt.public.key}")
             RSAPublicKey publicKey,
-            @Value("${jwt.private.key:classpath:keys/private.pem}")
+            @Value("${jwt.private.key}")
             RSAPrivateKey privateKey) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;

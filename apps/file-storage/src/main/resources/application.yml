@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: file-storage
+
+  devtools:
+    restart:
+      enabled: true
+
+  output:
+    ansi:
+      enabled: always
+
+server:
+  port: ${SERVER_PORT:8081}
+  error:
+    include-stacktrace: on_param
+
+logging:
+  level:
+    root: INFO
+    apps.file.storage: DEBUG
+  file:
+    name: logs/application.log
+
+#jwt:
+#  public.key: classpath:keys/public.pem
+#  private.key: classpath:keys/private.pem
+
+aws:
+  s3:
+    bucket-name: ${BUCKET_NAME}
+    region: ${BUCKET_REGION}
+    access-key-id: ${ACCESS_KEY_ID}
+    secret-access-key: ${SECRET_ACCESS_KEY}
+  cloud-front:
+    domain: ${CLOUD_FRONT_DOMAIN_NAME}
