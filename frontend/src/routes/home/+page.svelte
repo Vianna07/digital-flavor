@@ -11,6 +11,7 @@
 	import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
+  import shoppingCardIcon from "@icons/shopping-cart.svg"
 
 	let { data }: { data: { products: ProductCardProps[]; userType: number; canteen: Canteen } } =
 		$props();
@@ -77,7 +78,13 @@
 <div class="page">
 	<header>
 		<p>{data.canteen.address}</p>
-		<h1 class="simple-title">{data.canteen.name}</h1>
+
+    <div>
+      <h1 class="simple-title">{data.canteen.name}</h1>
+      <a href="/home/details/order">
+        <img class="icon--red" src={shoppingCardIcon} alt="">
+      </a>
+    </div>
 	</header>
 
 	<GenericSearchableList {...searchableList} />
@@ -85,7 +92,7 @@
 
 <style lang="postcss">
 	.product-listing {
-		@apply flex flex-wrap gap-6;
+		@apply flex flex-wrap gap-4 justify-center;
 
 		.new-product-card {
 			@apply flex h-60 w-40 flex-col items-center justify-center gap-3 rounded-lg border-2 border-secondary-400 p-3 shadow-2xl;
@@ -117,7 +124,7 @@
 	}
 
 	.page {
-		@apply w-[22rem];
+		@apply w-[21rem];
 
 		header {
 			@apply flex flex-col gap-2;
@@ -125,9 +132,17 @@
 				@apply text-xs text-gray-600;
 			}
 
-			h1 {
-				@apply ml-0 mt-0 text-left;
-			}
+      div {
+        @apply flex justify-between items-start;
+
+        h1 {
+          @apply ml-0 mt-0 text-left;
+        }
+
+        img {
+          @apply w-7 h-7 cursor-pointer;
+        }
+      }
 		}
 	}
 </style>
