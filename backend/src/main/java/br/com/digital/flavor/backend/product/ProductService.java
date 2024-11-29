@@ -1,5 +1,7 @@
 package br.com.digital.flavor.backend.product;
 
+import br.com.digital.flavor.backend.product.dto.NewProductDto;
+import br.com.digital.flavor.backend.product.dto.ProductCardDto;
 import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,17 +16,19 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import static java.io.File.createTempFile;
+import java.util.List;
 
 @Service
 public class ProductService {
 
+    @Autowired
+    private ProductRepository productRepository;
     @Value("${apps.file-storage.url}")
     private String FILE_STORAGE_URL;
 
-    @Autowired
-    private ProductRepository productRepository;
+    public List<ProductCardDto> getAll() {
+        return this.productRepository.findAllByCanteen(CanteenContext.getCurrentCanteenUUID());
+    }
 
     public Product save(NewProductDto dto) {
         Product product = new Product(dto);
@@ -60,7 +64,7 @@ public class ProductService {
             );
 
             if (!response.getStatusCode().is2xxSuccessful()) {
-                throw new RuntimeException( "Falha ao realizar upload da imagem de produto: " + response.getStatusCode());
+                throw new RuntimeException("Falha ao realizar upload da imagem de produto: " + response.getStatusCode());
             }
 
             product.setImageUrl(response.getBody());

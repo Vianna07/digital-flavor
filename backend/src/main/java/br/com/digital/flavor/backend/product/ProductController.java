@@ -1,5 +1,7 @@
 package br.com.digital.flavor.backend.product;
 
+import br.com.digital.flavor.backend.product.dto.NewProductDto;
+import br.com.digital.flavor.backend.product.dto.ProductCardDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @GetMapping("/get-all")
+    public ResponseEntity<List<ProductCardDto>> getAll() {
+        return ResponseEntity.ok(this.productService.getAll());
+    }
 
     @PostMapping("/save")
     public ResponseEntity<Product> uploadFile(@RequestBody NewProductDto dto) {
