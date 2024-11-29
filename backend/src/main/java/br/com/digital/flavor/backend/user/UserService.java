@@ -55,4 +55,8 @@ public class UserService {
 
         return new UserSettingsDto(user.get());
     }
+
+    public String getUserType() {
+        return CanteenContext.getCurrentScope();
+    }
 }

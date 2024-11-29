@@ -1,9 +1,11 @@
 package br.com.digital.flavor.backend.canteen;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CanteenService {
@@ -20,5 +22,19 @@ public class CanteenService {
 
     public List<CanteenDto> getAllByNameOrAddress(String nameOrAddress) {
         return this.canteenRepository.findAllByNameOrAddress("%" + nameOrAddress + "%");
+    }
+
+    public Canteen getCurrentCanteen() {
+        Optional<Canteen> canteen = this.canteenRepository.findById(UUID.fromString(CanteenContext.getCurrentCanteenId()));
+
+        if (canteen.isEmpty()) {
+            throw new RuntimeException("Cantina não encontrada");
+        }
+
+        return canteen.get();
+    }
+
+    public CanteenDto getById() {
+        return new CanteenDto(this.getCurrentCanteen());
     }
 }

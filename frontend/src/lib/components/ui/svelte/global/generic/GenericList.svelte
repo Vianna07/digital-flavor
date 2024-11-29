@@ -8,31 +8,37 @@
 		fields,
 		left,
 		onclick,
-		noDataMessage = 'Nenhum dado encontrado'
+		noDataMessage = 'Nenhum dado encontrado',
+    customListing,
 	}: GenericListProps<T> = $props();
 </script>
 
-<ul class={`list ${listingType}`}>
-	{#if data?.length}
-		{#each data as data (data.id)}
-			<li class="list__item" animate:flip>
-				<button type="button" onclick={() => onclick?.(data.id)}>
-					{#if left?.snippet}
-						<div class="list__item__left-content">
-							{@render left.snippet(data[left.field])}
-						</div>
-					{/if}
-					<div class="list__item__content">
-						<h1 class="list__item__title">{data[fields.title]}</h1>
-						<h3 class="list__item__sub-title">{data[fields.subTitle]}</h3>
-					</div>
-				</button>
-			</li>
-		{/each}
-	{:else}
-		<h1 class="list__no-data-message">{noDataMessage}</h1>
-	{/if}
-</ul>
+{#if listingType !== 'custom-listing'}
+  <ul class={`list ${listingType}`}>
+    {#if data?.length}
+      {#each data as data (data.id)}
+        <li class="list__item" animate:flip>
+          <button type="button" onclick={() => onclick?.(data.id)}>
+            {#if left?.snippet}
+              <div class="list__item__left-content">
+                {@render left.snippet(data[left.field])}
+              </div>
+            {/if}
+            <div class="list__item__content">
+              <h1 class="list__item__title">{data[(fields?.title) as keyof T]}</h1>
+              <h3 class="list__item__sub-title">{data[(fields?.subTitle) as keyof T]}</h3>
+            </div>
+          </button>
+        </li>
+      {/each}
+    {:else}
+      <h1 class="list__no-data-message">{noDataMessage}</h1>
+    {/if}
+  </ul>
+{:else}
+  {@render customListing?.(data)}
+{/if}
+
 
 <style lang="postcss">
 	.list {

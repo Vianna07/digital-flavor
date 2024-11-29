@@ -68,7 +68,7 @@
 	const searchableList: GenericSearchableListProps<Canteen> = {
 		list: canteens,
 		searchInput: searchInput,
-		style: 'h-96 gap-10'
+		style: 'h-96'
 	};
 </script>
 

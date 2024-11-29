@@ -32,8 +32,13 @@ public class UserController {
         return ResponseEntity.ok(this.userService.getAllCustomersByNameOrEmail(nameOrEmail));
     }
 
-    @GetMapping("get-user-settings-by-id")
+    @GetMapping("/get-user-settings-by-id")
     public ResponseEntity<UserSettingsDto> getUserById() {
         return ResponseEntity.ok(this.userService.getUserSettingsById());
+    }
+
+    @GetMapping("/get-user-type")
+    public ResponseEntity<String> getUserType() {
+        return ResponseEntity.ok(this.userService.getUserType());
     }
 }

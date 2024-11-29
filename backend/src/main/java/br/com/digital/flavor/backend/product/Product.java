@@ -2,6 +2,8 @@ package br.com.digital.flavor.backend.product;
 
 
 import br.com.digital.flavor.backend.canteen.Canteen;
+import br.com.digital.flavor.backend.product.dto.NewProductDto;
+import br.com.digital.flavor.backend.product.dto.ProductCardDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,6 +15,39 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+@SqlResultSetMapping(
+        name = "ProductCardDtoMapping",
+        classes = @ConstructorResult(
+                targetClass = ProductCardDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = UUID.class),
+                        @ColumnResult(name = "stock", type = Short.class),
+                        @ColumnResult(name = "price", type = BigDecimal.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "short_description", type = String.class),
+                        @ColumnResult(name = "image_url", type = String.class),
+                }
+        )
+)
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Product.findAll",
+                query = "SELECT id, stock, price, name, short_description, image_url " +
+                        "  FROM products " +
+                        " WHERE canteen_id = ?1 ",
+                resultSetMapping = "ProductCardDtoMapping"
+        ),
+        @NamedNativeQuery(
+                name = "Product.findAllByName",
+                query = "SELECT id, stock, price, name, short_description, image_url " +
+                        "  FROM products " +
+                        " WHERE canteen_id = ?1 " +
+                        "   AND name ILIKE ?2 ",
+                resultSetMapping = "ProductCardDtoMapping"
+        )
+})
 
 @Data
 @NoArgsConstructor
@@ -42,7 +77,7 @@ public class Product {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "short_description")
+    @Column(name = "short_description", length = 25)
     private String shortDescription;
 
     @Column(columnDefinition = "TEXT")
@@ -57,7 +92,7 @@ public class Product {
     @EqualsAndHashCode.Exclude
     private Canteen canteen;
 
-    public Product(NewProductDto dto) {
+    public Product(NewProductDto dto, Canteen canteen) {
         this.id = UUID.randomUUID();
         this.name = dto.name();
         this.shortDescription = dto.shortDescription();
@@ -65,5 +100,6 @@ public class Product {
         this.stock = dto.stock();
         this.description = dto.description();
         this.imageUrl = dto.imageUrl();
+        this.canteen = canteen;
     }
 }

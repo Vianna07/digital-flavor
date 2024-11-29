@@ -13,7 +13,7 @@
 
 	let activeIndex = 0;
 
-	function navigateWithAnimation(index: number, href: string) {
+	function navigateWithAnimation(index: number) {
 		activeIndex = index;
 	}
 </script>
@@ -23,7 +23,7 @@
 		<ul>
 			{#each icons as { icon, href }, i}
 				<li class:active={activeIndex === i} class="icon-item">
-					<a {href} on:click={() => navigateWithAnimation(i, href)}>
+					<a {href} on:click={() => navigateWithAnimation(i)}>
 						<span class="icon">
 							<img src={icon} alt="icon" />
 						</span>
