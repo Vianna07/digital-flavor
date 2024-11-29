@@ -19,10 +19,6 @@
 		}
 	}
 
-	.center {
-		@apply flex h-svh w-full flex-col items-center justify-center;
-	}
-
 	.icon {
     &--white {
       filter: brightness(0) invert(1) sepia(0) saturate(0);
