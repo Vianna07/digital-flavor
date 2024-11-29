@@ -3,6 +3,7 @@ package br.com.digital.flavor.backend.product;
 import br.com.digital.flavor.backend.canteen.CanteenService;
 import br.com.digital.flavor.backend.product.dto.NewProductDto;
 import br.com.digital.flavor.backend.product.dto.ProductCardDto;
+import br.com.digital.flavor.backend.product.dto.ProductDetailsDto;
 import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -17,6 +18,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -100,5 +103,18 @@ public class ProductService {
             System.err.println(e.getMessage());
             return null;
         }
+    }
+
+    public Product getById(UUID id) {
+        Optional<Product> product = this.productRepository.findById(id);
+
+        if (product.isEmpty()) {
+            throw new RuntimeException("Produto não encontrado");
+        }
+
+        return product.get();
+    }
+    public ProductDetailsDto getById(String id) {
+        return new ProductDetailsDto(this.getById(UUID.fromString(id)));
     }
 }

@@ -2,6 +2,7 @@ package br.com.digital.flavor.backend.product;
 
 import br.com.digital.flavor.backend.product.dto.NewProductDto;
 import br.com.digital.flavor.backend.product.dto.ProductCardDto;
+import br.com.digital.flavor.backend.product.dto.ProductDetailsDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,10 @@ public class ProductController {
             System.out.println(e.getMessage());
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/get-by-id/{id}")
+    public ResponseEntity<ProductDetailsDto> getAll(@PathVariable String id) {
+        return ResponseEntity.ok(this.productService.getById(id));
     }
 }
