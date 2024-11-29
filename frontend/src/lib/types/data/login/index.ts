@@ -1,6 +1,6 @@
 export * from './canteen';
 
-enum UserType {
+export enum UserType {
 	ADMIN = 1,
 	MANAGER = 2,
 	EMPLOYEE = 3,
