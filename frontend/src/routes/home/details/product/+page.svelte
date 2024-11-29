@@ -78,7 +78,7 @@
 		}
 
 		footer {
-			@apply flex w-full items-center justify-between gap-8;
+			@apply mt-auto flex w-full items-center justify-between gap-8;
 
 			.price {
 				@apply h-10 w-16 text-left;
