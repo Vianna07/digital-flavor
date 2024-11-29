@@ -14,6 +14,29 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@SqlResultSetMapping(
+        name = "ProductDtoMapping",
+        classes = @ConstructorResult(
+                targetClass = ProductDto.class,
+                columns = {
+                        @ColumnResult(name = "id", type = UUID.class),
+                        @ColumnResult(name = "stock", type = Short.class),
+                        @ColumnResult(name = "price", type = BigDecimal.class),
+                        @ColumnResult(name = "name", type = String.class),
+                        @ColumnResult(name = "shortDescription", type = String.class),
+                        @ColumnResult(name = "imageUrl", type = String.class),
+                }
+        )
+)
+
+@NamedNativeQuery(
+        name = "Product.findAll",
+        query = "SELECT id, stock, price, name, short_description, image_url " +
+                "  FROM product " +
+                " WHERE canteen_id = ?1 ",
+        resultSetMapping = "ProductDtoMapping"
+)
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -42,7 +65,7 @@ public class Product {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "short_description")
+    @Column(length = 25)
     private String shortDescription;
 
     @Column(columnDefinition = "TEXT")
