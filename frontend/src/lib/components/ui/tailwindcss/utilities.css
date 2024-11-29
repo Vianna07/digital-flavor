@@ -20,12 +20,12 @@
 	}
 
 	.icon {
-    &--white {
-      filter: brightness(0) invert(1) sepia(0) saturate(0);
-    }
+		&--white {
+			filter: brightness(0) invert(1) sepia(0) saturate(0);
+		}
 
-    &--red {
-      filter: invert(20%) sepia(25%) saturate(100) hue-rotate(350deg);
-    }
-  }
+		&--red {
+			filter: invert(20%) sepia(25%) saturate(100) hue-rotate(350deg);
+		}
+	}
 }
