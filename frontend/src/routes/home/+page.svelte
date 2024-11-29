@@ -1,34 +1,126 @@
 <script lang="ts">
-	import type { ProductCardProps } from '$lib/types';
+	import type { Canteen, GenericListProps, GenericSearchableListProps, ProductCardProps } from '$lib/types';
+  import addIcon from "@icons/add.svg"
   import ProductCard from '@components/global/ProductCard.svelte';
+	import { goto } from '$app/navigation';
+  import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
+  import { page } from '$app/stores';
 
-  const products: ProductCardProps[] = [
-    {
-        name: 'Café Java',
-        description: 'Extra forte',
-        price: 1.5,
-        imageUrl: 'http://s2.glbimg.com/pGTd3kAbZCgJBM4vEDJmVD806Xo=/e.glbimg.com/og/ed/f/original/2015/03/03/cafezinho.jpg',
-    },
-    {
-        name: 'Chá Verde',
-        description: 'Refrescante e saudável',
-        price: 2.0,
-        imageUrl: 'https://tse2.mm.bing.net/th?id=OIP.nfyh4h0c06uleHuh4hTgqAHaE7&pid=Api&P=0&h=220',
-    },
-];
+  let { data }: { data: { products: ProductCardProps[], userType: number, canteen: Canteen } } = $props()
+
+  const FETCH_URL = `/api${$page.url.pathname}`;
+
+  console.log(FETCH_URL);
+
+
+  let products: GenericListProps<ProductCardProps> = $state({
+    data: data.products,
+    listingType: 'custom-listing',
+    customListing: productListing
+  })
+
+  const searchInput = {
+    label: 'Pesquise pelo produto',
+    oninput: async (name: string) => {
+			try {
+				if (name) {
+					const response: Response = await fetch(FETCH_URL, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ name })
+					});
+
+					products.data = await response.json();
+          console.log(products.data);
+
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		}
+  }
+
+  let searchableList: GenericSearchableListProps<ProductCardProps> = {
+    list: products,
+    searchInput,
+  }
 </script>
 
-<section class="page">
-  <div class="flex gap-8">
-    {#each products as product}
-        <ProductCard
-            {...product}
-        />
-    {/each}
+{#snippet productListing(products: ProductCardProps[] | undefined)}
+  <div class="product-listing">
+    {#if data.userType < 4 }
+      <div class="new-product-card ">
+        <button class="primary" onclick={() => goto("/home/create/product")}>
+          <img class="icon--white" src={addIcon} alt="add-icon">
+        </button>
+        <h1>
+          Cadastrar produto
+        </h1>
+      </div>
+    {/if}
+
+    {#if products}
+      {#each products as product}
+          <ProductCard
+              {...product}
+          />
+      {/each}
+    {/if}
   </div>
-</section>
+{/snippet}
+
+<div class="page">
+  <header>
+    <p>{data.canteen.address}</p>
+    <h1 class="simple-title">{data.canteen.name}</h1>
+  </header>
+
+  <GenericSearchableList {...searchableList} />
+</div>
+
+
 
 <style lang="postcss">
+  .product-listing {
+    @apply flex flex-wrap gap-6;
+
+    .new-product-card {
+      @apply flex flex-col items-center justify-center rounded-lg p-3 gap-3 w-40 h-60 shadow-2xl border-2 border-secondary-400;
+
+      button {
+        @apply rounded-[100%] w-20 h-20 flex items-center justify-center;
+
+        transition: 200ms all ease-in-out;
+
+        img {
+          @apply w-10 h-10;
+        }
+      }
+
+      button:hover {
+        @apply scale-110;
+      }
+
+      h1 {
+        @apply text-lg font-bold text-center;
+      }
+    }
+  }
+
 	.page {
+    @apply w-[22rem];
+
+    header {
+      @apply flex flex-col gap-2;
+      p {
+        @apply text-xs text-gray-600;
+      }
+
+      h1 {
+        @apply text-left mt-0 ml-0;
+      }
+    }
 	}
 </style>
