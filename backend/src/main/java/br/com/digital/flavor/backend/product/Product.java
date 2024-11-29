@@ -2,6 +2,8 @@ package br.com.digital.flavor.backend.product;
 
 
 import br.com.digital.flavor.backend.canteen.Canteen;
+import br.com.digital.flavor.backend.product.dto.NewProductDto;
+import br.com.digital.flavor.backend.product.dto.ProductCardDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +19,7 @@ import java.util.UUID;
 @SqlResultSetMapping(
         name = "ProductDtoMapping",
         classes = @ConstructorResult(
-                targetClass = ProductDto.class,
+                targetClass = ProductCardDto.class,
                 columns = {
                         @ColumnResult(name = "id", type = UUID.class),
                         @ColumnResult(name = "stock", type = Short.class),
