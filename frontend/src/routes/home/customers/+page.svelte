@@ -44,7 +44,7 @@
 
 	const searchableList: GenericSearchableListProps<Customer> = {
 		list: customers,
-		searchInput: searchInput,
+		searchInput: searchInput
 	};
 </script>
 

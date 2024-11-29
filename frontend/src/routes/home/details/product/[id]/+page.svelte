@@ -2,11 +2,11 @@
 	import type { ProductDetails } from '$lib/types';
 	import GoBack from '@components/global/GoBack.svelte';
 
-  let { data }: { data: { product: ProductDetails } } = $props();
+	let { data }: { data: { product: ProductDetails } } = $props();
 
-  const product = data.product;
+	const product = data.product;
 
-  console.log(product);
+	console.log(product);
 </script>
 
 <div class="page">
@@ -21,7 +21,7 @@
 		<h2 class="product-content__name">{product.name}</h2>
 		<p class="product-content__short__description">{product.shortDescription}</p>
 
-		<hr>
+		<hr />
 
 		<h3 class="product-content__description__title">Descrição</h3>
 		<p class="product-content__description">
@@ -50,7 +50,7 @@
 			@apply flex flex-grow flex-col;
 
 			&__image {
-				@apply mb-4 h-56 w-full rounded-lg object-cover border-2 border-secondary-300 bg-secondary-200;
+				@apply mb-4 h-56 w-full rounded-lg border-2 border-secondary-300 bg-secondary-200 object-cover;
 			}
 
 			&__name {
@@ -61,9 +61,9 @@
 				@apply mb-3 text-placeholder;
 			}
 
-      hr {
-        @apply my-4;
-      }
+			hr {
+				@apply my-4;
+			}
 
 			&__description__title {
 				@apply h-6 w-20 text-lg font-semibold text-contrast;
@@ -90,7 +90,7 @@
 			}
 
 			.add-to-cart-button {
-				@apply flex justify-center items-center h-10;
+				@apply flex h-10 items-center justify-center;
 			}
 		}
 	}

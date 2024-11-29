@@ -15,5 +15,5 @@ export interface GenericListProps<T> {
 	};
 	onclick?: (id: string) => void;
 	noDataMessage?: string;
-  customListing?: Snippet<[T[] | undefined]>;
+	customListing?: Snippet<[T[] | undefined]>;
 }

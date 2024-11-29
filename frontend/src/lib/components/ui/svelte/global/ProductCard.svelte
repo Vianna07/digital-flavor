@@ -1,79 +1,73 @@
 <script lang="ts">
-	import type { ProductCardProps } from "$lib/types";
+	import type { ProductCardProps } from '$lib/types';
 
-  let {
-      id,
-      name,
-      shortDescription,
-      price,
-      imageUrl,
-      onclick = () => {},
-  }: ProductCardProps = $props();
+	let {
+		id,
+		name,
+		shortDescription,
+		price,
+		imageUrl,
+		onclick = () => {}
+	}: ProductCardProps = $props();
 </script>
 
 <div class="product-card">
-  <a href={`/home/details/product/${id}`}>
-    <img src={imageUrl} alt={name} />
+	<a href={`/home/details/product/${id}`}>
+		<img src={imageUrl} alt={name} />
 
-    <div class="product-card__info">
-      <h3 class="product-card__info__name">{name}</h3>
-      <p class="product-card__info__short-description">{shortDescription}</p>
-    </div>
+		<div class="product-card__info">
+			<h3 class="product-card__info__name">{name}</h3>
+			<p class="product-card__info__short-description">{shortDescription}</p>
+		</div>
 
-    <div class="product-card__purchase">
-        <h1 class="product-card__purchase__price">R$ {price.toFixed(2)}</h1>
-        <button
-          class="product-card__purchase__add-to-order"
-          {onclick}
-        >
-          +
-        </button>
-    </div>
-  </a>
+		<div class="product-card__purchase">
+			<h1 class="product-card__purchase__price">R$ {price.toFixed(2)}</h1>
+			<button class="product-card__purchase__add-to-order" {onclick}> + </button>
+		</div>
+	</a>
 </div>
 
 <style lang="postcss">
-  .product-card {
-    a {
-      @apply flex flex-col items-center rounded-lg p-3 gap-10 w-40 h-60 shadow-xl border-2 border-secondary-300 cursor-pointer;
+	.product-card {
+		a {
+			@apply flex h-60 w-40 cursor-pointer flex-col items-center gap-10 rounded-lg border-2 border-secondary-300 p-3 shadow-xl;
 
-      transition: 200ms all ease-in-out;
+			transition: 200ms all ease-in-out;
 
-      &:hover {
-        @apply scale-105;
-      }
+			&:hover {
+				@apply scale-105;
+			}
+		}
 
-    }
+		img {
+			@apply h-28 w-32 rounded-lg;
+		}
 
-    img {
-      @apply w-32 h-28 rounded-lg;
-    }
+		&__info {
+			@apply w-full;
 
-    &__info {
-      @apply w-full;
+			&__name {
+				@apply text-left text-base font-bold text-contrast;
+			}
+			&__short-description {
+				@apply mt-0 text-left text-xs text-secondary;
+			}
+		}
 
-      &__name {
-        @apply text-base font-bold text-left text-contrast;
-      }
-      &__short-description {
-        @apply text-xs text-secondary text-left mt-0;
-      }
-    }
+		&__purchase {
+			@apply flex w-full items-center justify-between;
 
-    &__purchase {
-      @apply flex items-center justify-between w-full;
+			&__price {
+				@apply text-base font-bold text-contrast;
+			}
 
-      &__price {
-        @apply text-base font-bold text-contrast;
-      }
+			&__add-to-order {
+				@apply flex h-8 w-8 cursor-pointer items-center justify-center rounded-xl border-none bg-primary text-lg text-light transition-colors;
 
-      &__add-to-order {
-        @apply flex items-center justify-center bg-primary text-light border-none rounded-xl w-8 h-8 text-lg cursor-pointer transition-colors;
-
-        &:hover {
-          @apply bg-primary-700 ;
-        }
-      }
-    }
-  }
+				&:hover {
+					@apply bg-primary-700;
+				}
+			}
+		}
+	}
 </style>

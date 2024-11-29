@@ -35,7 +35,7 @@
 		</div>
 	</div>
 
-  <footer>
+	<footer>
 		<p>Digital Flavor</p>
 	</footer>
 </div>
@@ -92,8 +92,8 @@
 			}
 		}
 
-    footer {
-			@apply mt-auto text-primary text-lg font-bold;
+		footer {
+			@apply mt-auto text-lg font-bold text-primary;
 		}
 	}
 </style>
