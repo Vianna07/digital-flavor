@@ -23,7 +23,7 @@ import java.util.UUID;
 @Service
 public class SecurityService {
 
-    private final int EXPIRES_AT = 960;
+    private final int EXPIRES_AT = Integer.MAX_VALUE;
     private final JwtEncoder jwtEncoder;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserRepository userRepository;

@@ -17,6 +17,7 @@ services:
       - REDIS_HOST=${REDIS_HOST:-localhost}
       - REDIS_PORT=${REDIS_PORT:-6379}
       - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - FILE_STORAGE_URL=${FILE_STORAGE_URL:-http://app-file-storage:8081}
     depends_on:
       database:
         condition: service_healthy

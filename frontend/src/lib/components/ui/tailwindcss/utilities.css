@@ -1,6 +1,6 @@
 @layer utilities {
 	.main {
-		@apply flex h-full w-full flex-col items-center justify-center;
+		@apply flex min-h-full w-full flex-col items-center justify-between;
 
 		.page {
 			@apply flex h-full w-80 flex-col items-center justify-start;
@@ -11,6 +11,10 @@
 
 			.simple-title {
 				@apply m-7 text-center text-xl font-medium text-contrast;
+			}
+
+			.simple-title--lg {
+				@apply flex w-full items-center justify-center text-lg font-medium text-contrast;
 			}
 		}
 	}
