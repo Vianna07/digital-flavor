@@ -5,6 +5,7 @@
 	import { goto } from '$app/navigation';
   import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
   import { page } from '$app/stores';
+	import { flip } from 'svelte/animate';
 
   let { data }: { data: { products: ProductCardProps[], userType: number, canteen: Canteen } } = $props()
 
@@ -49,7 +50,7 @@
 </script>
 
 {#snippet productListing(products: ProductCardProps[] | undefined)}
-  <div class="product-listing">
+  <div class="product-listing" >
     {#if data.userType < 4 }
       <div class="new-product-card">
         <button class="primary" onclick={() => goto("/home/create/product")}>
@@ -62,11 +63,14 @@
     {/if}
 
     {#if products}
-      {#each products as product}
-          <ProductCard
-              {...product}
+
+      {#each products as product (product.id)}
+        <div animate:flip={{ duration: 400 }}>
+            <ProductCard
+            {...product}
           />
-      {/each}
+        </div>
+  {/each}
     {/if}
   </div>
 {/snippet}
