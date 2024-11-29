@@ -23,6 +23,11 @@ public class ProductController {
         return ResponseEntity.ok(this.productService.getAll());
     }
 
+    @GetMapping("/get-all-by-name/{name}")
+    public ResponseEntity<List<ProductCardDto>> getAllByName(@PathVariable String name) {
+        return ResponseEntity.ok(this.productService.getAllByName(name));
+    }
+
     @PostMapping("/save")
     public ResponseEntity<Product> uploadFile(@RequestBody NewProductDto dto) {
         return ResponseEntity.ok(this.productService.save(dto));

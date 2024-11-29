@@ -13,4 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     @Query(name = "Product.findAll", nativeQuery = true)
     List<ProductCardDto> findAllByCanteen(UUID canteenId);
+
+    @Query(name = "Product.findAllByName", nativeQuery = true)
+    List<ProductCardDto> findAllByName(UUID canteenId, String name);
 }
