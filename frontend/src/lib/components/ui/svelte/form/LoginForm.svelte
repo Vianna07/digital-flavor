@@ -92,7 +92,7 @@
 			}
 
 			&__submit-area {
-				@apply mt-5 flex flex-col gap-1 text-center;
+				@apply mt-10 flex flex-col gap-1 text-center;
 
 				a {
 					@apply font-bold text-contrast;
