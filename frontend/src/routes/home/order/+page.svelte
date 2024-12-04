@@ -1,16 +1,16 @@
 <script lang="ts">
-	import GoBack from "@components/global/GoBack.svelte";
+	import GoBack from '@components/global/GoBack.svelte';
 	import addIcon from '@icons/add.svg';
 	import removeIcon from '@icons/remove.svg';
 
 	let orderItems = [
-		{ name: "Café Gourmet", quantity: 3, price: 5.97 },
-		{ name: "Café Java", quantity: 2, price: 3.0 },
-		{ name: "Tapioca", quantity: 1, price: 3.5 },
-		{ name: "Lanche", quantity: 2, price: 3.98 }
+		{ name: 'Café Gourmet', quantity: 3, price: 5.97 },
+		{ name: 'Café Java', quantity: 2, price: 3.0 },
+		{ name: 'Tapioca', quantity: 1, price: 3.5 },
+		{ name: 'Lanche', quantity: 2, price: 3.98 }
 	];
 
-	let totalPrice = orderItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+	let totalPrice = orderItems.reduce((total, item) => total + item.quantity * item.price, 0);
 	let selectedPaymentMethod = 'Pix';
 
 	function selectPaymentMethod(method: string) {
@@ -33,7 +33,7 @@
 	}
 
 	function updateTotal() {
-		totalPrice = orderItems.reduce((total, item) => total + (item.quantity * item.price), 0);
+		totalPrice = orderItems.reduce((total, item) => total + item.quantity * item.price, 0);
 	}
 </script>
 
@@ -77,7 +77,12 @@
 					</button>
 				</div>
 				<span class="item-name">{item.name}</span>
-				<span class="item-price">{(item.quantity * item.price).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</span>
+				<span class="item-price"
+					>{(item.quantity * item.price).toLocaleString('pt-br', {
+						style: 'currency',
+						currency: 'BRL'
+					})}</span
+				>
 			</div>
 		{/each}
 	</div>
@@ -93,17 +98,17 @@
 
 <style lang="postcss">
 	.page {
-		@apply flex flex-col min-h-screen items-center gap-6 py-4;
+		@apply flex min-h-screen flex-col items-center gap-6 py-4;
 
 		header {
-			@apply w-full flex justify-between items-center mt-4;
+			@apply mt-4 flex w-full items-center justify-between;
 		}
 
 		.payment-methods {
-			@apply flex justify-between gap-4 mb-6 w-full max-w-md;
+			@apply mb-6 flex w-full max-w-md justify-between gap-4;
 
 			.payment-method {
-				@apply px-6 py-3 rounded-full bg-secondary text-secondary-50 text-sm shadow-md transition duration-300;
+				@apply rounded-full bg-secondary px-6 py-3 text-sm text-secondary-50 shadow-md transition duration-300;
 			}
 
 			.payment-method.active {
@@ -112,20 +117,21 @@
 		}
 
 		.order-items {
-			@apply flex flex-col gap-4 w-full max-w-md;
+			@apply flex w-full max-w-md flex-col gap-4;
 
 			.order-item {
-				@apply flex justify-between items-center bg-secondary-50 rounded-lg shadow-sm p-4;
+				@apply flex items-center justify-between rounded-lg bg-secondary-50 p-4 shadow-sm;
 
 				.quantity {
 					@apply flex items-center gap-2 text-primary;
 
 					.button {
-						@apply flex items-center justify-center w-5 h-5 bg-primary rounded-lg shadow-sm transition duration-speed;
+						@apply flex h-5 w-5 items-center justify-center rounded-lg bg-primary shadow-sm transition duration-speed;
 
 						.icon {
-							@apply w-6 h-6;
-							filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+							@apply h-6 w-6;
+							filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%)
+								contrast(100%);
 						}
 					}
 
@@ -135,7 +141,7 @@
 				}
 
 				.item-name {
-					@apply text-sm font-medium text-contrast px-2;
+					@apply px-2 text-sm font-medium text-contrast;
 				}
 
 				.item-price {
@@ -145,7 +151,7 @@
 		}
 
 		footer {
-			@apply mt-auto flex items-center justify-between gap-4 w-full max-w-md;
+			@apply mt-auto flex w-full max-w-md items-center justify-between gap-4;
 
 			.price {
 				@apply flex flex-col text-left;
@@ -160,7 +166,7 @@
 			}
 
 			.add-to-cart-button {
-				@apply flex h-9 px-6 items-center justify-center rounded-xl bg-primary text-sm text-secondary-50 transition duration-speed hover:bg-primary-500;
+				@apply flex h-9 items-center justify-center rounded-xl bg-primary px-6 text-sm text-secondary-50 transition duration-speed hover:bg-primary-500;
 			}
 		}
 	}

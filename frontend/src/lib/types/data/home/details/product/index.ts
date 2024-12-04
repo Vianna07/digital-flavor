@@ -1,5 +1,5 @@
 export interface ProductDetails {
-  id?: string,
+	id?: string;
 	name: string;
 	shortDescription: string;
 	description: string;

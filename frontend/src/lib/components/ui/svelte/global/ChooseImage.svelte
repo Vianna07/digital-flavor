@@ -7,7 +7,7 @@
 	import Modal from './Modal.svelte';
 	import type { ChooseImageProps, GenericInputProps, ModalProps } from '$lib/types';
 
-	let { label, value = "" }: ChooseImageProps = $props();
+	let { label, value = '' }: ChooseImageProps = $props();
 
 	let showUploadButton = $state(true);
 	let isUrlOption = $state(false);

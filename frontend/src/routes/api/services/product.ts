@@ -2,20 +2,24 @@ import { fail, redirect, type Actions, type Cookies } from '@sveltejs/kit';
 import { PRIVATE_BACKEND_API_URL } from '$env/static/private';
 import type { Product, ProductDetails } from '$lib/types';
 
-export const GET_PRODUCT_BY_ID = async (id: string, cookies: Cookies, fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>):  Promise<{
-  product: ProductDetails;
-} | undefined> => {
+export const GET_PRODUCT_BY_ID = async (
+	id: string,
+	cookies: Cookies,
+	fetch: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
+): Promise<
+	| {
+			product: ProductDetails;
+	  }
+	| undefined
+> => {
 	try {
-		const response: Response = await fetch(
-			`${PRIVATE_BACKEND_API_URL}/product/get-by-id/${id}`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: JSON.parse(cookies.get('authorization') || '{}') as string
-				}
+		const response: Response = await fetch(`${PRIVATE_BACKEND_API_URL}/product/get-by-id/${id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: JSON.parse(cookies.get('authorization') || '{}') as string
 			}
-		);
+		});
 
 		const product: ProductDetails = await response.json();
 
@@ -27,13 +31,12 @@ export const GET_PRODUCT_BY_ID = async (id: string, cookies: Cookies, fetch: (in
 	}
 };
 
-
 export const SAVE_PRODUCT = {
 	default: async ({ cookies, request }) => {
 		const data = await request.formData();
 
 		const product: Product = {
-      id: data.get('id') as string,
+			id: data.get('id') as string,
 			name: data.get('name') as string,
 			shortDescription: data.get('short-description') as string,
 			price: Number(data.get('price')),
@@ -62,8 +65,8 @@ export const SAVE_PRODUCT = {
 } satisfies Actions;
 
 async function saveOrEditProductWithUrl(product: Product, cookies: Cookies): Promise<void> {
-  const endpoint: string = '/product' + (product.id ? '/edit' : '/save')
-  const method: string = product.id ? 'PUT' : 'POST';
+	const endpoint: string = '/product' + (product.id ? '/edit' : '/save');
+	const method: string = product.id ? 'PUT' : 'POST';
 
 	await fetch(`${PRIVATE_BACKEND_API_URL}${endpoint}`, {
 		method,
@@ -75,10 +78,14 @@ async function saveOrEditProductWithUrl(product: Product, cookies: Cookies): Pro
 	});
 }
 
-async function saveOrEditProductWithFile(product: Product, file: File, cookies: Cookies): Promise<void> {
+async function saveOrEditProductWithFile(
+	product: Product,
+	file: File,
+	cookies: Cookies
+): Promise<void> {
 	const formData = new FormData();
-  const endpoint: string = '/product' + (product.id ? '/edit' : '/save') + '-with-file';
-  const method: string = product.id ? 'PUT' : 'POST';
+	const endpoint: string = '/product' + (product.id ? '/edit' : '/save') + '-with-file';
+	const method: string = product.id ? 'PUT' : 'POST';
 
 	formData.append('product', JSON.stringify(product));
 	formData.append('file', file);

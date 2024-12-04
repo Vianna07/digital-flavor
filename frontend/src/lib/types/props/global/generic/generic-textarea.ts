@@ -4,5 +4,5 @@ export interface GenericTextareaProps {
 	required?: boolean;
 	oninput?: (value: string) => void;
 	rows?: number;
-  value?: string;
+	value?: string;
 }
