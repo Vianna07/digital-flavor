@@ -36,7 +36,8 @@ import java.util.UUID;
                 name = "Product.findAll",
                 query = "SELECT id, stock, price, name, short_description, image_url " +
                         "  FROM products " +
-                        " WHERE canteen_id = ?1 ",
+                        " WHERE canteen_id = ?1 " +
+                        " ORDER BY name ",
                 resultSetMapping = "ProductCardDtoMapping"
         ),
         @NamedNativeQuery(
@@ -44,7 +45,8 @@ import java.util.UUID;
                 query = "SELECT id, stock, price, name, short_description, image_url " +
                         "  FROM products " +
                         " WHERE canteen_id = ?1 " +
-                        "   AND name ILIKE ?2 ",
+                        "   AND name ILIKE ?2" +
+                        " ORDER BY name ",
                 resultSetMapping = "ProductCardDtoMapping"
         )
 })
