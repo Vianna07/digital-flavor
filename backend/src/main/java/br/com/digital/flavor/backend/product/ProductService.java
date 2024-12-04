@@ -47,9 +47,27 @@ public class ProductService {
         return this.productRepository.save(product);
     }
 
+    public Product edit(Product product) {
+        return this.productRepository.save(new Product(product, canteenService.getCurrentCanteen()));
+    }
+
     public Product saveWithFile(NewProductDto dto, MultipartFile file) {
         Product product = new Product(dto, canteenService.getCurrentCanteen());
 
+        this.uploadFile(product, file);
+
+        return this.productRepository.save(product);
+    }
+
+    public Product editWithFile(Product product, MultipartFile file) {
+        product = new Product(product, canteenService.getCurrentCanteen());
+
+        this.uploadFile(product, file);
+
+        return this.productRepository.save(product);
+    }
+
+    public void uploadFile(Product product, MultipartFile file) {
         File renamedFile = createTempFile(file, product.getId() + ".png");
 
         if (renamedFile == null) {
@@ -84,8 +102,6 @@ public class ProductService {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
-
-        return this.productRepository.save(product);
     }
 
     private File createTempFile(MultipartFile file, String newFileName) {

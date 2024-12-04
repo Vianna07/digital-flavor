@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type {
-		Canteen,
-		GenericListProps,
-		GenericSearchableListProps,
-		ProductCardProps
+	import {
+		type Canteen,
+		type GenericListProps,
+		type GenericSearchableListProps,
+		type ProductCardProps
 	} from '$lib/types';
 	import addIcon from '@icons/add.svg';
 	import ProductCard from '@components/global/ProductCard.svelte';
@@ -53,7 +53,7 @@
 
 {#snippet productListing(products: ProductCardProps[] | undefined)}
 	<div class="product-listing">
-		{#if data.userType}
+		{#if data.userType < 4}
 			<button class="new-product-card" onclick={() => goto('/home/create/product')}>
 				<a href="/home/create/product" class="primary">
 					<img class="icon--white" src={addIcon} alt="add-icon" />
@@ -65,7 +65,7 @@
 		{#if products}
 			{#each products as product (product.id)}
 				<div animate:flip={{ duration: 400 }}>
-					<ProductCard {...product} />
+					<ProductCard {...product} userType={data.userType} />
 				</div>
 			{/each}
 		{/if}

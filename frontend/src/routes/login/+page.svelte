@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { FormProps } from '$lib/types';
+	import type { LoginFormProps } from '$lib/types';
 
 	import LoginForm from '@components/form/LoginForm.svelte';
 
-	const formProps: FormProps = {
+	const formProps: LoginFormProps = {
 		title: 'Entre na sua conta',
 		submit: {
 			text: 'Faça login',
