@@ -11,7 +11,7 @@
 	];
 
 	let totalPrice = orderItems.reduce((total, item) => total + (item.quantity * item.price), 0);
-	let selectedPaymentMethod = 'Pix'; // Valor inicial do método de pagamento
+	let selectedPaymentMethod = 'Pix';
 
 	function selectPaymentMethod(method: string) {
 		selectedPaymentMethod = method;
