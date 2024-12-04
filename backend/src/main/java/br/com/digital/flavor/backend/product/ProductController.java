@@ -30,12 +30,17 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Product> uploadFile(@RequestBody NewProductDto dto) {
+    public ResponseEntity<Product> save(@RequestBody NewProductDto dto) {
         return ResponseEntity.ok(this.productService.save(dto));
     }
 
+    @PutMapping("/edit")
+    public ResponseEntity<Product> edit(@RequestBody Product product) {
+        return ResponseEntity.ok(this.productService.edit(product));
+    }
+
     @PostMapping("/save-with-file")
-    public ResponseEntity<Product> uploadFile(@RequestParam("product") String productJson,
+    public ResponseEntity<Product> saveWithFile(@RequestParam("product") String productJson,
                                               @RequestParam("file") MultipartFile file) {
         try {
             return ResponseEntity.ok(this.productService.saveWithFile(new ObjectMapper().readValue(productJson, NewProductDto.class), file));
@@ -45,8 +50,19 @@ public class ProductController {
         }
     }
 
+    @PutMapping("/edit-with-file")
+    public ResponseEntity<Product> editWithFile(@RequestParam("product") String productJson,
+                                              @RequestParam("file") MultipartFile file) {
+        try {
+            return ResponseEntity.ok(this.productService.editWithFile(new ObjectMapper().readValue(productJson, Product.class), file));
+        } catch (JsonProcessingException e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @GetMapping("/get-by-id/{id}")
-    public ResponseEntity<ProductDetailsDto> getAll(@PathVariable String id) {
+    public ResponseEntity<ProductDetailsDto> getById(@PathVariable String id) {
         return ResponseEntity.ok(this.productService.getById(id));
     }
 }
