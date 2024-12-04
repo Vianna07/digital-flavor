@@ -77,7 +77,7 @@
 					</button>
 				</div>
 				<span class="item-name">{item.name}</span>
-				<span class="item-price">R$ {(item.quantity * item.price).toFixed(2)}</span>
+				<span class="item-price">{(item.quantity * item.price).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</span>
 			</div>
 		{/each}
 	</div>
