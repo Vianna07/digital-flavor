@@ -5,8 +5,6 @@
 	let { data }: { data: { product: ProductDetails } } = $props();
 
 	const product = data.product;
-
-	console.log(product);
 </script>
 
 <div class="page">

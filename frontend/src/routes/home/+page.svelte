@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type {
-		Canteen,
-		GenericListProps,
-		GenericSearchableListProps,
-		ProductCardProps
+	import {
+		type Canteen,
+		type GenericListProps,
+		type GenericSearchableListProps,
+		type ProductCardProps
 	} from '$lib/types';
 	import addIcon from '@icons/add.svg';
 	import ProductCard from '@components/global/ProductCard.svelte';
@@ -11,13 +11,12 @@
 	import GenericSearchableList from '@components/global/generic/GenericSearchableList.svelte';
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
+	import shoppingCardIcon from '@icons/shopping-cart.svg';
 
 	let { data }: { data: { products: ProductCardProps[]; userType: number; canteen: Canteen } } =
 		$props();
 
 	const FETCH_URL = `/api${$page.url.pathname}`;
-
-	console.log(FETCH_URL);
 
 	let products: GenericListProps<ProductCardProps> = $state({
 		data: data.products,
@@ -39,7 +38,6 @@
 					});
 
 					products.data = await response.json();
-					console.log(products.data);
 				}
 			} catch (error) {
 				console.error(error);
@@ -55,7 +53,7 @@
 
 {#snippet productListing(products: ProductCardProps[] | undefined)}
 	<div class="product-listing">
-		{#if data.userType}
+		{#if data.userType < 4}
 			<button class="new-product-card" onclick={() => goto('/home/create/product')}>
 				<a href="/home/create/product" class="primary">
 					<img class="icon--white" src={addIcon} alt="add-icon" />
@@ -67,7 +65,7 @@
 		{#if products}
 			{#each products as product (product.id)}
 				<div animate:flip={{ duration: 400 }}>
-					<ProductCard {...product} />
+					<ProductCard {...product} userType={data.userType} />
 				</div>
 			{/each}
 		{/if}
@@ -77,7 +75,13 @@
 <div class="page">
 	<header>
 		<p>{data.canteen.address}</p>
-		<h1 class="simple-title">{data.canteen.name}</h1>
+
+		<div>
+			<h1 class="simple-title">{data.canteen.name}</h1>
+			<a href="/home/details/order">
+				<img class="icon--red" src={shoppingCardIcon} alt="" />
+			</a>
+		</div>
 	</header>
 
 	<GenericSearchableList {...searchableList} />
@@ -85,7 +89,7 @@
 
 <style lang="postcss">
 	.product-listing {
-		@apply flex flex-wrap gap-6;
+		@apply flex flex-wrap justify-center gap-4;
 
 		.new-product-card {
 			@apply flex h-60 w-40 flex-col items-center justify-center gap-3 rounded-lg border-2 border-secondary-400 p-3 shadow-2xl;
@@ -117,7 +121,7 @@
 	}
 
 	.page {
-		@apply w-[22rem];
+		@apply w-[21rem];
 
 		header {
 			@apply flex flex-col gap-2;
@@ -125,8 +129,16 @@
 				@apply text-xs text-gray-600;
 			}
 
-			h1 {
-				@apply ml-0 mt-0 text-left;
+			div {
+				@apply flex items-start justify-between;
+
+				h1 {
+					@apply ml-0 mt-0 text-left;
+				}
+
+				img {
+					@apply h-7 w-7 cursor-pointer;
+				}
 			}
 		}
 	}

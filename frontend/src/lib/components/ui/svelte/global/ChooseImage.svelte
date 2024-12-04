@@ -5,16 +5,16 @@
 	import closeIcon from '@icons/close.svg';
 	import GenericInput from '@components/global/generic/GenericInput.svelte';
 	import Modal from './Modal.svelte';
-	import type { GenericInputProps, ModalProps } from '$lib/types';
+	import type { ChooseImageProps, GenericInputProps, ModalProps } from '$lib/types';
 
-	let { label }: { label: string } = $props();
+	let { label, value = "" }: ChooseImageProps = $props();
 
 	let showUploadButton = $state(true);
 	let isUrlOption = $state(false);
 
 	let fileInput = $state() as HTMLInputElement;
-	let previewUrl = $state('');
-	let url: string | null = $state(null);
+	let previewUrl = $state(value);
+	let url: string | null = $state(value);
 
 	let modalProps: ModalProps = $state({
 		isOpen: false,

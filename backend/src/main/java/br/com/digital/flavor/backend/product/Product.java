@@ -36,7 +36,8 @@ import java.util.UUID;
                 name = "Product.findAll",
                 query = "SELECT id, stock, price, name, short_description, image_url " +
                         "  FROM products " +
-                        " WHERE canteen_id = ?1 ",
+                        " WHERE canteen_id = ?1 " +
+                        " ORDER BY name ",
                 resultSetMapping = "ProductCardDtoMapping"
         ),
         @NamedNativeQuery(
@@ -44,7 +45,8 @@ import java.util.UUID;
                 query = "SELECT id, stock, price, name, short_description, image_url " +
                         "  FROM products " +
                         " WHERE canteen_id = ?1 " +
-                        "   AND name ILIKE ?2 ",
+                        "   AND name ILIKE ?2" +
+                        " ORDER BY name ",
                 resultSetMapping = "ProductCardDtoMapping"
         )
 })
@@ -100,6 +102,17 @@ public class Product {
         this.stock = dto.stock();
         this.description = dto.description();
         this.imageUrl = dto.imageUrl();
+        this.canteen = canteen;
+    }
+
+    public Product(Product product, Canteen canteen) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.shortDescription = product.getShortDescription();
+        this.price = product.getPrice();
+        this.stock = product.getStock();
+        this.description = product.getDescription();
+        this.imageUrl = product.getImageUrl();
         this.canteen = canteen;
     }
 }
