@@ -104,4 +104,15 @@ public class Product {
         this.imageUrl = dto.imageUrl();
         this.canteen = canteen;
     }
+
+    public Product(Product product, Canteen canteen) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.shortDescription = product.getShortDescription();
+        this.price = product.getPrice();
+        this.stock = product.getStock();
+        this.description = product.getDescription();
+        this.imageUrl = product.getImageUrl();
+        this.canteen = canteen;
+    }
 }
