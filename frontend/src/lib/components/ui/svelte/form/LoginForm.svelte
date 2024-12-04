@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { FormProps, PasswordInputProps } from '$lib/types';
+	import type { LoginFormProps, PasswordInputProps } from '$lib/types';
 	import GoBack from '../global/GoBack.svelte';
 	import { fly } from 'svelte/transition';
 	import { enhance } from '$app/forms';
@@ -8,7 +8,7 @@
 	import PasswordInput from '@components/form/inputs/Password.svelte';
 	import { goto } from '$app/navigation';
 
-	let { title, submit, inputs }: FormProps = $props();
+	let { title, submit, inputs }: LoginFormProps = $props();
 
 	let error: string = $state('');
 
