@@ -5,7 +5,7 @@
 		id,
 		type,
 		label,
-    value = "",
+		value = '',
 		leftIconUrl,
 		rightIcon,
 		pattern,
@@ -15,7 +15,7 @@
 		maxlength,
 		min,
 		minlength,
-		step,
+		step
 	}: GenericInputProps = $props();
 
 	let isButtonDisabled = $state<boolean>(false);
@@ -36,7 +36,7 @@
 		class="input-area__input"
 		{type}
 		{id}
-    {value}
+		{value}
 		name={id}
 		placeholder=" "
 		{pattern}

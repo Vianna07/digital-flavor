@@ -8,14 +8,22 @@
 	import ChooseImage from '@components/global/ChooseImage.svelte';
 	import type { ProductFormProps } from '$lib/types';
 
-  let { id = "", name = "", shortDescription = "", price, description = "", imageUrl = "", submitButtonLabel }: ProductFormProps = $props();
+	let {
+		id = '',
+		name = '',
+		shortDescription = '',
+		price,
+		description = '',
+		imageUrl = '',
+		submitButtonLabel
+	}: ProductFormProps = $props();
 
 	const nameInputProps: GenericInputProps = {
 		id: 'name',
 		type: 'text',
 		label: 'Digite o nome do produto',
 		leftIconUrl: undefined,
-    value: name
+		value: name
 	};
 
 	const shortDescriptionInputProps: GenericInputProps = {
@@ -23,8 +31,8 @@
 		type: 'text',
 		label: 'Breve descrição',
 		required: false,
-		maxlength: 25,
-    value: shortDescription
+		maxlength: 20,
+		value: shortDescription
 	};
 
 	const priceInputProps: GenericInputProps = {
@@ -32,8 +40,8 @@
 		type: 'number',
 		label: 'Valor',
 		step: '.01',
-    max: 99,
-    value: String(price)
+		max: 99,
+		value: String(price)
 	};
 
 	// const stockInputProps: GenericInputProps = {
@@ -42,21 +50,21 @@
 	// 	label: 'Estoque',
 	// 	required: false,
 	// 	step: '1',
-  //   max: 32000,
-  //   value: String(stock)
+	//   max: 32000,
+	//   value: String(stock)
 	// };
 
 	const descriptionTextareaProps: GenericTextareaProps = {
 		id: 'description',
 		placeholder: 'Descreva seu produto de forma mais detalhada',
 		required: false,
-    value: description
+		value: description
 	};
 
-  const chooseImageProps: ChooseImageProps = {
-    label: 'Coloque a imagem do produto',
-    value: imageUrl
-  }
+	const chooseImageProps: ChooseImageProps = {
+		label: 'Coloque a imagem do produto',
+		value: imageUrl
+	};
 </script>
 
 <section class="page">
@@ -78,14 +86,14 @@
 			};
 		}}
 	>
-    <input type="hidden" name="id" id="id" value={id} />
+		<input type="hidden" name="id" id="id" value={id} />
 
 		<GenericInput {...nameInputProps} />
 		<GenericInput {...shortDescriptionInputProps} />
 
 		<!-- <div class="flex gap-5"> -->
-			<GenericInput {...priceInputProps} />
-			<!-- <GenericInput {...stockInputProps} /> -->
+		<GenericInput {...priceInputProps} />
+		<!-- <GenericInput {...stockInputProps} /> -->
 		<!-- </div> -->
 
 		<hr />
