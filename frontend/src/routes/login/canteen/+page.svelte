@@ -72,7 +72,7 @@
 	};
 </script>
 
-{#snippet canteenIImage(url?: string)}
+{#snippet canteenIImage(_: number, url?: string)}
 	{@const src: string = url ?? noImageIcon}
 	{@const area: string = src === noImageIcon ? 'w-10 h-10' : 'w-16 h-16'}
 	<img class={area} {src} alt="logo" />

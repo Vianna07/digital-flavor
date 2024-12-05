@@ -7,27 +7,34 @@
 		data,
 		fields,
 		left,
+    right,
 		onclick,
 		noDataMessage = 'Nenhum dado encontrado',
-		customListing
+		customListing,
+    contentStyle,
 	}: GenericListProps<T> = $props();
 </script>
 
 {#if listingType !== 'custom-listing'}
 	<ul class={`list ${listingType}`}>
 		{#if data?.length}
-			{#each data as data (data.id)}
+			{#each data as data, index (data.id)}
 				<li class="list__item" animate:flip>
 					<button type="button" onclick={() => onclick?.(data.id)}>
 						{#if left?.snippet}
 							<div class="list__item__left-content">
-								{@render left.snippet(data[left.field])}
+								{@render left.snippet(index, data[left?.field as keyof T])}
 							</div>
 						{/if}
-						<div class="list__item__content">
-							<h1 class="list__item__title">{data[fields?.title as keyof T]}</h1>
-							<h3 class="list__item__sub-title">{data[fields?.subTitle as keyof T]}</h3>
+						<div class={`list__item__content ${contentStyle?.content}`}>
+							<h1 class={`list__item__title ${contentStyle?.title}`}>{data[fields?.title as keyof T]}</h1>
+							<h3 class={`list__item__sub-title ${contentStyle?.subtitle}`}>{data[fields?.subTitle as keyof T]}</h3>
 						</div>
+            {#if right?.snippet}
+              <div class="list__item__right-content">
+                {@render right.snippet(index, data[right?.field as keyof T])}
+              </div>
+            {/if}
 					</button>
 				</li>
 			{/each}
