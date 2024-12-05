@@ -5,6 +5,10 @@
 	import GenericList from '@components/global/generic/GenericList.svelte';
   import GoBack from '@components/global/GoBack.svelte';
   import { orderItems } from '@stores/order'
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
+
+  const FETCH_URL = `/api${$page.url.pathname}`;
 
   let products: GenericListProps<Order> = $state({
     data: typeof window !== 'undefined' ? [...JSON.parse(localStorage.getItem('order-products') as string) || new Map()].map(([id, obj]) => ({id,...obj})) : undefined,
@@ -80,6 +84,25 @@
 	function updateTotal() {
 		totalPrice = products.data?.reduce((total, item) => total + item.quantity * item.price, 0);
 	}
+
+  async function pay() {
+    try {
+      await fetch(FETCH_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ orderItems: typeof window !== 'undefined' ? localStorage.getItem('order-products') as string || undefined : undefined }),
+      });
+
+      localStorage.removeItem('order-products');
+      orderItems.set(new Map())
+
+      goto('/home')
+    } catch (error) {
+      console.error(error);
+    }
+  }
 </script>
 
 {#snippet quantity(index: number)}
@@ -142,7 +165,7 @@
         currency: 'BRL'
       })}</h1>
 		</div>
-		<button>Pagar</button>
+		<button type="button" onclick={pay}>Pagar</button>
 	</footer>
 </div>
 
