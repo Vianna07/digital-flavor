@@ -1,41 +1,109 @@
 <script lang="ts">
-	import GoBack from '@components/global/GoBack.svelte';
-	import addIcon from '@icons/add.svg';
-	import removeIcon from '@icons/remove.svg';
+  import addIcon from '@icons/add.svg';
+  import removeIcon from '@icons/remove.svg';
+	import type { GenericListProps, Order } from '$lib/types';
+	import GenericList from '@components/global/generic/GenericList.svelte';
+  import GoBack from '@components/global/GoBack.svelte';
+  import { orderItems } from '@stores/order'
 
-	let orderItems = [
-		{ name: 'Café Gourmet', quantity: 3, price: 5.97 },
-		{ name: 'Café Java', quantity: 2, price: 3.0 },
-		{ name: 'Tapioca', quantity: 1, price: 3.5 },
-		{ name: 'Lanche', quantity: 2, price: 3.98 }
-	];
+  let products: GenericListProps<Order> = $state({
+    data: typeof window !== 'undefined' ? [...JSON.parse(localStorage.getItem('order-products') as string) || new Map()].map(([id, obj]) => ({id,...obj})) : undefined,
+    fields: {
+      title: 'name'
+    },
+    left: {
+      snippet: quantity
+    },
+    right: {
+      snippet: price
+    },
+    contentStyle: {
+      title: 'text-left'
+    }
+  });
 
-	let totalPrice = orderItems.reduce((total, item) => total + item.quantity * item.price, 0);
-	let selectedPaymentMethod = 'Pix';
+	let totalPrice = $state(products.data?.reduce((total, item) => total + item.quantity * item.price, 0));
+	let selectedPaymentMethod = $state('Pix');
 
 	function selectPaymentMethod(method: string) {
 		selectedPaymentMethod = method;
 	}
 
 	function incrementQuantity(index: number) {
-		orderItems[index].quantity += 1;
-		updateTotal();
-	}
+    if (products.data) {
+      products.data[index].quantity = Math.min(products.data[index].quantity + 1, 99);
+
+      const id: string = (products.data[index].id)
+
+      orderItems.update((current) => {
+        const newOrder = new Map(current);
+
+        newOrder.set(id, {
+          name: newOrder.get(id)?.name as string,
+          price: newOrder.get(id)?.price as number,
+          quantity: (newOrder.get(id)?.quantity || 0) + 1,
+        });
+
+        return newOrder;
+      });
+
+      updateTotal();
+    }
+  }
 
 	function decrementQuantity(index: number) {
-		orderItems[index].quantity -= 1;
+    if (products.data) {
+      products.data[index].quantity -= 1;
 
-		if (orderItems[index].quantity <= 0) {
-			orderItems.splice(index, 1);
-		}
+      const id: string = (products.data[index].id)
 
-		updateTotal();
+      orderItems.update((current) => {
+        const newOrder = new Map(current);
+
+        newOrder.set(id, {
+          name: newOrder.get(id)?.name as string,
+          price: newOrder.get(id)?.price as number,
+          quantity: (newOrder.get(id)?.quantity || 0) - 1,
+        });
+
+        return newOrder;
+      });
+
+      if (products.data[index].quantity <= 0) {
+			  products.data.splice(index, 1);
+		  }
+
+		  updateTotal();
+    }
 	}
 
 	function updateTotal() {
-		totalPrice = orderItems.reduce((total, item) => total + item.quantity * item.price, 0);
+		totalPrice = products.data?.reduce((total, item) => total + item.quantity * item.price, 0);
 	}
 </script>
+
+{#snippet quantity(index: number)}
+  <div class="quantity-area">
+    <button onclick={() => incrementQuantity(index)} class="button">
+      <img src={addIcon} alt="Adicionar item" class="icon--white" />
+    </button>
+    <p class="quantity">
+      {products.data?.[index].quantity}
+    </p>
+    <button onclick={() => decrementQuantity(index)} class="button">
+      <img src={removeIcon} alt="Remover item" class="icon--white" />
+    </button>
+  </div>
+{/snippet}
+
+{#snippet price(index: number)}
+  <h2 class="price">
+    {((products.data?.[index].quantity || 0) * (products.data?.[index].price || 0)).toLocaleString('pt-br', {
+    style: 'currency',
+    currency: 'BRL'
+  })}</h2
+  >
+{/snippet}
 
 <div class="page">
 	<header>
@@ -46,59 +114,61 @@
 	<div class="payment-methods">
 		<button
 			class="payment-method {selectedPaymentMethod === 'Pix' ? 'active' : ''}"
-			on:click={() => selectPaymentMethod('Pix')}
+			onclick={() => selectPaymentMethod('Pix')}
 		>
 			Pix
 		</button>
 		<button
 			class="payment-method {selectedPaymentMethod === 'Cartão' ? 'active' : ''}"
-			on:click={() => selectPaymentMethod('Cartão')}
+			onclick={() => selectPaymentMethod('Cartão')}
 		>
 			Cartão
 		</button>
 		<button
 			class="payment-method {selectedPaymentMethod === 'Dinheiro' ? 'active' : ''}"
-			on:click={() => selectPaymentMethod('Dinheiro')}
+			onclick={() => selectPaymentMethod('Dinheiro')}
 		>
 			Dinheiro
 		</button>
 	</div>
 
-	<div class="order-items">
-		{#each orderItems as item, index}
-			<div class="order-item">
-				<div class="quantity">
-					<button on:click={() => incrementQuantity(index)} class="button">
-						<img src={addIcon} alt="Adicionar item" class="icon" />
-					</button>
-					<span class="quantity-value">{item.quantity}</span>
-					<button on:click={() => decrementQuantity(index)} class="button">
-						<img src={removeIcon} alt="Remover item" class="icon" />
-					</button>
-				</div>
-				<span class="item-name">{item.name}</span>
-				<span class="item-price"
-					>{(item.quantity * item.price).toLocaleString('pt-br', {
-						style: 'currency',
-						currency: 'BRL'
-					})}</span
-				>
-			</div>
-		{/each}
-	</div>
+  <GenericList {...products} />
 
 	<footer>
 		<div class="price">
-			<span class="price__label">Total</span>
-			<span class="price__value">R$ {totalPrice.toFixed(2)}</span>
+			<h2 class="price__label">Total</h2>
+			<h1 class="price__value">{totalPrice?.toLocaleString('pt-br', {
+        style: 'currency',
+        currency: 'BRL'
+      })}</h1>
 		</div>
-		<button class="add-to-cart-button">Pagar</button>
+		<button>Pagar</button>
 	</footer>
 </div>
 
 <style lang="postcss">
+  .quantity-area {
+    @apply flex items-center justify-between gap-2 text-primary w-20;
+
+    .quantity {
+      @apply text-base font-bold;
+    }
+
+    button {
+    @apply flex h-5 w-5 items-center justify-center rounded-lg bg-primary shadow-sm transition duration-speed;
+
+      .icon {
+        @apply h-6 w-6;
+      }
+    }
+  }
+
+  .price {
+    @apply w-20 text-left text-sm font-semibold text-primary;
+  }
+
 	.page {
-		@apply flex min-h-screen flex-col items-center gap-6 py-4;
+		@apply flex flex-col items-center gap-6 py-4;
 
 		header {
 			@apply mt-4 flex w-full items-center justify-between;
@@ -116,39 +186,13 @@
 			}
 		}
 
-		.order-items {
-			@apply flex w-full max-w-md flex-col gap-4;
+    .item-name {
+      @apply px-2 text-sm font-medium text-contrast;
+    }
 
-			.order-item {
-				@apply flex items-center justify-between rounded-lg bg-secondary-50 p-4 shadow-sm;
-
-				.quantity {
-					@apply flex items-center gap-2 text-primary;
-
-					.button {
-						@apply flex h-5 w-5 items-center justify-center rounded-lg bg-primary shadow-sm transition duration-speed;
-
-						.icon {
-							@apply h-6 w-6;
-							filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%)
-								contrast(100%);
-						}
-					}
-
-					.quantity-value {
-						@apply text-base font-bold;
-					}
-				}
-
-				.item-name {
-					@apply px-2 text-sm font-medium text-contrast;
-				}
-
-				.item-price {
-					@apply text-sm font-semibold text-primary;
-				}
-			}
-		}
+    .item-price {
+      @apply text-sm font-semibold text-primary;
+    }
 
 		footer {
 			@apply mt-auto flex w-full max-w-md items-center justify-between gap-4;
@@ -165,7 +209,7 @@
 				}
 			}
 
-			.add-to-cart-button {
+			button {
 				@apply flex h-9 items-center justify-center rounded-xl bg-primary px-6 text-sm text-secondary-50 transition duration-speed hover:bg-primary-500;
 			}
 		}
