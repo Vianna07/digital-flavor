@@ -79,8 +79,12 @@
 
 		<div>
 			<h1 class="simple-title">{data.canteen.name}</h1>
-			<a href="/home/details/order">
-				<img class="icon--red" src={shoppingCardIcon} alt="" />
+			<button onclick={() => {
+        if ($orderQuantityTotal) {
+          goto("/home/details/order")
+        }
+      }}>
+				<img class:cursor-default={!$orderQuantityTotal} class="icon--red" src={shoppingCardIcon} alt="" />
 
         {#if $orderQuantityTotal}
           <div>
@@ -89,7 +93,7 @@
             </p>
           </div>
         {/if}
-			</a>
+			</button>
 		</div>
 	</header>
 
@@ -145,7 +149,7 @@
 					@apply ml-0 mt-0 text-left;
 				}
 
-        a {
+        button {
           @apply relative;
 
           div {
@@ -158,6 +162,10 @@
 
           img {
             @apply h-7 w-7 cursor-pointer;
+          }
+
+          img.cursor-default {
+            cursor: default;
           }
         }
 			}
