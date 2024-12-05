@@ -145,7 +145,7 @@
 
 <style lang="postcss">
 	img {
-		@apply max-h-56 max-w-64;
+		@apply max-h-56 max-w-64 object-cover;
 	}
 
 	.choose-image-container {
@@ -157,7 +157,7 @@
 	}
 
 	.image-preview {
-		@apply relative flex h-56 w-64 flex-col items-center justify-center gap-10 rounded-lg border-4 border-secondary bg-secondary-300;
+		@apply relative flex h-56 w-64 object-cover flex-col items-center justify-center gap-10 rounded-lg border-4 border-secondary bg-secondary-300;
 
 		.upload-button {
 			@apply flex h-full w-full items-center justify-center;
@@ -189,7 +189,7 @@
 	}
 
 	.close-button {
-		@apply absolute right-1.5 top-1.5 rounded-lg bg-secondary-50;
+		@apply absolute right-1.5 top-1.5 rounded-lg bg-secondary-50 z-50 border-opacity-100 ;
 
 		img {
 			@apply h-5 w-5;

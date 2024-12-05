@@ -40,7 +40,7 @@
 <style lang="postcss">
 	footer,
 	nav {
-		@apply flex h-[4.375rem] w-full items-center justify-center bg-primary;
+		@apply flex h-[4.375rem] w-full items-center justify-center bg-primary fixed bottom-0;
 	}
 
 	footer {

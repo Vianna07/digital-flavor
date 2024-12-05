@@ -81,7 +81,7 @@
 		}
 
 		&__info {
-			@apply w-full;
+			@apply w-full break-words overflow-auto;
 
 			&__name {
 				@apply text-left text-sm font-bold text-contrast;

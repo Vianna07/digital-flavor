@@ -45,14 +45,14 @@
 		}
 
 		.product-content {
-			@apply flex flex-grow flex-col max-w-full;
+			@apply flex flex-grow flex-col w-80;
 
 			&__image {
 				@apply mb-4 h-56 w-full rounded-lg border-2 border-secondary-300 bg-secondary-200 object-cover;
 			}
 
 			&__name {
-				@apply mb-1 text-xl font-bold text-secondary-950;
+				@apply mb-1 text-xl font-bold text-secondary-950 break-words;
 			}
 
 			&__short__description {
