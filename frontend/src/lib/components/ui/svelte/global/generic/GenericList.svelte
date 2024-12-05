@@ -48,7 +48,7 @@
 
 <style lang="postcss">
 	.list {
-		@apply flex h-full w-80 flex-col items-center justify-start gap-5 overflow-y-scroll pr-1.5;
+		@apply flex h-full w-80 flex-col items-center justify-start gap-5 overflow-y-scroll pr-1.5 max-h-[380px];
 
 		&__no-data-message {
 			@apply relative top-1/2 -translate-y-1/2 p-3 font-bold;
