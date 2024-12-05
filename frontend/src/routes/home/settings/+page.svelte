@@ -25,11 +25,11 @@
 
 		<div class="actions">
 			<button class="action">
-				<img src={settingsIcon} alt="Configuração" class="icon" />
+				<img src={settingsIcon} alt="Configuração" class="icon--red" />
 				<p>Editar informações</p>
 			</button>
 			<button class="action" onclick={logout}>
-				<img src={logoutIcon} alt="Logout" class="icon" />
+				<img src={logoutIcon} alt="Logout" class="icon--red" />
 				<p>Logout</p>
 			</button>
 		</div>
@@ -79,10 +79,6 @@
 
 					&:hover {
 						@apply scale-110;
-					}
-
-					.icon {
-						filter: invert(20%) sepia(25%) saturate(100) hue-rotate(15deg);
 					}
 
 					p {

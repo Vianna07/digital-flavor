@@ -4,5 +4,5 @@ export interface ProductCardProps {
 	shortDescription: string;
 	price: number;
 	imageUrl: string;
-	onclick?: () => void;
+	userType: number;
 }

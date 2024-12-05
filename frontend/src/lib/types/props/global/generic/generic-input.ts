@@ -7,6 +7,7 @@ export interface GenericInputProps {
 	id: string;
 	type: string;
 	label: string;
+	value?: string;
 	leftIconUrl?: string;
 	rightIcon?: RightIcon;
 	pattern?: string;

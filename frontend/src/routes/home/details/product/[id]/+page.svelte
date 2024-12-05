@@ -5,8 +5,6 @@
 	let { data }: { data: { product: ProductDetails } } = $props();
 
 	const product = data.product;
-
-	console.log(product);
 </script>
 
 <div class="page">
@@ -16,9 +14,9 @@
 	</header>
 
 	<div class="product-content">
-		<img src={product.imageUrl} alt={product.name} class="product-content__image" />
+		<img src={product.imageUrl} alt="Produto sem imagem" class="product-content__image" />
 
-		<h2 class="product-content__name">{product.name}</h2>
+		<h1 class="product-content__name">{product.name}</h1>
 		<p class="product-content__short__description">{product.shortDescription}</p>
 
 		<hr />
@@ -47,7 +45,7 @@
 		}
 
 		.product-content {
-			@apply flex flex-grow flex-col;
+			@apply flex flex-grow flex-col max-w-full;
 
 			&__image {
 				@apply mb-4 h-56 w-full rounded-lg border-2 border-secondary-300 bg-secondary-200 object-cover;
@@ -66,7 +64,7 @@
 			}
 
 			&__description__title {
-				@apply h-6 w-20 text-lg font-semibold text-contrast;
+				@apply h-6 w-20 text-lg text-contrast;
 			}
 
 			&__description {

@@ -5,6 +5,7 @@
 		id,
 		type,
 		label,
+		value = '',
 		leftIconUrl,
 		rightIcon,
 		pattern,
@@ -35,6 +36,7 @@
 		class="input-area__input"
 		{type}
 		{id}
+		{value}
 		name={id}
 		placeholder=" "
 		{pattern}
