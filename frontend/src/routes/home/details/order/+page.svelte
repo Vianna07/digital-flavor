@@ -1,7 +1,7 @@
 <script lang="ts">
   import addIcon from '@icons/add.svg';
   import removeIcon from '@icons/remove.svg';
-	import type { GenericListProps, Order } from '$lib/types';
+	import { PaymentMethod, type GenericListProps, type Order } from '$lib/types';
 	import GenericList from '@components/global/generic/GenericList.svelte';
   import GoBack from '@components/global/GoBack.svelte';
   import { orderItems } from '@stores/order'
@@ -27,9 +27,9 @@
   });
 
 	let totalPrice = $state(products.data?.reduce((total, item) => total + item.quantity * item.price, 0));
-	let selectedPaymentMethod = $state('Pix');
+	let selectedPaymentMethod: PaymentMethod = $state(PaymentMethod.PIX);
 
-	function selectPaymentMethod(method: string) {
+	function selectPaymentMethod(method: PaymentMethod) {
 		selectedPaymentMethod = method;
 	}
 
@@ -92,7 +92,7 @@
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ orderItems: typeof window !== 'undefined' ? localStorage.getItem('order-products') as string || undefined : undefined }),
+        body: JSON.stringify({ orderItems: typeof window !== 'undefined' ? localStorage.getItem('order-products') as string || undefined : undefined, paymentMethod: selectedPaymentMethod.toString() }),
       });
 
       localStorage.removeItem('order-products');
@@ -136,20 +136,20 @@
 
 	<div class="payment-methods">
 		<button
-			class="payment-method {selectedPaymentMethod === 'Pix' ? 'active' : ''}"
-			onclick={() => selectPaymentMethod('Pix')}
+			class="payment-method {selectedPaymentMethod === PaymentMethod.PIX ? 'active' : ''}"
+			onclick={() => selectPaymentMethod(PaymentMethod.PIX)}
 		>
 			Pix
 		</button>
 		<button
-			class="payment-method {selectedPaymentMethod === 'Cartão' ? 'active' : ''}"
-			onclick={() => selectPaymentMethod('Cartão')}
+			class="payment-method {selectedPaymentMethod === PaymentMethod.CARD ? 'active' : ''}"
+			onclick={() => selectPaymentMethod(PaymentMethod.CARD)}
 		>
 			Cartão
 		</button>
 		<button
-			class="payment-method {selectedPaymentMethod === 'Dinheiro' ? 'active' : ''}"
-			onclick={() => selectPaymentMethod('Dinheiro')}
+			class="payment-method {selectedPaymentMethod === PaymentMethod.CASH ? 'active' : ''}"
+			onclick={() => selectPaymentMethod(PaymentMethod.CASH)}
 		>
 			Dinheiro
 		</button>
