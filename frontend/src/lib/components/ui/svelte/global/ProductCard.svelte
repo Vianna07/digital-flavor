@@ -20,7 +20,7 @@
 		<img src={imageUrl} alt="Produto sem imagem" />
 
 		<div class="product-card__info">
-			<h3 class="product-card__info__name">{name}</h3>
+			<h3 class="product-card__info__name">{name.slice(0, 30)}</h3>
 			<p class="product-card__info__short-description">{shortDescription}</p>
 		</div>
 
@@ -67,7 +67,7 @@
 <style lang="postcss">
 	.product-card {
 		a {
-			@apply flex h-60 w-40 cursor-pointer flex-col items-center rounded-lg border-2 border-secondary-300 p-3 shadow-xl;
+			@apply flex h-60 w-40 cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-secondary-300 p-3 shadow-xl;
 
 			transition: 200ms all ease-in-out;
 
@@ -84,7 +84,7 @@
 			@apply w-full;
 
 			&__name {
-				@apply text-left text-base font-bold text-contrast;
+				@apply text-left text-sm font-bold text-contrast;
 			}
 			&__short-description {
 				@apply mt-0 text-left text-xs text-secondary;
