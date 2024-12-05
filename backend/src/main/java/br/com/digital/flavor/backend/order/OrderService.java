@@ -2,13 +2,14 @@ package br.com.digital.flavor.backend.order;
 
 import br.com.digital.flavor.backend.canteen.Canteen;
 import br.com.digital.flavor.backend.canteen.CanteenService;
+import br.com.digital.flavor.backend.order.dto.OrderResponseDto;
 import br.com.digital.flavor.backend.order_item.OrderItem;
-import br.com.digital.flavor.backend.order_item.dto.OrderItemDto;
 import br.com.digital.flavor.backend.order_item.OrderItemRepository;
+import br.com.digital.flavor.backend.order_item.dto.OrderItemDto;
 import br.com.digital.flavor.backend.payment.Payment;
 import br.com.digital.flavor.backend.payment.PaymentRepository;
-import br.com.digital.flavor.backend.payment.PaymentService;
 import br.com.digital.flavor.backend.product.ProductService;
+import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import br.com.digital.flavor.backend.user.User;
 import br.com.digital.flavor.backend.user.UserService;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,10 @@ public class OrderService {
         this.orderRepository.save(order);
         this.orderItemRepository.saveAll(orderItems);
         this.paymentRepository.save(new Payment(order, amount, paymentMethod, canteen));
+    }
+
+    public List<OrderResponseDto> getAll() {
+        List<OrderResponseDto> orderResponseDto = this.orderRepository.findAllByCanteen(CanteenContext.getCurrentCanteenUUID());
+        return orderResponseDto;
     }
 }

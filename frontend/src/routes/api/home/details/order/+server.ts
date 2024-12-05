@@ -3,13 +3,12 @@ import { PRIVATE_BACKEND_API_URL } from '$env/static/private';
 
 export const POST = async ({ request, cookies }: RequestEvent) => {
 	try {
-		const { orderItems }: { orderItems: string } = await request.json();
-
-    console.log(orderItems);
+		const { orderItems, paymentMethod }: { orderItems: string, paymentMethod: string } = await request.json();
 
     const body = orderItems
-    ? JSON.stringify((JSON.parse(orderItems) as Array<[string, {name: string, price: number, quantity: number}]>)
-    .map(([id, obj]: [id: string, {name: string, price: number, quantity: number}]) => ({productId: id, price: obj.price, quantity: obj.quantity})))
+    ? JSON.stringify({ orderItemsDto: (JSON.parse(orderItems) as Array<[string, {name: string, price: number, quantity: number}]>)
+    .map(([id, obj]: [id: string, {name: string, price: number, quantity: number}]) => ({productId: id, price: obj.price, quantity: obj.quantity})),
+    paymentMethod})
     : undefined;
 
 		await fetch(
