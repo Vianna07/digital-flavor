@@ -17,7 +17,8 @@ const config = {
 			'@images/*': './src/lib/assets/images/*',
 			'@components/*': './src/lib/components/ui/svelte/*',
 			// "@components-css/*": "./src/lib/components/ui/tailwindcss/*",
-			'@services/*': './src/routes/api/services/*'
+			'@services/*': './src/routes/api/services/*',
+      '@stores/*': './src/stores/*'
 		}
 	}
 };
