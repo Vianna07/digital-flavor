@@ -3,6 +3,7 @@
 	import type { ProductCardProps } from '$lib/types';
 	import addIcon from '@icons/add.svg';
 	import editIcon from '@icons/edit.svg';
+  import { orderItems } from '@stores/order'
 
 	let {
 		id,
@@ -11,13 +12,12 @@
 		price,
 		imageUrl,
 		userType = 4,
-		onclick = () => {}
 	}: ProductCardProps = $props();
 </script>
 
 <div class="product-card">
 	<a href={`/home/details/product/${id}`}>
-		<img src={imageUrl} alt={name} />
+		<img src={imageUrl} alt="Produto sem imagem" />
 
 		<div class="product-card__info">
 			<h3 class="product-card__info__name">{name}</h3>
@@ -30,7 +30,21 @@
 			</h1>
 
 			<div>
-				<button class="product-card__purchase__add-to-order" {onclick}>
+				<button class="product-card__purchase__add-to-order" onclick={(event) => {
+          event.preventDefault();
+
+          orderItems.update((current) => {
+            const newOrder = new Map(current);
+
+            newOrder.set(id, {
+              name,
+              price,
+              quantity: (newOrder.get(id)?.quantity || 0) + 1,
+            });
+
+            return newOrder;
+          });
+        }}>
 					<img class="icon--white" src={addIcon} alt="" />
 				</button>
 
