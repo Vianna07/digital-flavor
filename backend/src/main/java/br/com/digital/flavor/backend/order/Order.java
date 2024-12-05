@@ -12,12 +12,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -44,4 +42,17 @@ public class Order {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Canteen canteen;
+
+    public Order() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Order(User user, Canteen canteen) {
+        this();
+
+        this.dateFinished =  LocalDateTime.now();
+        this.user = user;
+        this.status = OrderStatus.FINALIZED;
+        this.canteen = canteen;
+    }
 }
