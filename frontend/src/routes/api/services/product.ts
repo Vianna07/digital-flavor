@@ -36,7 +36,6 @@ export const SAVE_PRODUCT = {
 		const data = await request.formData();
 
 		const product: Product = {
-			id: data.get('id') as string,
 			name: data.get('name') as string,
 			shortDescription: data.get('short-description') as string,
 			price: Number(data.get('price')),
@@ -44,6 +43,10 @@ export const SAVE_PRODUCT = {
 			description: data.get('description') as string,
 			imageUrl: data.get('image-url') as string
 		};
+
+    if (data.get('id') as string) {
+      product.id = data.get('id') as string;
+    }
 
 		const file = data.get('image-file') as File;
 
@@ -65,8 +68,8 @@ export const SAVE_PRODUCT = {
 } satisfies Actions;
 
 async function saveOrEditProductWithUrl(product: Product, cookies: Cookies): Promise<void> {
-	const endpoint: string = '/product' + (product.id ? '/edit' : '/save');
-	const method: string = product.id ? 'PUT' : 'POST';
+	const endpoint: string = '/product' + (product?.id ? '/edit' : '/save');
+	const method: string = product?.id ? 'PUT' : 'POST';
 
 	await fetch(`${PRIVATE_BACKEND_API_URL}${endpoint}`, {
 		method,
@@ -84,8 +87,8 @@ async function saveOrEditProductWithFile(
 	cookies: Cookies
 ): Promise<void> {
 	const formData = new FormData();
-	const endpoint: string = '/product' + (product.id ? '/edit' : '/save') + '-with-file';
-	const method: string = product.id ? 'PUT' : 'POST';
+	const endpoint: string = '/product' + (product?.id ? '/edit' : '/save') + '-with-file';
+	const method: string = product?.id ? 'PUT' : 'POST';
 
 	formData.append('product', JSON.stringify(product));
 	formData.append('file', file);
