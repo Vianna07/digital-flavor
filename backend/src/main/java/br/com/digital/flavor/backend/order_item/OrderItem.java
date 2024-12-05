@@ -33,4 +33,11 @@ public class OrderItem {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Product product;
+
+    public OrderItem(Order order, Product product, Short quantity) {
+        this.id = new OrderItemId(order.getId(), product.getId());
+        this.quantity = quantity;
+        this.order = order;
+        this.product = product;
+    }
 }

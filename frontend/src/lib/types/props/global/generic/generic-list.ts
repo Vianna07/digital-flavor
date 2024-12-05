@@ -7,13 +7,22 @@ export interface GenericListProps<T> {
 	data?: T[];
 	fields?: {
 		title: keyof T;
-		subTitle: keyof T;
+		subTitle?: keyof T;
 	};
 	left?: {
-		snippet: Snippet<[field: T[keyof T]]>;
-		field: keyof T;
+		snippet: Snippet<[index: number, field: T[keyof T]]>;
+		field?: keyof T;
+	};
+  right?: {
+		snippet: Snippet<[index: number, field: T[keyof T]]>;
+		field?: keyof T;
 	};
 	onclick?: (id: string) => void;
 	noDataMessage?: string;
 	customListing?: Snippet<[T[] | undefined]>;
+  contentStyle?: {
+    content?: string
+    title?: string
+    subtitle?: string
+  }
 }

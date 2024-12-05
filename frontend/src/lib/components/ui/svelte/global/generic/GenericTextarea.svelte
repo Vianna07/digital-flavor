@@ -3,7 +3,7 @@
 
 	let { id, placeholder, required, oninput, rows = 5, value = "" }: GenericTextareaProps = $props();
 
-	const textareaAtributes = {
+	const textareaAttributes = {
 		id,
 		name: id,
 		required,
@@ -14,7 +14,7 @@
 	};
 </script>
 
-<textarea {...textareaAtributes}></textarea>
+<textarea {...textareaAttributes}></textarea>
 
 <style lang="postcss">
 	textarea {

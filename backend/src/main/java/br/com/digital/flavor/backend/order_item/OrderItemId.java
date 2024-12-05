@@ -13,6 +13,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class OrderItemId implements Serializable {
-    private Long orderId;
+    private UUID orderId;
     private UUID productId;
 }
