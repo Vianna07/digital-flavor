@@ -68,18 +68,17 @@ public class Product {
     @Column(precision = 7, scale = 2)
     private BigDecimal cost;
 
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @UpdateTimestamp
-    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "short_description", length = 25)
+    @Column(name = "short_description", length = 20)
     private String shortDescription;
 
     @Column(columnDefinition = "TEXT")

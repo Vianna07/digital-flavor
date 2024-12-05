@@ -9,15 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -28,7 +27,7 @@ public class Order {
     @Column(name = "date_cancelled")
     private LocalDateTime dateCancelled;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -43,4 +42,17 @@ public class Order {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Canteen canteen;
+
+    public Order() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Order(User user, Canteen canteen) {
+        this();
+
+        this.dateFinished =  LocalDateTime.now();
+        this.user = user;
+        this.status = OrderStatus.FINALIZED;
+        this.canteen = canteen;
+    }
 }

@@ -5,4 +5,4 @@ export const load: PageServerLoad = async ({ params, cookies, fetch }) => {
 	return GET_PRODUCT_BY_ID(params.id, cookies, fetch);
 };
 
-export const actions = SAVE_PRODUCT
+export const actions = SAVE_PRODUCT;

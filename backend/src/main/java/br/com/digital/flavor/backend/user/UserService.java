@@ -1,5 +1,6 @@
 package br.com.digital.flavor.backend.user;
 
+import br.com.digital.flavor.backend.canteen.Canteen;
 import br.com.digital.flavor.backend.security.tenant.CanteenContext;
 import br.com.digital.flavor.backend.user.dto.CustomerDto;
 import br.com.digital.flavor.backend.user.dto.NewUserDto;
@@ -59,4 +60,13 @@ public class UserService {
     public String getUserType() {
         return CanteenContext.getCurrentScope();
     }
-}
+
+    public User getCurrentUser() {
+        Optional<User> user = this.userRepository.findById(UUID.fromString(CanteenContext.getCurrentSubject()));
+
+        if (user.isEmpty()) {
+            throw new RuntimeException("Usuário não encontrada");
+        }
+
+        return user.get();
+    }}

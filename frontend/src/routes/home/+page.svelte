@@ -12,6 +12,7 @@
 	import { page } from '$app/stores';
 	import { flip } from 'svelte/animate';
 	import shoppingCardIcon from '@icons/shopping-cart.svg';
+  import { orderQuantityTotal } from '@stores/order'
 
 	let { data }: { data: { products: ProductCardProps[]; userType: number; canteen: Canteen } } =
 		$props();
@@ -78,9 +79,21 @@
 
 		<div>
 			<h1 class="simple-title">{data.canteen.name}</h1>
-			<a href="/home/details/order">
-				<img class="icon--red" src={shoppingCardIcon} alt="" />
-			</a>
+			<button onclick={() => {
+        if ($orderQuantityTotal) {
+          goto("/home/details/order")
+        }
+      }}>
+				<img class:cursor-default={!$orderQuantityTotal} class="icon--red" src={shoppingCardIcon} alt="" />
+
+        {#if $orderQuantityTotal}
+          <div>
+            <p>
+              {$orderQuantityTotal}
+            </p>
+          </div>
+        {/if}
+			</button>
 		</div>
 	</header>
 
@@ -136,9 +149,25 @@
 					@apply ml-0 mt-0 text-left;
 				}
 
-				img {
-					@apply h-7 w-7 cursor-pointer;
-				}
+        button {
+          @apply relative;
+
+          div {
+            @apply absolute -top-3 -right-1.5 bg-primary rounded-full py-1 w-6 text-center opacity-85;
+
+            p {
+              @apply text-secondary-50 w-full;
+            }
+          }
+
+          img {
+            @apply h-7 w-7 cursor-pointer;
+          }
+
+          img.cursor-default {
+            cursor: default;
+          }
+        }
 			}
 		}
 	}

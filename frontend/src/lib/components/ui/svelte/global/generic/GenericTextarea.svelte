@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GenericTextareaProps } from '$lib/types';
 
-	let { id, placeholder, required, oninput, rows = 5, value = "" }: GenericTextareaProps = $props();
+	let { id, placeholder, required, oninput, rows = 5, value = '' }: GenericTextareaProps = $props();
 </script>
 
 <textarea
@@ -12,7 +12,7 @@
 	oninput={(event: Event) => oninput?.((event.target as HTMLInputElement).value)}
 	{rows}
 >
-  {value}
+	{value}
 </textarea>
 
 <style lang="postcss">

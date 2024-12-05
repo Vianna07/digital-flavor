@@ -1,6 +1,7 @@
 package br.com.digital.flavor.backend.payment;
 
 import br.com.digital.flavor.backend.canteen.Canteen;
+import br.com.digital.flavor.backend.canteen.CanteenService;
 import br.com.digital.flavor.backend.order.Order;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -13,12 +14,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "payments")
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
@@ -42,4 +41,17 @@ public class Payment {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Canteen canteen;
+
+    public Payment() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Payment(Order order, BigDecimal amount, String paymentMethod, Canteen canteen) {
+        this();
+
+        this.order = order;
+        this.amount = amount;
+        this.method = PaymentMethod.valueOf(paymentMethod);
+        this.canteen = canteen;
+    }
 }
