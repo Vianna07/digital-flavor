@@ -1,13 +1,10 @@
 package br.com.digital.flavor.backend.order;
 
-import br.com.digital.flavor.backend.order_item.dto.OrderItemDto;
-import br.com.digital.flavor.backend.order_item.dto.OrderRequestDto;
+import br.com.digital.flavor.backend.order.dto.OrderRequestDto;
+import br.com.digital.flavor.backend.order.dto.OrderResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +19,10 @@ public class OrderController {
     public ResponseEntity<Void> save(@RequestBody OrderRequestDto dto) {
         this.orderService.save(dto.orderItemsDto(), dto.paymentMethod());
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<List<OrderResponseDto>> getAll() {
+        return ResponseEntity.ok(orderService.getAll());
     }
 }
