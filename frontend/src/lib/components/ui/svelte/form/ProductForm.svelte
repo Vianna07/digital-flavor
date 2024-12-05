@@ -31,7 +31,7 @@
 		type: 'text',
 		label: 'Breve descrição',
 		required: false,
-		maxlength: 25,
+		maxlength: 20,
 		value: shortDescription
 	};
 

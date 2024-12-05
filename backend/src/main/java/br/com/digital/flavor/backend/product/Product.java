@@ -79,7 +79,7 @@ public class Product {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "short_description", length = 25)
+    @Column(name = "short_description", length = 20)
     private String shortDescription;
 
     @Column(columnDefinition = "TEXT")
